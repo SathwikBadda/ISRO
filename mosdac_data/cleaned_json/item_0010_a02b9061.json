@@ -1,0 +1,17 @@
+{
+  "title": "SCATSAT-1 Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "Scatsat-1 was launched by PSLV-C35 from Satish Dhawan Space Centre, Sriharikota on September 26, 2016. It carries the Ku-band Pencil Beam scatterometer (SCAT) payload developed by SAC-ISRO. ह न द",
+  "source_url": "https://www.mosdac.gov.in/scatsat-1",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "satellite",
+      "ocean",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.060048"
+  }
+}

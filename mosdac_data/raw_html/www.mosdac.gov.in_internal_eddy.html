@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta name="theme-color" content="#317EFB"/>
+	    <meta name="Description" CONTENT="Author: Mosdac, Illustrator: Satellite Images, Category: Scientific Spatial Data">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes, width=device-width">
+		
+		<title></title>
+		
+		<link rel="canonical" href="https://localhost:81/monsoon/">
+		<link rel="preconnect" href="https://localhost:81/monsoon/">
+		
+		<link rel="icon" href="assets/img/logo-transparent.png" type="image/gif" sizes="16x16">
+		<link rel="manifest" href="source/jsons/manifest.json?v=1.0">
+
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes, width=device-width">
+	<!-- CSS LINKS START -->
+	<link rel="stylesheet" href="source/css/angular/angular-csp.css?v=1.0" />
+	<link rel="stylesheet" href="source/css/angular/angular-material.min.css?v=1.0" />
+	<link rel="stylesheet" href="source/css/bootstrap/bootstrap.min.css?v=1.0" />
+	<link rel="stylesheet" href="source/css/ol/ol.css?v=1.0" />
+	<link rel="stylesheet" href="source/css/ol/ol-layerswitcher.css?v=1.0" />
+	<link rel="stylesheet" href="source/css/angular/angular-datepicker.css?v=1.0" />
+	<!--link rel="stylesheet" href="source/css/angularjs-slider/rzslider.min.css?v=1.0" /-->
+	
+    <link rel="stylesheet" href="source/css/font-awesome.min.css" />
+	
+    <link rel="stylesheet" href="source/css/custom.css?v=1.0" />
+	<!-- CSS LINKS END -->
+	
+	<!-- LIB JAVASCRIPT START -->
+	<script defer type="application/javascript" src="source/js/angular/angular.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/angular/angular-animate.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/angular/angular-datepicker.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/angular/angular-aria.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/angular/angular-material.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/angular/angular-touch.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/jquery/jquery-3.6.0.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/bootstrap/bootstrap.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js?v=1.0"></script>
+	<!--script defer type="application/javascript" src="source/js/angularjs-slider/rzslider.min.js?v=1.0"></script-->
+	<script defer type="application/javascript" src="source/js/ol/ol.js?v=1.0"></script>
+	<script defer type="application/javascript" src="source/js/ol/ol-layerswitcher.js?v=1.0"></script>
+	<!-- LIB JAVASCRIPT END -->
+	
+	<script defer type="application/javascript" src="source/js/highcharts.js"></script>
+	<script defer type="application/javascript" src="source/js/series-label.js"></script>
+	<script defer type="application/javascript" src="source/js/exporting.js"></script>
+	<script defer type="application/javascript" src="source/js/export-data.js"></script>
+	<script defer type="application/javascript" src="source/js/accessibility.js"></script>
+	
+</head>
+ <style type="text/css"> 
+
+
+            .x-grid-rowbody {
+                padding: 0;
+            }
+
+            .legend {
+                margin: 3px 0 0 0;
+                border: 1px solid transparent;
+                border-radius: 6px;
+            }
+
+            .ol-popup {
+                position: absolute;
+                background-color: white;
+                -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+                filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+                padding: 15px;
+                border-radius: 10px;
+                border: 1px solid #cccccc;
+                bottom: 12px;
+                left: -50px;
+                min-width: 280px;
+            }
+            .ol-popup:after, .ol-popup:before {
+                top: 100%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+            .ol-popup:after {
+                border-top-color: white;
+                border-width: 10px;
+                left: 48px;
+                margin-left: -10px;
+            }
+            .ol-popup:before {
+                border-top-color: #cccccc;
+                border-width: 11px;
+                left: 48px;
+                margin-left: -11px;
+            }
+            .ol-popup-closer {
+                text-decoration: none;
+                position: absolute;
+                top: 2px;
+                right: 8px;
+            }
+            .ol-popup-closer:after {
+                content: "X";
+            }
+        div.olMapViewport { 
+            background-color: #7aa2e0;
+        } 
+
+        div#OpenLayers.Control.PanZoom_5.olControlPanZoom.olControlNoSelect{
+            background-color: red;
+            position: absolute; right: 60px; top: 4px; z-index: 1004;
+            
+        }
+        .tool_tip{
+
+            text-transform: none;
+            padding-left:20px;
+            padding-top:1px;
+            /*width: 100px;*/
+            line-height: 2px;
+
+        }
+        .md-tab1{
+
+            text-transform: none;
+            padding-left:20px;
+            padding-top:7px;
+            /*width: 100px;*/
+            line-height: 20px;
+        }
+       /*  .md-tab2{
+
+            text-transform: none;
+            padding-left:10px;
+            padding-right:20px;
+            padding-top:2px;
+            /*width: 100px;
+            line-height: 18px;
+        } */
+
+        .md-row{
+            /*font-size: 15px;
+            font-weight: bold;
+            padding: 6px 15px 6px 15px;
+            line-height: 30px;*/
+            text-transform: none;
+            padding: 1px;
+            /*width: 100px;*/
+            line-height: 1px;
+        }
+
+        .md-toolbar-tools{
+            background-color: rgba(40,122,147,0.8)
+        }
+
+        .md-primary{
+            background-color: rgba(40,122,147,0.8);
+        }
+
+        .md-button{
+            background-color: #35bcff;
+        }
+        .md-raised{
+            background-color: rgba(40,122,147,0.7);
+        }
+        .md-tab{
+            color:#ffffff;
+            font-weight:bold;
+        }
+/*        .md-tab-item{
+            color:#ffffff;
+            font-weight:bold;
+        }*/
+        md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+    color: #fff !important;
+/*    background-color: rgba(40,40,40,.5);*/
+    
+   
+}
+        .sidemenu {  
+    
+
+    position: absolute;
+     z-index: 1;
+    /* width: 286px; */
+    width: 320px;
+    left: 1px;
+    background: rgba(0,0,0,0.38);
+    top: 32px;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+
+}
+
+   .sidemenu1 {  
+    /*border: 1px solid #333;*/
+    /*  border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    */  
+    position: absolute;
+/*     z-index: 1;*/
+    /* width: 286px; */
+/*    width: 360px;*/
+    left: 50px;
+      background: rgba(40,40,40,0); 
+    top: 50px;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+
+}
+
+
+.iconpanel
+{
+    position: absolute;
+    z-index: 200;
+    height:auto;
+    width:110px;
+    text-align: center;
+    bottom:10%;
+    right:20px;
+    margin: -100px 0 0 -150px;
+     background: rgba(40,40,40,.85);
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+.placeholder-white{
+    
+    color:white;
+}
+.md-select-value :first-child {
+    
+    color:white;
+}
+.md-input-container {
+   
+     margin: 1px 0; 
+   
+}
+ .box{
+                width: 90%;
+                display: block;
+                padding:3px;
+                clear: both;
+            }
+
+    </style>
+      <script type="text/javascript">
+      function openNav() {
+  		document.getElementById("mySidenav1").style.display = "block";
+  		document.getElementById("side_btn_extra").style.display= "block";
+  		document.getElementById("side_btn").style.background= "transparent";
+  		
+  		
+  	}
+
+  	function closeNav() {
+  		document.getElementById("mySidenav1").style.display = "none";
+  		document.getElementById("side_btn_extra").style.display= "none";
+  		document.getElementById("side_btn").style.background= "transparent";
+
+  		
+  	}
+
+  	var sidebar_open_close_flag=false;
+
+  	function opencloseNav() {
+  		if(sidebar_open_close_flag){
+//  				alert(false)
+  			closeNav();
+  			sidebar_open_close_flag=false;
+  		}else{
+//  				alert(true)
+  			openNav();
+  			sidebar_open_close_flag=true;
+  		}
+  		hideDivIconSideBtn();
+  	}
+
+  	hideDivIconSideBtn=function()
+  	{
+  	    //console.log("INSIDE CONTROLLER AND FUNCTION IS hideDivIconSideBtn"); 
+  	    if(document.getElementById('mySidenav1').style.display=='none' || !document.getElementById('mySidenav1').style.display)
+  	    { 
+  	        //console.log("Inside If:- ",document.getElementById('mySidenav1').style.display)
+  	        //return scope.folder_name_img+'/chevron-down.svg';
+  	    	document.getElementById('layer_open_close_icon').src="icons/chevron-down.svg";
+  	    }
+  	    else
+  	    {
+  	    	//console.log("Inside Else:- ",document.getElementById('mySidenav1').style.display)
+  	        //return scope.folder_name_img+'/double-chevron-up.svg';
+  	    	document.getElementById('layer_open_close_icon').src="icons/double-chevron-up.svg";
+  	    	
+  	    	
+  	    }
+  	}
+      </script>
+<body ng-app="app" ng-controller="controller" id="map" class="map body_custom">
+
+
+<input type="hidden" ng-model="appName" value="india" id="appName"/>
+ <div only_resizable class="titlemenu">
+ <table>
+	            <tr>
+	                <td>
+	    	            <img width="150" align="center" alt="mosdac logo" src="assets/img/transparent_mosdac_rapid.png" style="margin-top: -6px;width: 170px;margin-left: -27px;"/>
+	    	           
+	                </td>
+	                  <td calss="application-name">
+	    	            <label ng-cloak class="title ng-cloak" style="margin:auto;margin-left:7px;">{{appName}}</label>
+	    	             <button type="button" title="Info" ng-click="siteInfo()" style="background-color: rgb(250 250 250)margin:auto;margin-left:-1px;margin-top: -2px;height: 30px;">
+                		<md-icon class="ol-info" aria-label="" md-svg-src="assets/img/ic_info_24px.svg" style=" line-height: .4em;margin-top: -2px; background-color: rgb(250 250 250);" role="img">
+						</md-icon>
+            		</button>
+	                </td>
+	                         	
+	             </tr>	            	
+	                         	             	          
+	        </table>
+	        
+</div>
+
+
+<!--  <div class="sidemenu1" ng-cloak ng-draggable='dragOptions'>-->
+	<!-- <div class="sidemenu" layout="column" > -->
+		<span id="side_btn" class="sidebar_btn" style="font-size:28px;cursor:pointer">
+		<table>
+			<tr>
+				<td>							
+					<button aria-label="Aria Label" onclick="opencloseNav()" style="border: none; background: #00000003; position: absolute;height: 42px;    margin-top: -6px;border-radius: 21px;">
+										    
+					<img id="layer_open_close_icon" src="icons/chevron-down.svg" style="height: 36px; width: 36px; border: 1px solid #ccc; border-radius: 15px;margin-top:12px;background-color: #00adff;"></img>
+	                			          
+			        </button>
+							
+				</td>
+				
+				<td id="side_btn_extra" style="display:none; padding-left:6px;">
+										
+			    </td>
+			    			    				    			    
+		    </tr>
+		    <tr>
+		    <td>
+<!--		     <label style="text-transform: capitalize;
+    font-style: normal;
+    color: #ffffff;
+    font-weight: bolder;
+    margin-top: 1px;
+    font-size: large;
+    background: #0000007a;
+    margin-left: 57px;
+    top: 1px;" >2020-01-01 TO 2020-12-31</label> -->
+		      <label style="text-transform: capitalize;
+    font-style: normal;
+    color: #ffffff;
+    font-weight: bolder;
+    margin-top: 1px;
+    font-size: large;
+    background: #0000007a;
+    margin-left: 57px;
+    top: 1px;" >{{start_date |date:'yyyy-MM-dd'}} To {{end_date |date:'yyyy-MM-dd' }}</label>
+
+		    </td>
+		    </tr>
+		   
+	    </table>
+	</span>
+	
+	
+	  <div id="mySidenav1" class="sidenav1 scrollbar">  	
+	<p style="color: ivory;font-style: italic;font-weight: bold;font-size: 15px;">*Data Available from Jan-1993 to Dec-2024 </p>
+	
+	<div >
+		
+	<!-- <md-button id="eddybtn" style="background-color:#0072ff; color:#FFFFFF;margin-top: -14px;" ng-model="Eddy"  ng-click="getID(); btnstyle2={'background-color':'#0072ff'}; btnstyle1={'background-color':'rgba(40,40,40,.5)'}; eddymode_select='glob';" ng-style='btnstyle2'>Global Eddy </md-button>
+	  <md-button id="eqbtn" style="background-color:rgba(40,40,40,.5); color:#FFFFFF;margin-top: -14px;" ng-model="EddyEquator" ng-click="geteqdata(); btnstyle1={'background-color':'#0072ff'}; btnstyle2={'background-color':'rgba(40,40,40,.5)'}; eddymode_select='equ';" ng-style='btnstyle1'>Equatorial Eddy</md-button>
+	  --> 
+	
+	</div>
+	
+	<div align="left" style="align-content: flex-start;float: left;margin-top: -38px;">
+		  <md-input-container  style="margin-top: 52px;">
+ <label ng-click="delegateClick()" tabindex="-1" aria-hidden="true" class="ng-scope" role="button" for="input_2" style="color:#ffffff;font-style:normal;font-size: 23px;"> Start date </label>
+                <md-datepicker ng-model="start_date"   md-placeholder="Enter Date" md-open-on-focus></md-datepicker>
+                
+                
+       <!--          <datepicker date-format="yyyy-MM-dd" date-set="2020-01-01" date-min-limit="1993-01-01" date-max-limit="2020-12-31" selector="form-control">
+                   <div layout="row">
+	 <label ng-click="delegateClick()" tabindex="-1" aria-hidden="true" class="ng-scope" role="button" for="input_2" style="color:#ffffff;font-style:normal;"> Start date </label>
+                       <input id="date1" style="width:285px ;text-transform: capitalize; font-style:normal;background-color:rgba(128,128,128,.5) ; color:#ffffff; font-weight:bolder;" ng-model="start_date" class="form-control"    readonly="true" />
+
+                   </div>
+                </datepicker>
+                <md-icon style="margin-left: 263px;margin-top: -5px;" md-svg-icon="assets/img/calendar-w.svg" role="button" aria-hidden="true" ></md-icon> -->
+           </md-input-container>
+            <md-input-container >
+                <label ng-click="delegateClick()" tabindex="-1" aria-hidden="true" class="ng-scope" role="button" for="input_2" style="color:#ffffff;font-style:normal;font-size: 23px;">End date </label>
+                 <md-datepicker ng-model="end_date"   md-placeholder="Enter Date" md-open-on-focus></md-datepicker>
+              <!--   <datepicker date-format="yyyy-MM-dd" date-set="2020-12-31" date-max-limit="2020-12-31"  date-min-limit="1993-01-01" selector="form-control" >
+                    <div class="input-group" layout="row">
+     				<label ng-click="delegateClick()" tabindex="-1" aria-hidden="true" class="ng-scope" role="button" for="input_2" style="color:#ffffff;font-style:normal;">End date </label>              
+                        <input id="date2" style="width:285px; text-transform: capitalize; font-style:normal; color:#ffffff; font-weight:bolder;background-color:rgba(128,128,128,.5) ;" ng-model="end_date" class="form-control"  readlony="true"/>
+                       <span class="input-group-addon" style="cursor: pointer">
+                            <i class="fa fa-lg fa-calendar"></i>
+                        </span>
+
+                    </div>
+                </datepicker>
+                <md-icon style="margin-left: 263px;margin-top: -5px;"  md-svg-icon="assets/img/calendar-w.svg" role="button" aria-hidden="true" ></md-icon> -->
+            </md-input-container>
+	    		
+	    		<div class="md-tab2">
+                    <label style="text-transform: capitalize; font-style:normal; color:#ffffff; font-weight:bolder" >Select Eddy Type:</label>
+                    <select id="param" value="eddy_flag" ng-model="eddy_type"  style="width:129px; color:rgba(22, 77, 115, 0.97); font-weight:bolder">
+                        <option ng-if="tc.selectedGroup='cyc'" value="cyc">Cyclonic</option>
+                        <option ng-if="tc.selectedGroup='ant'" value="ant">Anti-Cyclonic</option>
+                        <option ng-if="tc.selectedGroup='both'" value="Both" >Both</option>
+                    </select>
+                </div>
+	    		
+	    		<div  ng-show="eddy_id || eddy_type" >
+	    			<center>
+	    			 <md-button  style="background-color:#00abff;color:#FFFFFF" ng-hide="hideanim" ng-click="getIDs()" >Submit</md-button>
+	    			</center>	    	
+	    			
+	    					 
+               <div class="layer-display" style="margin-top: 5px;">Animation</div>
+                  <div layout="row" style="margin-top: 6px;">
+                <div class="md-tab2">
+                    <md-label style="text-transform: capitalize; font-style:normal; margin-left: 2px;color:#ffffff; font-weight:bolder" >Select Eddy ID:</md-label>
+
+                    <select   ng-model="eddy_id" style="width: 170px;color: rgba(22, 77, 115, 0.97);font-weight: bolder;margin-left: 0px;" ng-change="eddyID_info()" ng-options="avlID for avlID in avlIDs">                        
+                    </select>					
+                </div>
+             
+                <div style="font-style:normal; color:#ff6BCC; font-weight:bolder">    </div>
+                <br>               
+            </div>
+            </div>
+	    	
+	    	
+	    	
+	    	
+          <div ng-show="eddy_id">
+          <center>
+          
+           <md-button style="background-color:#00abff; color:#FFFFFF" ng-show="hideanim" ng-click="hideanim=false; stopanimation()" >Close</md-button>
+                <md-button  style="background-color:#00abff;color:#FFFFFF" ng-hide="hideanim" ng-click="hideanim=true; loadanimation()" >Animation</md-button>
+                </center>
+          </div>
+
+            <div role="group" ng-show="hideanim" aria-label="Animation controls">
+                <md-button id="pause" class="md-raised md-accent" style='z-index:100; min-width:40px; width: 40px; height: 40px; overflow-x: hidden; border-radius: 50%; background-color: rgba(40,40,40,.5);' ng-click="updateanimationStatus()">
+                    <md-icon ng-if="animationStatus=='play'" style="color: white; padding: 2px 2px 2px 2px;" md-svg-icon="assets/img/play-button.svg" role="button" aria-hidden="true"></md-icon>
+                    <md-icon ng-if="animationStatus=='pause'" style="color: white; padding: 0 3px 2px 0;" md-svg-icon="assets/img/pause-button.svg" role="button" aria-hidden="true"></md-icon>
+                    <md-tooltip style='font-weight: bold; font-size: 14px;'>Play</md-tooltip>
+                </md-button>
+<!--                 <md-button id="pause" class="md-raised md-accent"  ng-if="animation_status=='play'"  style='z-index:100; min-width:40px; width: 40px; height: 40px; overflow-x: hidden; border-radius: 50%; background-color: rgba(40,40,40,.5);'> -->
+<!--                     <md-icon style="color: white; padding: 0 3px 2px 0;" md-svg-icon="assets/img/pause-button.svg" role="button" aria-hidden="true" ></md-icon> -->
+<!--                     <md-tooltip style='font-weight: bold; font-size: 14px;'>Pause</md-tooltip> -->
+<!--                 </md-button> -->
+                <md-button id="replay" class="md-raised md-accent" style='z-index:100; min-width:40px; width: 40px; height: 40px; overflow-x: hidden; border-radius: 50%; background-color: rgba(40,40,40,.5);' ng-click="replay()">
+                    <md-icon style="color: white; padding: 0 3px 2px 0;" md-svg-icon="assets/img/replay_1.svg" role="button" aria-hidden="true" ></md-icon>
+                    <md-tooltip style='font-weight: bold; font-size: 14px;'>Replay</md-tooltip>    
+                </md-button>
+                <span id="info" style="font-style:normal; color:#ffffff; font-weight:bolder"></span>
+            </div>
+	              
+	                
+	               
+	</div>
+	</div>
+	
+	
+
+		  	<div id="bottom_menu" class="bottom_menu">
+			<table class="bottom_menu_table">
+				<tbody>
+					<tr>									
+						<td ng-click="showHideBottomMenu()">Legends</td>
+									 
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	<div id="legends" class="legends scrollbarX" style="display:none">
+		
+      <table>
+           <tr>
+           
+               <td ng-if="layers.values_.title == 'Eddy Point' || layers.values_.title =='Eddy Track'" ng-repeat="layers in map.getLayers().array_[1].values_.layers.array_ | orderBy:layers:true">
+                       <div id="legends_div" class="legends_div" ng-show="layers.values_.visible ">
+                                        <canvas id="{{layers.ol_uid}}">
+                                                <img ng-src="{{layers.values_.extraparams.legendAvailable}}" onload="changeCssOfLegendDiv(this)">
+                                        </canvas><br/>
+                                        <select ng-if="layers.values_.extraparams.fixStyleLegend==false" aria-label="Aria Label" class="select-font-box-style" ng-model="layers.values_.extraparams.legendStyle" ng-change="updateSelectedLayerLegend(layers)"  ng-options="option for option in layers.values_.extraparams.legendsStyleAvailable" aria-invalid="false">
+                                                </select>
+                          </div>
+                                </td>
+                        </tr>
+                </table>
+
+	</div> 
+	
+	<div style="visibility: hidden">    
+    	
+		 <div class="md-dialog-container" id="siteInfoId">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="site_info_id" style="display:none;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px; ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+            					<md-tab label="About">
+              						<md-content class="md-padding" style="color:black; font-size: large;">
+                						<p style="color: #1c1c1b;font-size: large;">
+                						
+
+										<br>
+										Eddy for more detail:<a href="assets/documents/mosdac_eddy_detection.pdf" target="_blank" >Eddy Detection and Tracking</a> 
+                					
+                						</p>
+
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Disclaimer">
+              						<md-content class="md-padding" style="color:black; font-size: large;">
+                						<p style="color: #1c1c1b;font-size: large;">Developed & Maintained By: DWD/SAC | Overlay Layers Source: NRDB | Ports data source: http://msi.ngs.mil</p> 
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Credits">
+              						<md-content class="md-padding" style="color:black; font-size: large;">                						
+										<p style="color: #1c1c1b;font-size: large;"> 
+											Credits for following information/layers/data used in this website is dually acknowledged
+											</br>
+											* Bhuvan Layer: NRSC, Hyderabd (www.nrsc.gov.in)
+											</br>
+											* OpenStreetMap: @OpenStreetMap Contributors (www.openstreetmap.org/copyright)
+											</br>
+											* Satellite Data Layers : Indian Space Research Organisation (ISRO)
+											</br>
+											* True Marble: Unearthed Outdoors, LLC
+											</br>
+											* India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in)
+											</br>
+											Credits for following information/layers/data used in this website is dually acknowledged: 
+											</br>
+											* Input altimeter currents data: Near Real Time data provided by E.U. Copernicus Marine Service Information;<a href=" https://doi.org/10.48670/moi-00149" target="_blank"> https://doi.org/10.48670/moi-00149</a> 
+										
+										</p>
+              						</md-content>
+            					</md-tab>
+          					</md-tabs>
+        				</md-dialog-content>
+        
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>
+	
+   </div>
+
+	<div id="popup" class="ol-popup">
+		      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+		      <div id="popup-content"></div>
+    </div>
+
+<!-- CONTROLLER JAVASCRIPT START -->
+<script defer type="application/javascript" src="source/controllers/controller.js?v=1.0"></script>
+<!-- CONTROLLER JAVASCRIPT END -->
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "title": "OCEANSAT-3 Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "EOS-06(Oceansat-3) also known as Earth Observing Satellite EOS-06(Oceansat-3) , was launched by PSLV-C54 from Satish Dhawan Space Centre, Sriharikota on 26 November 2022. EOS-06(Oceansat-3) is developed to provide a unique opportunity for simultaneously measuring the physical, biological and atmospheric parameters for the first time from three instruments, (i) 13-band advanced Ocean Colour Monitor (OCM-3), (ii) Ku-band Scatterometer (SCAT-3) and (ii) a 2-channel Sea Surface Temperature Monitor (SSTM). ARGOS is the fourth payload provided by French Space Agency (CNES) and serves as a data collection platform from various ocean based platform. EOS-06(Oceansat-3) is envisaged to provide continuity of operational services of Oceansat-1, 2 and SCATSAT-1 Mission with enhanced application potential. ह न द",
+  "source_url": "https://www.mosdac.gov.in/oceansat-3",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "temperature",
+      "satellite",
+      "ocean",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.041631"
+  }
+}

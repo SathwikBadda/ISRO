@@ -1,0 +1,17 @@
+{
+  "title": "Validation Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "Display name modified Satellite Thu, 2018-02-08 10:35 Forecast Wed, 2017-01-04 09:46 2 folders",
+  "source_url": "https://www.mosdac.gov.in/validation-reports",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "satellite",
+      "ocean",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.462390"
+  }
+}

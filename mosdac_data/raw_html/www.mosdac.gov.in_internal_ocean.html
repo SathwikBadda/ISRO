@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>MOSDAC Live</title>
+        <meta name="description" content="MOSDAC-LIVE is a web enabled data and Information visualization and analysis system of MOSDAC, SAC/ISRO. Provides access to Satellite Data Products and Information products derived from Satellite and model forecast in near real time basis.">
+        <meta name="keywords" content="Forecast, Nowcast, Current Events, Near Real time,  Cloud cover, Surface winds, Fire, Heavy rain, RIP current, Snow, Cloud Burst, Heat Wave, Cold Wave, INSAT-3D, INSAT-3DR, Kalpana-1, SCATSAT-1">
+        <link rel="icon" href="img/logo-transparent.png" type="image/gif" sizes="16x16">
+
+
+        <script src="js/jquery.min.js"></script> 
+        <script src="js/jquery-ui.js"></script>
+        <!--  <script src="js_temp/angular.min.js"></script> -->
+        <!--         <link rel="stylesheet" href="jquery-ui.min.css">
+                <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+                <script type="text/javascript" src="js/jquery-ui.js"></script>-->
+                
+		<!-- Old angular link start -->                
+
+                
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-sanitize.min.js"></script> 
+        <!-- <script type="text/javascript" src="js/angular-openlayers-directive_1_1.js"></script> -->
+        <script type="text/javascript" src="js/angular-aria.min.js"></script> 
+        <script type="text/javascript" src="js/angular-material.min.js"></script>
+         <script type="text/javascript" src="js/angular-ui-router.min.js"></script> 
+        <script type="text/javascript" src="js/ui-listView.js"></script>
+        <!--  <script type="text/javascript" src="js/angular-filter.js"></script> -->
+        <script type="text/javascript" src="js/angular-filter.min.js"></script>
+        <script type="text/javascript" src="js/highchart.js"></script>
+        <script type="text/javascript" src="js/xml2json.js"></script>
+        <script type="text/javascript" src="js/ui-bootstrap-tpls.js"></script> 
+        <script type="text/javascript" src="js/angular-animate.min.js"></script>
+        <script type="text/javascript" src="js/rzslider.js"></script>
+        
+        
+        <script type="text/javascript" src="js/dygraph.js"></script> <!-- Update and Added By jay on 12DEC19 -->
+
+
+		
+
+
+        <!-- Old angular link stop -->
+        
+        
+<!-- 		<script type="text/javascript" src="js/angular-messages.min.js"></script> -->
+
+<!-- 		<script type="text/javascript" src="Angularjs_Version/angular-1.7.8/angular.min.js"></script> -->
+<!--         <script type="text/javascript" src="Angularjs_Version/angular-1.7.8/angular-sanitize.min.js"></script>  -->
+<!--         <script type="text/javascript" src="Angularjs_Version/angular-1.7.8/angular-aria.min.js"></script>  -->
+<!--         <script type="text/javascript" src="js/angular-material.min.js"></script> -->
+<!--         <script type="text/javascript" src="js/angular-ui-router.min.js"></script>  -->
+        
+<!--         <script type="text/javascript" src="js/ui-listView.js"></script> -->
+        
+<!--         <script type="text/javascript" src="js/angular-filter.min.js"></script> -->
+        
+<!--         <script type="text/javascript" src="js/highchart.js"></script> -->
+<!--         <script type="text/javascript" src="js/xml2json.js"></script> -->
+<!--         <script type="text/javascript" src="js/ui-bootstrap-tpls.js"></script>  -->
+        
+<!--         <script type="text/javascript" src="Angularjs_Version/angular-1.7.8/angular-animate.min.js"></script> -->
+
+<!-- 		<script type="text/javascript" src="js/rzslider.js"></script> -->
+
+
+
+
+<!-- /trans15Oct_Copy/Angular_Dialog/Dialog_example1/external_resources -->
+
+
+<!-- 		<link rel="stylesheet" href="../Angular_Dialog/Dialog_example1/external_resources/docs.css" /> -->
+<!-- 		<script type="text/javascript" src="../Angular_Dialog/Dialog_example1/external_resources/angular-messages.min.js"></script> -->
+<!-- 		<script type="text/javascript" src="../Angular_Dialog/Dialog_example1/external_resources/angular-route.min.js"></script> -->
+
+<!-- 		<script type="text/javascript" src="../Angular_Dialog/Dialog_example1/external_resources/moment.js"></script> -->
+<!-- 		<script type="text/javascript" src="../Angular_Dialog/Dialog_example1/external_resources/svg-assets-cache.js"></script> -->
+
+
+
+        <link rel="stylesheet" href="css/jquery-ui.min.css" />
+        <!--        <link rel="stylesheet" href="css/jquery-ui.css" />-->
+         <!-- <link rel="stylesheet" href="css/ol.css" /> <!-- new -->
+<!--         <link rel="stylesheet" href="ol_versions/v4.6.5-dist/ol.css" /> -->
+        <link rel="stylesheet" href="ol_old_js_css/ol.css" /> <!-- old -->
+        <link rel="stylesheet" href="css/ui-listView.css" />
+        <link rel="stylesheet" href="css/angular-material.min.css" /> <!-- old -->
+        <!-- <link rel="stylesheet" href="angular_js_css/angular-material.min.css" /> 	<!-- new -->
+<!--         <link rel="stylesheet" href="angular_js_css/angular-material.min.css" /> -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" href="css/treecss.css"/> 
+        <link rel="stylesheet" href="css/bootstrap.css"/>        
+        <link rel="stylesheet" href="css/alerts.css"/>
+        <link rel="stylesheet" href="css/rzslider.css"/>
+        
+        <link rel="stylesheet" href="css/dygraph.css"/>	<!-- Update and Added By jay on 12DEC19 -->
+        
+        <link rel="stylesheet" href="css/custom.css"/>
+        
+        
+        
+        
+        <style>
+            div[resizable] {
+                border: 0px solid Black;
+                /*               width: 150px;
+                                height:100px;
+                                bottom:5px;
+                                right:10px;*/
+            }
+
+            .enter {
+                background-color:#efefef;
+            }
+            /*           #mainDrag { border:#00ffff 1px solid; width:200px; height:200px;position:absolute;right:150px;bottom:80px;z-index:300;background:white;}
+                         .nestedDrag{border:#00ffff 1px solid; width:50px;height:60px;position:absolute;z-index:300;background:green;right:10px;bottom:5px;}
+            */
+        </style>
+        <!--Piwik -->
+        <script type="text/javascript">
+//             var _paq = _paq || [];
+//             _paq.push(["setDomains", ["*.mosdac.gov.in"]]);
+//             _paq.push(['trackPageView']);
+//             _paq.push(['enableLinkTracking']);
+//             (function() {
+//                 var u="//mosdac.gov.in/visit/";
+//                 _paq.push(['setTrackerUrl', u+'piwik.php']);
+//                 _paq.push(['setSiteId', 2]);
+//                 var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+//                 g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+//             })();
+        </script>
+
+        <script>
+            //var some_variable = 'india';
+            var some_variable = 'ocean';
+               if(some_variable=="")
+               {
+                   window.location= "error.html";
+               }
+           
+        </script>
+
+        <!-- End Piwik Code -->
+
+        <noscript>
+        <style> 
+            html
+            {
+                display:none;
+            }
+        </style>
+        <meta http-equiv="refresh" content="0; URL=error.html">
+
+        </noscript>
+	<!-- <meta name="viewport" content="initial-scale=0.4 , user-scalable=yes, width=device-width"> -->
+	<meta name="viewport" content="initial-scale=1.0 , user-scalable=no, width=device-width">
+	
+	<script>
+//         function openNav() {
+//           document.getElementById("mySidenav1").style.display = "block";
+//           document.getElementById("side_btn_extra").style.display = "block";
+// //           document.getElementById("side_btn").style.left = "27px";
+//           document.getElementById("side_btn").style.paddingLeft = "32px";
+//           document.getElementById("side_btn").style.paddingRight = "24px";
+//         }
+        
+//         function closeNav() {
+//           document.getElementById("mySidenav1").style.display = "none";
+// //           document.getElementById("side_btn").style.left = "0px";
+//           document.getElementById("side_btn").style.paddingLeft = "6px";
+//           document.getElementById("side_btn").style.paddingRight = "6px";
+//         }
+
+        function openNav() {
+        	document.getElementById("mySidenav1").style.display = "block";
+//         	document.getElementById("side_btn_extra").style.display= "block";
+			document.getElementById("side_btn_extra1").style.display= "table-cell";
+			document.getElementById("side_btn_extra2").style.display= "table-cell";
+			document.getElementById("side_btn_extra3").style.display= "table-cell";
+			document.getElementById("side_btn_extra4").style.display= "table-cell";
+        	document.getElementById("side_btn").style.background= "black";
+
+        	document.getElementById("layer_manager_label").style.display = "none";	//Updated By Jay On 06JAN2020
+        }
+
+        function closeNav() {
+        	document.getElementById("mySidenav1").style.display = "none";
+//         	document.getElementById("side_btn_extra").style.display= "none";
+			document.getElementById("side_btn_extra1").style.display= "none";
+			document.getElementById("side_btn_extra2").style.display= "none";
+			document.getElementById("side_btn_extra3").style.display= "none";
+			document.getElementById("side_btn_extra4").style.display= "none";
+        	document.getElementById("side_btn").style.background= "transparent";
+
+         	document.getElementById("layer_manager_label").style.display = "block";	//Updated By Jay On 06JAN2020
+        }
+
+        var sidebar_open_close_flag=false;
+
+		function opencloseNav() {
+			if(sidebar_open_close_flag){
+// 				alert(false)
+				closeNav();
+				sidebar_open_close_flag=false;
+			}else{
+// 				alert(true)
+				openNav();
+				sidebar_open_close_flag=true;
+			}
+		}
+
+		var quick_layers_open_close_flag=false;
+		var tools_open_close_flag=false;
+		var legends_open_close_flag=false;
+		var analysis_open_close_flag=false;
+		var animation_open_close_flag=false;
+
+		function openQuickLayers() {
+			if(tools_open_close_flag){
+				closeTools();
+				tools_open_close_flag=false;
+			}
+
+			else if(legends_open_close_flag){
+				closeLegends();
+				legends_open_close_flag=false;	
+			}
+
+			else if(analysis_open_close_flag){
+				closeAnalysis();
+				analysis_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Starts On 09JAN2020=======================*/
+			
+			else if(animation_open_close_flag){
+				closeAnimation()
+				animation_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Ends On 09JAN2020=======================*/
+			
+			document.getElementById("bottom_menu_btn1").style.display = "block";
+// 			document.getElementById("bottom_menu_act_btn1").style.background = "rgb(245,0,87,1)";
+// 			document.getElementById("side_btn_btm1").style.background = "rgb(245,0,87,1)";
+
+// 			document.getElementById("bottom_menu_act_btn1").style.background = "#00adff";	//blue
+// 			document.getElementById("side_btn_btm1").style.background = "#00adff";	//blue
+
+			document.getElementById("bottom_menu_act_btn1").style.background = "#ff4081";	//pink
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="132px";	//Updated And Added By Jay On 30DEC2019
+			
+// 			document.getElementById("bottom_menu_act_btn1").style.background = "rgba(255, 64, 129,0.6)";	//pink
+			//document.getElementById("side_btn_btm1").style.background = "#ff4081";	//pink
+
+// 			document.getElementById("mySidenav1").style.bottom="189px";	//Updated BY Jay On 26DEC2019
+
+// 			document.getElementById("mySidenav1").style.bottom="145px";	//Updated BY Jay On 26DEC2019
+		}
+
+		function closeQuickLayers() {
+			document.getElementById("bottom_menu_btn1").style.display = "none";
+// 			document.getElementById("bottom_menu_act_btn1").style.background = "rgba(40,40,40,1)";
+// 			document.getElementById("side_btn_btm1").style.background = "rgba(40,40,40,1)";
+
+
+			document.getElementById("bottom_menu_act_btn1").style.background = "#00adff";
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="37px";		//Updated And Added By Jay On 30DEC2019
+			//document.getElementById("side_btn_btm1").style.background = "rgba(0, 173, 255,0.6)";
+
+// 			document.getElementById("mySidenav1").style.bottom="unset";	//Updated BY Jay On 26DEC2019
+		}
+		
+		function opencloseQuickLayers() {
+			if(quick_layers_open_close_flag){
+				closeQuickLayers();
+				quick_layers_open_close_flag=false;
+			}else{
+				openQuickLayers();
+				quick_layers_open_close_flag=true;
+			}
+		}
+
+		function openTools() {
+			if(quick_layers_open_close_flag){
+				closeQuickLayers();
+				quick_layers_open_close_flag=false;
+			}
+			
+			else if(legends_open_close_flag){
+				closeLegends();
+				legends_open_close_flag=false;
+			}
+
+			else if(analysis_open_close_flag){
+				closeAnalysis();
+				analysis_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Starts On 09JAN2020=======================*/
+			
+			else if(animation_open_close_flag){
+				closeAnimation()
+				animation_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Ends On 09JAN2020=======================*/
+			
+			document.getElementById("bottom_menu_btn2").style.display = "block";
+// 			document.getElementById("bottom_menu_act_btn2").style.background = "rgb(245,0,87,1)";
+// 			document.getElementById("side_btn_btm2").style.background = "rgb(245,0,87,1)";
+
+// 			document.getElementById("bottom_menu_act_btn2").style.background = "#00adff";	//blue
+// 			document.getElementById("side_btn_btm2").style.background = "#00adff";	//blue
+
+			document.getElementById("bottom_menu_act_btn2").style.background = "#ff4081";	//pink
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="107px";	//Updated And Added By Jay On 30DEC2019
+			
+// 			document.getElementById("bottom_menu_act_btn2").style.background = "rgba(255, 64, 129,0.6)";	//pink
+			//document.getElementById("side_btn_btm2").style.background = "#ff4081";	//pink
+
+// 			document.getElementById("mySidenav1").style.bottom="189px";	//Updated BY Jay On 26DEC2019
+
+// 			document.getElementById("mySidenav1").style.bottom="145px";	//Updated BY Jay On 26DEC2019
+		}
+
+		function closeTools() {
+			document.getElementById("bottom_menu_btn2").style.display = "none";			
+// 			document.getElementById("bottom_menu_act_btn2").style.background = "rgba(40,40,40,1)";
+// 			document.getElementById("side_btn_btm2").style.background = "rgba(40,40,40,1)";
+
+			document.getElementById("bottom_menu_act_btn2").style.background = "#00adff";
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="37px";		//Updated And Added By Jay On 30DEC2019
+			//document.getElementById("side_btn_btm2").style.background = "rgba(0, 173, 255,0.6)";
+
+// 			document.getElementById("mySidenav1").style.bottom="unset";	//Updated BY Jay On 26DEC2019
+		}
+
+		function opencloseTools() {
+			if(tools_open_close_flag){
+				closeTools();
+				tools_open_close_flag=false;	
+			}else{
+				openTools();
+				tools_open_close_flag=true;		
+			}	
+		}
+
+		function openLegends(){
+			if(quick_layers_open_close_flag){
+				closeQuickLayers();
+				quick_layers_open_close_flag=false;
+			}
+
+			else if(tools_open_close_flag){
+				closeTools();
+				tools_open_close_flag=false;
+			}
+
+			else if(analysis_open_close_flag){
+				closeAnalysis();
+				analysis_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Starts On 09JAN2020=======================*/
+			
+			else if(animation_open_close_flag){
+				closeAnimation()
+				animation_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Ends On 09JAN2020=======================*/
+
+			document.getElementById("bottom_menu_btn3").style.display = "block";
+//				document.getElementById("bottom_menu_act_btn1").style.background = "rgb(245,0,87,1)";
+//				document.getElementById("side_btn_btm1").style.background = "rgb(245,0,87,1)";
+			
+// 			document.getElementById("bottom_menu_act_btn3").style.background = "#00adff";	//blue
+// 			document.getElementById("side_btn_btm3").style.background = "#00adff";	//blue
+
+			document.getElementById("bottom_menu_act_btn3").style.background = "#ff4081";	//pink
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="175px";	//Updated And Added By Jay On 30DEC2019
+			
+// 			document.getElementById("bottom_menu_act_btn3").style.background = "rgba(255, 64, 129,0.6)";	//pink
+			//document.getElementById("side_btn_btm3").style.background = "#ff4081";	//pink
+
+// 			document.getElementById("mySidenav1").style.bottom="189px";	//Updated BY Jay On 26DEC2019
+			
+// 			document.getElementById("mySidenav1").style.bottom="195px";	//Updated BY Jay On 26DEC2019
+
+			
+		}
+
+		function closeLegends() {
+			document.getElementById("bottom_menu_btn3").style.display = "none";			
+// 			document.getElementById("bottom_menu_act_btn3").style.background = "rgba(40,40,40,1)";
+// 			document.getElementById("side_btn_btm3").style.background = "rgba(40,40,40,1)";
+
+			document.getElementById("bottom_menu_act_btn3").style.background = "#00adff";
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="37px";		//Updated And Added By Jay On 30DEC2019
+			
+			//document.getElementById("side_btn_btm3").style.background = "rgba(0, 173, 255,0.6)";
+
+// 			document.getElementById("mySidenav1").style.bottom="unset";	//Updated BY Jay On 26DEC2019
+		}
+
+		function opencloseLegends() {
+			if(legends_open_close_flag){
+				closeLegends();
+				legends_open_close_flag=false;
+			}else{
+				openLegends();
+				legends_open_close_flag=true;
+			}
+		}
+
+		function openAnalysis() {
+			if(quick_layers_open_close_flag){
+				closeQuickLayers();
+				quick_layers_open_close_flag=false;
+			}
+
+			else if(tools_open_close_flag){
+				closeTools();
+				tools_open_close_flag=false;
+			}
+
+			else if(legends_open_close_flag){
+				closeLegends();
+				legends_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Starts On 09JAN2020=======================*/
+			
+			else if(animation_open_close_flag){
+				closeAnimation()
+				animation_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Ends On 09JAN2020=======================*/
+
+			document.getElementById("bottom_menu_btn4").style.display = "block";
+			document.getElementById("point-probe-table").style.display="block";
+//				document.getElementById("bottom_menu_act_btn1").style.background = "rgb(245,0,87,1)";
+//				document.getElementById("side_btn_btm1").style.background = "rgb(245,0,87,1)";
+
+// 			document.getElementById("bottom_menu_act_btn4").style.background = "#00adff";	//blue
+// 			document.getElementById("side_btn_btm4").style.background = "#00adff";	//blue
+
+			document.getElementById("bottom_menu_act_btn4").style.background = "#ff4081";	//pink
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="127px";	//Updated And Added By Jay On 30DEC2019
+			
+// 			document.getElementById("bottom_menu_act_btn4").style.background = "rgba(255, 64, 129,0.6)";	//pink
+			//document.getElementById("side_btn_btm4").style.background = "#ff4081";	//pink
+
+// 			document.getElementById("mySidenav1").style.bottom="189px";	//Updated BY Jay On 26DEC2019
+
+// 			document.getElementById("mySidenav1").style.bottom="145px";	//Updated BY Jay On 26DEC2019
+
+// 			document.getElementById("mySidenav1").style.bottom="165px";	//Updated BY Jay On 26DEC2019
+		}
+		
+		function closeAnalysis() {
+			document.getElementById("bottom_menu_btn4").style.display = "none";
+
+			document.getElementById("point-probe-table").style.display="none";
+						
+// 			document.getElementById("bottom_menu_act_btn4").style.background = "rgba(40,40,40,1)";
+// 			document.getElementById("side_btn_btm4").style.background = "rgba(40,40,40,1)";
+
+			document.getElementById("bottom_menu_act_btn4").style.background = "#00adff";
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="37px";		//Updated And Added By Jay On 30DEC2019
+			
+			//document.getElementById("side_btn_btm4").style.background = "rgba(0, 173, 255,0.6)";
+
+// 			document.getElementById("mySidenav1").style.bottom="unset";	//Updated BY Jay On 26DEC2019
+		}
+
+		function opencloseAnalysis() {
+			if(analysis_open_close_flag){
+				closeAnalysis();
+				analysis_open_close_flag=false;
+			}else{
+				openAnalysis();
+				analysis_open_close_flag=true;
+			}
+		}
+
+
+		/*=======================Update By Jay Starts On 09JAN2020=========================*/
+		
+		
+		function openAnimation() {
+			if(quick_layers_open_close_flag){
+				closeQuickLayers();
+				quick_layers_open_close_flag=false;
+			}
+
+			else if(tools_open_close_flag){
+				closeTools();
+				tools_open_close_flag=false;
+			}
+
+			else if(legends_open_close_flag){
+				closeLegends();
+				legends_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Starts On 09JAN2020=======================*/
+			
+			else if(analysis_open_close_flag){
+				closeAnalysis();
+				analysis_open_close_flag=false;
+			}
+
+			/*=====================Update By Jay Ends On 09JAN2020=======================*/
+
+			document.getElementById("bottom_menu_btn5").style.display = "block";
+			document.getElementById("point-probe-table").style.display="block";
+
+			document.getElementById("bottom_menu_act_btn5").style.background = "#ff4081";	//pink
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="127px";	//Updated And Added By Jay On 30DEC2019
+		}
+		
+		function closeAnimation() {
+			document.getElementById("bottom_menu_btn5").style.display = "none";
+
+			document.getElementById("point-probe-table").style.display="none";
+						
+			document.getElementById("bottom_menu_act_btn5").style.background = "#00adff";
+
+			document.getElementsByClassName("ol-scale-line")[0].style.bottom="37px";		//Updated And Added By Jay On 30DEC2019
+			
+		}
+		
+		
+		
+		function opencloseAnimation() {
+			if(animation_open_close_flag){
+				closeAnimation();
+				animation_open_close_flag=false;
+			}else{
+				openAnimation();
+				animation_open_close_flag=true;
+			}
+		}
+		
+		/*=======================Update By Jay Ends On 09JAN2020=========================*/
+
+
+		
+        
+    </script>
+    
+    <script>
+
+	$(document).ready(function(){
+// 		console.log("in jq");
+		$('.datepicker').datepicker().on('hide',function(){
+// 			console.log('on hide');
+			hide();
+		});
+		});
+    
+    </script>
+	
+	<script>
+	// if no Webkit browser
+	(function(){
+	  let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+	  let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	  let scrollbarDiv = document.querySelector('.scrollbar');
+	    if (!isChrome && !isSafari) {
+	      scrollbarDiv.innerHTML = 'You need Webkit browser to run this code';
+	    }
+	})();
+	</script>
+	
+    </head>
+
+
+    <body ng-controller="mainController" class="color_style">
+    	
+
+        <input type="hidden" ng-model="url_name" value="india" id="hidden_url"/>
+<!--         <div id="toast_message_id" class="toast_message"> </div> -->
+<!--        <md-button aria-label="Aria Label" ng-click="resetZoom()" uib-tooltip="Reset Zoom" id="top_panel_button" class="panel-button-class"><img id="zoom" src="img/reset-zoom-icon-small.png" style="width:35px;height:32px;"></md-button> -->
+<!--         <button class="ol-unselectable ol-control" type="button" title="Reset Zoom" type="button" ng-click="resetZoom()" style="z-index:2; top: 5.5em; right: 3.5px; border-width: 0px; /* background-color: rgba(0,60,136,.5); */"><img src="img/reset-zoom-icon-small.png" style="height: 1.770em; width: 1.770em;"></button>     -->
+<!--          <button class="ol-unselectable ol-control" type="button" title="Reset Zoom" ng-click="resetZoom()" style="z-index:2; /*top: 70px;*/ /*top: 90px;*/ top: 117px; right: 0px; border-width: 0px; /* background-color: rgba(0,60,136,.5); */"><img src="img/reset-zoom-icon-small.png" style="height: 1.770em; width: 1.770em;"></button>  -->	<!--  Updated By Jay On 27DEC2019 -->
+		
+<!-- 	<div class="ol-unselectable ol-control" style="position: absolute; right: 0px; top: /*90px*//*127px*/110px;">  -->
+<!--             <button type="button" title="Reset Zoom" ng-click="resetZoom()"> -->
+<!-- 	            <img src="img/ic_zoom_to_actual_size_48px.png" style="height: 1.375em; width: 1.375em; line-height: .4em;">    -->
+<!--             </button> -->
+<!-- 		</div> -->
+		
+<!--         <div class="ol-unselectable ol-control" style="position: absolute; right: 0px; top: /*117px*//*168px*/140px;">  -->
+<!--             <button type="button" title="Info" ng-click="siteInfo()"> -->
+<!--                  <md-icon class="ol-info" md-svg-src="img/ic_info_24px.svg" style="height: 1.375em; width: 1.375em; line-height: .4em;">   -->
+<!--                 </md-icon> -->
+<!--             </button> -->
+<!--         </div> -->
+		
+         
+        
+
+        <!-- <div id="drag_drop_info" style="display:none;">&nbsp;</div> -->
+        
+<!--         <div resizable class="search_class"  id="search_table_id"> -->
+<!--             <div style="float:right;height:35px;"><md-button aria-label="Aria Label" ng-click="closeSearch()"><b>X</b></md-button></div>    -->
+<!--            <div style="clear:both;"></div> -->
+<!--             <div class="search_only_class"> -->
+<!--                 <table border-spacing="5px;"> -->
+<!--                     <tr><td width="60px;"> Enter Keyword</td> -->
+<!--                        <td> <input aria-label="Aria Label" type="text" style="color:black;" name="select_location" ng-model="selectedLocation" ng-keypress="($event.charCode==13)?updateLocationSetting():return"> -->
+<!--                         </td> -->
+<!--                         <td>     -->
+<!--                     <md-button aria-label="Aria Label" ng-click="updateLocationSetting('location_setting')" ng-disabled="selectedLocation==''"><label style="color:white;">Search</label></md-button>   -->
+<!--                     </td> -->
+<!--                     </tr> -->
+<!--                 </table> -->
+<!--                 <table class="sec_table" style="border-spacing:10px;" ng-show="locationData.length>0">  -->
+                    <!--                <tr><th>Place</th></tr>-->
+<!--                     <tr ng-repeat="entry in locationData">      -->
+<!--                         <td> -->
+<!--                             <button aria-label="Aria Label" ng-click="zoomToLocationDialog(entry)"> <div class="scrollable"> {{entry.display_name}} ({{entry.type}}) </div></button> -->
+<!--                         </td> -->
+<!--                     </tr> -->
+<!--                 </table> -->
+<!--             </div></div> -->
+            
+            
+            <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="searchDialog">
+		      <md-dialog class="search_table_class" layout-padding="">
+<!-- 		        <h2>Pre-Rendered Dialog</h2> -->
+<!-- 		        <div id="rss_feed"  ng-show="show_status" ng-class="{fadein:show_status==true, fadeout:show_status==false}"> -->
+
+              <md-content class="md-padding" style="color:white;">
+    		        <div id="search_table_id">
+                		<div style="float:right;height:35px;"><md-button aria-label="Aria Label" ng-click="closeSearch()"><b style="font-size: 20px;">X</b></md-button></div>
+                		<div style="clear:both;"></div>
+                		<div class="search_only_class">
+                    		<table border-spacing="5px;">
+                        		<tr>
+                        			<td width="60px;">Enter Keyword</td>
+                            		
+                            		<td> 
+                            			<input aria-label="Aria Label" type="text" style="color:black;" name="select_location" ng-model="selectedLocation" ng-keypress="($event.charCode==13)?updateLocationSetting():return">
+                            		</td>
+                            		
+                            		<td>    
+                        				<md-button aria-label="Aria Label" ng-click="updateLocationSetting('location_setting')" ng-disabled="selectedLocation==''" style="background-color: #00adff; margin-left: 3px;"><label style="color:white;">Search</label></md-button>
+                        			</td>
+                        		</tr>
+                    		</table>
+                    		
+                    		<table class="sec_table" style="border-spacing:10px;" ng-show="locationData.length>0">
+                            <!--                <tr><th>Place</th></tr>-->
+                        		<tr ng-repeat="entry in locationData">     
+                                	<td>
+                                    	<button aria-label="Aria Label" ng-click="zoomToLocationDialog(entry)" class="locationdatabtn"> <div class="scrollable"> {{entry.display_name}} ({{entry.type}}) </div></button>
+                                	</td>
+                        		</tr>
+                    		</table>
+    	            	</div>
+    	            </div>
+                </md-content>
+		      </md-dialog>
+		    </div>
+		  </div>
+            
+            
+            
+            
+            
+            
+            
+            
+
+		
+		
+        <div id="container_timeseries" class="ol-timeseries" ng-hide="sat_timeseries" style="display:none;">
+            <a href="#" id="timeseries-closer" class="ol-timeseries-closer"></a>
+            <div id="content_timeseries"></div>
+        </div>
+
+
+        <!-- <div id="popup-layer-list-animation" class="layer_list_animation_class">
+            
+     
+         </div> -->
+
+        <div role="group" aria-label="Animation controls" class="animation_info_class" id="animation_info_id" style="display:block;">
+            <span ng-show="timezone==timezone_gmt" id="animation_info_gmt" style="font-weight:bold;"></span>
+            <span ng-show="timezone==timezone_local" id="animation_info_local" style="font-weight:bold;"></span>
+
+            <!-- <md-button id="play" type="button" ng-click="playAnimation()">Play</md-button>
+             <md-button id="pause" type="button" ng-click="pauseAnimation()">Pause</md-button>
+            -->
+        </div>
+
+		
+		
+        <div id="map" class="map">
+            <canvas id="windyMap"></canvas>
+        </div>
+		 
+		<span id="side_btn" class="sidebar_btn" style="font-size:30px;cursor:pointer">
+			<table style="width: 295px;">
+			<tr>
+			<td>
+<!-- 			<md-button aria-label="Aria Label" class="md-fab" onclick="opencloseNav()" uib-tooltip="Configure"><md-icon md-svg-src="img/settings_white.svg"></md-icon></md-button>   -->  
+			
+<!-- 			<md-button aria-label="Aria Label" class="md-fab" onclick="opencloseNav()" uib-tooltip="Configure"><md-icon md-svg-src="img/double-chevron-up.svg" class="ng-scope" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1_cache91" x="0px" y="0px" viewBox="0 0 477.159 477.159" style="enable-background:new 0 0 477.159 477.159;" xml:space="preserve" width="100%" height="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">   -->
+<!-- 					</svg></md-icon></md-button> -->
+					
+					
+<!-- 				<md-button aria-label="Aria Label" class="md-icon-button md-primary" value="Hide div" ng-click="hideDiv()"> -->
+<!--                     <md-icon md-svg-src="{{hideDivIcon()}}"></md-icon> -->
+<!--                 </md-button> -->
+                
+<!--                 <md-button aria-label="Aria Label" class="md-fab" onclick="opencloseNav()" uib-tooltip="Configure">     -->
+				<md-button aria-label="Aria Label" class="md-fab" onclick="opencloseNav()" style="border: 1px solid #ccc;">	<!-- uib-tooltip="Configure" tooltip-placement="bottom" -->    
+                    <md-icon md-svg-src="{{hideDivIconSideBtn()}}"></md-icon>
+                </md-button>
+				
+<!-- 				<label id="layer_manager_label">Layer Manager</label> -->	<!-- Updated By Jay On 06JAN2020 -->
+
+				<div id="layer_manager_label" class="scrollbar" style="display: none;">
+					<table>
+						<tr ng-repeat="layer in layers | orderBy:'$index':true">
+<!--							<td ng-if="layer.data_type=='satellite'">	-->
+							<td ng-if="layer.satellite">
+								<label ng-if="!(layer.isContour) && timezone==timezone_gmt && layer.active" style="color: white;font-size:12px;"><b>{{layer.dateval}} {{layer.timeval}} {{layer.sensor}}/{{layer.satellite}} {{layer.name}}</b>&nbsp;&nbsp;</label>
+                                <label ng-if="!(layer.isContour) && timezone==timezone_local && layer.active" style="color: white;font-size:12px;"><b>{{layer.dateval_local}} {{layer.timeval_local}} {{layer.sensor}}/{{layer.satellite}} {{layer.name}}</b>&nbsp;&nbsp;</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+			
+<!-- 			<button class="md-icon-button md-primary md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Aria Label" value="Hide div" onclick="opencloseNav()> -->
+<!--                     <md-icon md-svg-src="img/double-chevron-up.svg" class="ng-scope" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1_cache91" x="0px" y="0px" viewBox="0 0 477.159 477.159" style="enable-background:new 0 0 477.159 477.159;" xml:space="preserve" width="100%" height="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">     -->
+<!-- 					</svg></md-icon> -->
+<!--                 <div class="md-ripple-container"></div></button> -->
+			
+			</td>
+            
+            <td id="side_btn_extra1" style="display:none;">
+            	<md-button aria-label="Aria Label" class="md-fab" id="synch-button-clicked" ng-click="syncRecentData('button_click')" uib-tooltip={{synch_tooltip}} tooltip-placement="bottom"> <md-icon md-svg-src="img/ic_autorenew_24px.svg"></md-icon> </md-button>
+            </td>
+            
+            <td id="side_btn_extra2" style="display:none;">
+            	<md-button aria-label="Aria Label" class="md-fab" ng-click="showCatalog()" uib-tooltip="Add Layers" tooltip-placement="bottom"><md-icon md-svg-src="img/ic_playlist_add_48px.svg"></md-icon></md-button>
+            </td>
+            
+            <td id="side_btn_extra3" style="display:none;">
+            	<md-button aria-label="Aria Label" class="md-fab" ng-click="toggleTimeZone()" uib-tooltip={{timezone_tooltip}} tooltip-placement="bottom">{{timezone}}</md-button>
+            </td>
+            
+            <td id="side_btn_extra4" style="display:none;">
+            	<md-button aria-label="Aria Label" class="md-fab" ng-click="multilayer_3d()" uib-tooltip="3D" tooltip-placement="bottom">3D</md-button>
+            </td>
+            </tr>
+            </table>
+            
+			
+		</span> 
+		 
+
+		
+        
+<!--         <div style="visibility: hidden">   <!-- 		    <div class="md-dialog-container" id="calendarDialog"> -->
+<!-- 		      <md-dialog layout-padding=""> -->
+<!--         		<div class="input-group" id="calendarDialog"> <!-- id="calendarDialog"    -->
+<!--         			<input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>      -->
+<!--                 </div> -->
+<!-- 		      </md-dialog> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
+		
+		
+<!-- 		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
+<!--           <div class="modal-dialog modal-dialog-centered" role="document"> -->
+<!--             <div class="modal-content"> -->
+<!--               <div class="modal-header"> -->
+<!--                 <h5 class="modal-title" id="exampleModalLongTitle">Calendar</h5> -->
+<!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--                   <span aria-hidden="true">&times;</span> -->
+<!--                 </button> -->
+<!--               </div> -->
+<!--               <div class="modal-body"> -->
+<!-- <!--                 ...  -->
+<!--                <div class="input-group"> <!-- id="calendarDialog" -->        
+<!--          			<input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>      -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--               <div class="modal-footer"> -->
+<!--                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+<!-- <!--                 <button type="button" class="btn btn-primary">Save changes</button> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+        
+<!--         <md-dialog aria-label="Mango (Fruit)" id="calendarDialog">  -->
+<!-- 		<md-dialog-content>   -->
+<!--               <md-content class="md-padding"> -->
+<!--                     <md-input-container> -->
+<!--                          <div> -->
+<!--                                 <input type="text" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>      -->
+<!--                         </div> -->
+<!--                      </md-input-container> -->
+<!--                </md-content> -->
+<!--          </md-dialog-content> -->
+<!--          </md-dialog> -->
+		
+		
+		<div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="calendarDialog">
+		      <md-dialog layout-padding="">
+<!-- 		        <h2>Pre-Rendered Dialog</h2> -->
+		        <div>
+                        <input type="text" class="datepicker" style="display: none;" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>     
+                </div>
+		      </md-dialog>
+		    </div>
+		  </div>
+		  
+		  <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="rssDialog">
+		      <md-dialog class="site_info_class" layout-padding="">
+<!-- 		        <h2>Pre-Rendered Dialog</h2> -->
+<!-- 		        <div id="rss_feed"  ng-show="show_status" ng-class="{fadein:show_status==true, fadeout:show_status==false}"> -->
+
+              <md-content class="md-padding" style="color:white;">
+		        <div id="rss_feed" ng-class="{fadein:show_status==true, fadeout:show_status==false}">
+                    <div id="rssfeed_close" ng-click="popup_close()" style="float: right;"><b>X</b></div>
+                    <div id="rssfeed_content" style="padding-top: 23px;">	<!-- Updated By Jay On 24DEC2019 -->
+                    </div>
+                </div>
+                </md-content>
+		      </md-dialog>
+		    </div>
+		  </div>
+		  
+		  
+<!-- 		<div class="md-padding dialogdemoBasicUsage" id="popupContainer"> -->
+		
+<!-- 		</div> -->
+		
+		<div id="mySidenav1" class="sidenav1 scrollbar">
+<!-- 		<md-dialog aria-label="Mango (Fruit)" id="calendarDialoge"> -->
+<!-- 		<md-dialog-content style="max-width:100vw;max-height:100vh; " >   -->
+<!--               <md-content class="md-padding"> -->
+<!--                     <md-input-container> -->
+<!-- 		                                         <div class="input-group"> -->
+<!--    	                                                    <input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>       -->     
+<!--                                                 </div> -->
+<!--                      </md-input-container> -->
+<!--                </md-content> -->
+<!--          </md-dialog-content> -->
+<!--          </md-dialog> -->
+
+<!--         <div class="input-group" id="calendarDialog"> <!-- id="calendarDialog"-->       	 -->
+<!--  			<input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>      -->
+<!--         </div> -->
+        
+        
+        
+        
+<!--			<md-content layout-padding layout="column" style="margin-top:10px;overflow:visible;">  -->
+                    <!-- <div style="padding-left: 36px;">
+                    	<md-button aria-label="Aria Label" class="md-fab" ng-click="siteInfo()" uib-tooltip="Info"> <md-icon md-svg-src="img/ic_info_24px.svg"></md-icon> </md-button>
+                <md-button aria-label="Aria Label" class="md-fab" id="synch-button-clicked" ng-click="syncRecentData('button_click')" uib-tooltip={{synch_tooltip}}> <md-icon md-svg-src="img/ic_autorenew_24px.svg"></md-icon> </md-button>
+                <md-button aria-label="Aria Label" class="md-fab" ng-click="showCatalog()" uib-tooltip="Add Layers"><md-icon md-svg-src="img/ic_playlist_add_48px.svg"></md-icon></md-button>
+                <md-button aria-label="Aria Label" class="md-fab" ng-click="toggleTimeZone()" uib-tooltip={{timezone_tooltip}}>{{timezone}}</md-button>
+                <md-button aria-label="Aria Label" class="md-fab" ng-click="searchLocation()" uib-tooltip="Search"><md-icon md-svg-src="img/ic_search_white_48px.svg"></md-icon></md-button>
+                    </div>  -->
+<!--						<md-content layout-padding layout="column" style="margin-top:0px;overflow:visible;">  -->
+<!-- 						<md-content layout-padding layout="column" style="margin-top:36px;overflow:visible;">     -->
+						<md-content layout-padding layout="column" style="padding-top:23px;overflow:visible;">
+                    <div class="layer-display" ng-if="count_overlaylayer!=0" style="background-color:grey;">Overlay Layers
+                    </div>
+
+                    <div ng-repeat="layer in layers | orderBy:'$index':true | limitTo:count_overlaylayer:0">
+                        <div layout="row" class="layer-list-row" ng-if="!(layer.source.urlaws) && layer.displayname!='animation'">
+                            <md-checkbox ng-model="layer.active" ng-change="stateChanged(layer)" flex="80">{{layer.displayname}}</md-checkbox>
+                            <input flex="20" type="range" min="0" max="1" step="0.01" ng-model="layer.opacity" ng-change="stateChangedOpacity(layer)" uib-tooltip="Layer Opacity"/>
+                            <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="Add vector layers" ng-click="showLegend(layer,'toggle')" uib-tooltip="Add vector layers">
+                                <!-- <md-icon md-svg-src="{{hideDivOverlayIcon()}}"></md-icon> -->
+                                <i class="{{divoverlay_class}}" style="font-size:28px;color:white;font-weight:bold;"></i>
+                            </md-button>
+                            <label>&nbsp;</label>
+                        </div>
+                        <div layout="row" class="layer-list-row" ng-if="(layer.source.urlaws)">
+                            <md-checkbox ng-model="layer.active" ng-change="stateChanged(layer)" flex="80">{{layer.aws_parameter.parameter_name}}</md-checkbox>
+                            <!-- <md-checkbox ng-if="timezone==timezone_gmt" ng-model="layer.active" ng-change="stateChanged(layer)" flex="80">{{layer.displayname_gmt}}</md-checkbox> -->
+                            <input flex="20" type="range" min="0" max="1" step="0.01" ng-model="layer.opacity" ng-change="stateChangedOpacity(layer)" uib-tooltip="Layer Opacity"/>
+                            <md-button aria-label="Aria Label" class="md-icon-button md-primary" value="Remove Layer" ng-click="remove(layer)" uib-tooltip="Delete Layer"> <md-icon aria-label="Aria Label" md-svg-src="img/ic_delete_black_24px.svg"></md-icon>      </md-button>
+
+                            <label>&nbsp;</label>
+                        </div>
+<!--                         <div style="width:1200px;" ng-if="(layer.source.urlaws)">   -->
+                        <div style="/* width:1200px; */" ng-if="(layer.source.urlaws)">
+                            <div class="range_table_one" style="padding-top:5px;padding-bottom:5px;float:left;color:white;width:/*350px*/100%;">
+                                <table>
+                                    <tr>
+                                        <td style="width:120px;">                                        
+                                            <label ng-if="!(layer.isContour) && timezone==timezone_gmt" style="color:#10A6F7;font-size:12px; width:250px"><b>{{layer.dateval_gmt}} {{layer.timeval_gmt}}</b>&nbsp;&nbsp;</label>
+                                            <label ng-if="!(layer.isContour) && timezone==timezone_local" style="color:#10A6F7;font-size:12px; width:250px;"><b>{{layer.dateval_local}} {{layer.timeval_local}}</b>&nbsp;&nbsp;</label>
+                                        </td>
+<!--                                         <td rowspan="2" width="50px;"> -->
+<!--                                             <div layout="row" ng-if="!(layer.isContour)" style="float:left;">   -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button"  ng-click="showBackDateSelectionFun(layer)">Date</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-click="showTimeSelectionFun(layer)">Time</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-click="showBandSelectionFun(layer)">Param</md-button> -->
+
+<!--                                             </div> -->
+<!--                                         </td> -->
+                                        
+                                        
+                                        <td ng-if="!(layer.isContour)">
+                                        
+                                        
+<!--                                         <button class="range_table_button md-button ng-scope md-ink-ripple" type="button" ng-transclude="" aria-label="Aria Label" ng-if="layer.time==true &amp;&amp; layer.data_type!='climatology' &amp;&amp; layer.data_type!='weather_forecast' &amp;&amp; layer.data_type!='satellite_analyzed_winds'" ng-click="showBackDateSelectionFun(layer)"> -->
+<!--                                         	<span class="ng-scope">Date</span> -->
+<!--                                         	<div class="md-ripple-container" style=""></div>   -->
+<!--                                         </button> -->
+                                        
+                            				<div ng-show="true" id="calendar_id" class="calendar_class" style="dispaly: block !important;">	<!--  ng-if="layer.time==true && layer.data_type!='climatology' && layer.data_type!='weather_forecast' && layer.data_type!='satellite_analyzed_winds'" -->
+                                    
+                                    
+<!--                                                 <div class="input-group"> -->
+<!--   	                                                    <input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>    -->     
+<!--                                                 </div> -->
+                                                <span class="input-group-btn">
+<!--                                                     <button type="button" class="btn btn-default" ng-click="openCalendar_layer($event,layer, 'dt')"  data-toggle="modal" data-target="#exampleModalCenter"><i class="glyphicon glyphicon-calendar"></i></button> -->    <!-- Actual calendar before -->
+<!--                                                     <button type="button" class="btn btn-default" ng-click="openCalendar_layer($event,ev,layer, 'dt')"><i class="glyphicon glyphicon-calendar"></i></button> -->
+<!--                                                     <button ng-click="showAlert(ev,layer)">show</button> -->
+														 <button type="button" class="btn btn-default" ng-click="showAlert(ev,$event,layer,'dt')" style="background-color: #00adff;"><i class="glyphicon glyphicon-calendar"></i></button>   <!-- Actual calendar after -->
+                                                            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> -->
+                                                            <!--   Launch demo modal -->
+                                                            <!-- </button> -->
+                                                </span>
+                                    
+                                    
+                                                <!--
+                                                    <input type="text" aria-label="Aria Label" style="width:150px;" class="form-control" datetime-picker="yyyy-MM-dd" ng-model="date_main" ng-change="addLayers(false)" is-open="open"/>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <span class="input-group-btn"><button type="button" aria-label="Aria Label" class="btn btn-default" style="valign:top" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button></span>
+                                                </div>
+                                                -->
+                                                
+                                            </div>
+                                        </td>
+                                        
+                                        
+                                    </tr>
+
+                                </table>
+                                
+                                <table style="width:100%;">
+    								<tr>
+	    								<td>
+                                            <select class="range_select form-control" aria-label="Aria Label" ng-if="timezone==timezone_gmt" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_gmt for option in layer.list_time_arr">
+            <!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_gmt}}</md-option> -->
+                                            </select>
+                                            <select class="range_select form-control" aria-label="Aria Label" ng-if="timezone==timezone_local" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_local for option in layer.list_time_arr">
+            <!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_local}}</md-option> -->
+                                            </select>
+                                        </td> 
+                                        <td>
+                                        	<select aria-label="Aria Label" class="range_select form-control" ng-model="layer.selectedBandSetting" ng-change="updateSelectedLayerBand(layer)" ng-value="option" ng-options="option.parameter_name for option in layer.list_parameter_arr">
+            <!--                                     <md-content ng-show="layer.showBandSetting">  <md-option ng-value="option" ng-repeat="option in layer.list_parameter_arr">{{option.parameter_name}}</md-option>
+                                            </md-content>   -->
+                                            <select>
+                                        </td>
+    								</tr>
+    							</table>
+                            </div>
+
+                            <!-- Update Starts by jay for migrate md-select,md-option with select ng-option -->
+
+<!--                             <div style="float:left;background-color:white;" class="range_selection" ng-show="layer.showTimeSetting" id="datebased_time_listing_id">     -->      
+<!--                                 <md-select class="range_select" aria-label="Aria Label" ng-if="timezone==timezone_gmt" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)"> -->
+<!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_gmt}}</md-option> -->
+<!--                                 </md-select> -->
+<!--                                 <md-select class="range_select" aria-label="Aria Label" ng-if="timezone==timezone_local" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)"> -->
+<!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_local}}</md-option> -->
+<!--                                 </md-select> -->
+<!--                             </div> -->
+<!--                             <div ng-show="layer.showBandSetting" style="float:left;background-color:white;" class="range_selection">    -->
+<!--                                 <md-select ng-show="layer.showBandSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedBandSetting" ng-change="updateSelectedLayerBand(layer)"> -->
+<!--                                     <md-content ng-show="layer.showBandSetting">  <md-option ng-value="option" ng-repeat="option in layer.list_parameter_arr">{{option.parameter_name}}</md-option> -->
+<!--                                     </md-content> -->
+<!--                                 </md-select> -->
+<!--                             </div> -->
+                            
+                            
+                            
+                            <!-- Update Ends by jay for migrate md-select,md-option with select ng-option -->
+                            
+                        </div>
+
+
+                        <div id="overlayselection" ng-show="showOverlaySelection" ng-if="!(layer.source.urlaws)" ng-repeat="overlaylayer in overlay_layers" >
+                            <div layout="row" class="overlay_selection" style="width:100%;margin-top:0;margin-bottom:0;" > <md-checkbox ng-model="overlaylayer.active" ng-change="nodeSelectedOverlay(overlaylayer)" flex="10"><label style="width:250px;text-align:left;">{{overlaylayer.displayname}}</label></md-checkbox>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layer-display" ng-if="count_layer!=0">Layers</div>
+                    <div ng-repeat="layer in layers | orderBy:'$index':true | limitTo:count_layer:starting_layer_index" class="layer_border_div">
+                        <div layout="row" class="layer-list-row" ng-if="!(layer.isContour)"> 
+                            <md-checkbox ng-model="layer.active" ng-change="stateChanged(layer)" flex="80">{{layer.name.substring(0,25)}}</md-checkbox>
+                            <input aria-label="Aria Label" flex="20" type="range" min="0" max="1" step="0.01" ng-model="layer.opacity" ng-change="stateChangedOpacity(layer)" uib-tooltip="Layer Opacity"/>
+                            <md-button aria-label="Aria Label" ng-if="layer.fix_layer==false" aria-label="Aria Label" class="md-icon-button md-primary" value="Remove Layer" ng-click="remove(layer)" uib-tooltip="Delete Layer"> <md-icon aria-label="Aria Label" md-svg-src="img/ic_delete_black_24px.svg"></md-icon>      </md-button>
+<!--                             <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="Show Legend"  ng-click="showLegend(layer,'toggle')" uib-tooltip="Legend"> <md-icon aria-label="Aria Label" md-svg-src="img/ic_visibility_black_24px.svg"></md-icon>  </md-button> -->
+<!--                             <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="Animation" ng-click="addAnimationLayer(layer)" uib-tooltip="Animation">   <md-icon aria-label="Aria Label" md-svg-src="{{layer.animation_control_status}}"></md-icon> </md-button> -->
+                            <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="Image Settings" ng-click="showImageSettingFun(layer)" uib-tooltip="Image Settings">          <i class="{{layer.div_setting_class}}" style="font-size:28px;color:white;font-weight:bold;"></i>  </md-button>
+                          <!--  <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="3D" ng-click="show3DInterface(layer)" uib-tooltip="3D">  <font style="color:white;"> 3D </font>  </md-button> -->
+                            <!-- <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="TGraph" ng-click="showTephigram(layer)" uib-tooltip="Tephigram">  <font style="color:white;"> TG </font>  </md-button> -->
+
+                        </div>
+<!--                          <div style="width:1200px;">   -->
+                        <div>
+<!--                             <div class="range_table_one" style="padding-top:5px;padding-bottom:5px;float:left;color:white;width:350px;">    -->
+                            <div class="range_table_one" style="padding-top:5px;padding-bottom:5px;float:left;color:white;width:310px;">
+<!--                                 <table> -->
+<!--                                                                         <td rowspan="2" width="50px;"> -->
+<!-- <!--                                            <div layout="row" ng-if="!(layer.isContour)" style="float:right;">  -->
+<!--                                             <div layout="row" ng-if="!(layer.isContour)" style="float:left;">   --> 
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button"  ng-if="layer.time==true && layer.data_type!='climatology' && layer.data_type!='weather_forecast' && layer.data_type!='satellite_analyzed_winds'" ng-click="showBackDateSelectionFun(layer)">Date</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.time==true && layer.data_type!='satellite_analyzed_winds'" ng-click="showTimeSelectionFun(layer)">Time</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.elevation==true && layer.data_type!='satellite_analyzed_winds'" ng-click="showElevationSelectionFun(layer)">Elevation</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='satellite'" ng-click="showBandSelectionFun(layer)">Band</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='geophysical_analyzed_winds'" ng-click="showBandSelectionFun(layer)">Param</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='weather_forecast' || layer.data_type=='climatology'" ng-click="showBandSelectionFun(layer)">Param</md-button> -->
+                                                <!-- <md-button aria-label="Aria Label" class="range_table_button" ng-click="addAnimationLayer(layer)">Animation</md-button> --> 
+
+<!--                                             </div> -->
+<!--                                         </td>  -->
+<!--                                     </tr> -->
+<!--                                 </table> -->
+                                <table>
+
+                                    <tr>
+                                        <td style="width:120px;">
+                                            <!--                                        <label ng-if="!(layer.isContour) && timezone==timezone_gmt" style="color:#10A6F7;font-size:12px;"><b>{{layer.dateval}} {{layer.timeval}}</b>&nbsp;&nbsp;</label>
+                                                                                    <label ng-if="!(layer.isContour) && timezone==timezone_local" style="color:#10A6F7;font-size:12px;"><b>{{layer.dateval_local}} {{layer.timeval_local}}</b>&nbsp;&nbsp;</label>
+                                            -->
+                              <label ng-if="!(layer.isContour) && timezone==timezone_gmt" style="color:#10A6F7;font-size:12px; width:250px;"><b>{{layer.dateval}} {{layer.timeval}}</b></label>
+                               <label ng-if="!(layer.isContour) && timezone==timezone_local" style="color:#10A6F7;font-size:12px; width:250px;"><b>{{layer.dateval_local}} {{layer.timeval_local}}</b></label>
+                                            
+                                            <span></span>
+                                        </td>
+                                        
+                                        <td ng-if="!(layer.isContour)">
+                                        
+                                        
+<!--                                         <button class="range_table_button md-button ng-scope md-ink-ripple" type="button" ng-transclude="" aria-label="Aria Label" ng-if="layer.time==true &amp;&amp; layer.data_type!='climatology' &amp;&amp; layer.data_type!='weather_forecast' &amp;&amp; layer.data_type!='satellite_analyzed_winds'" ng-click="showBackDateSelectionFun(layer)"> -->
+<!--                                         	<span class="ng-scope">Date</span> -->
+<!--                                         	<div class="md-ripple-container" style=""></div>   -->
+<!--                                         </button> -->
+                                        
+                            				<div ng-if="layer.time==true &amp;&amp; layer.data_type!='climatology' &amp;&amp; layer.data_type!='weather_forecast' &amp;&amp; layer.data_type!='satellite_analyzed_winds'" ng-show="true" id="calendar_id" class="calendar_class" style="dispaly: block !important;">
+                                    
+                                    
+<!--                                                 <div class="input-group"> -->
+<!--   	                                                    <input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>    -->     
+<!--                                                 </div> -->
+                                                <span class="input-group-btn">
+<!--                                                     <button type="button" class="btn btn-default" ng-click="openCalendar_layer($event,layer, 'dt')"  data-toggle="modal" data-target="#exampleModalCenter"><i class="glyphicon glyphicon-calendar"></i></button> -->    <!-- Actual calendar before -->
+<!--                                                     <button type="button" class="btn btn-default" ng-click="openCalendar_layer($event,ev,layer, 'dt')"><i class="glyphicon glyphicon-calendar"></i></button> -->
+<!--                                                     <button ng-click="showAlert(ev,layer)">show</button> -->
+														 <button type="button" class="btn btn-default" ng-click="showAlert(ev,$event,layer,'dt')" style="background-color: #00adff;"><i class="glyphicon glyphicon-calendar"></i></button>   <!-- Actual calendar after -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> -->
+<!--   Launch demo modal -->
+<!-- </button> -->
+                                                </span>
+                                    
+                                    
+                                                <!--
+                                                    <input type="text" aria-label="Aria Label" style="width:150px;" class="form-control" datetime-picker="yyyy-MM-dd" ng-model="date_main" ng-change="addLayers(false)" is-open="open"/>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <span class="input-group-btn"><button type="button" aria-label="Aria Label" class="btn btn-default" style="valign:top" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button></span>
+                                                </div>
+                                                -->
+                                                
+                                            </div>
+                                        </td>
+                                        
+<!--                                         <td rowspan="2" width="50px;"> -->
+<!--                                            <div layout="row" ng-if="!(layer.isContour)" style="float:right;">  -->
+<!--                                             <div layout="row" ng-if="!(layer.isContour)" style="float:left;"> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button"  ng-if="layer.time==true && layer.data_type!='climatology' && layer.data_type!='weather_forecast' && layer.data_type!='satellite_analyzed_winds'" ng-click="showBackDateSelectionFun(layer)">Date</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.time==true && layer.data_type!='satellite_analyzed_winds'" ng-click="showTimeSelectionFun(layer)">Time</md-button>  -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.elevation==true && layer.data_type!='satellite_analyzed_winds'" ng-click="showElevationSelectionFun(layer)">Elevation</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='satellite'" ng-click="showBandSelectionFun(layer)">Band</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='geophysical_analyzed_winds'" ng-click="showBandSelectionFun(layer)">Param</md-button> -->
+<!--                                                 <md-button aria-label="Aria Label" class="range_table_button" ng-if="layer.data_type=='weather_forecast' || layer.data_type=='climatology'" ng-click="showBandSelectionFun(layer)">Param</md-button> -->
+                                                <!-- <md-button aria-label="Aria Label" class="range_table_button" ng-click="addAnimationLayer(layer)">Animation</md-button> --> 
+
+<!--                                             </div> -->
+<!--                                         </td>  -->
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">
+                                            <label ng-if="(layer.sensor && !(layer.isContour))">{{layer.sensor}}/{{layer.satellite}}</label>                       
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            
+                            <!-- Update Starts by jy for migrate md-select, md-option with  select ng-options-->
+<!--                             <div ng-show="layer.showBandSetting" style="float:left;background-color:white;" class="range_selection">    -->
+<!--                                 <md-select ng-show="layer.showBandSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedBandSetting" ng-change="updateSelectedLayerBand(layer)"> -->
+<!--                                     <md-content ng-show="layer.showBandSetting">  <md-option ng-value="option" ng-repeat="option in layer.list_band_arr track by $index">{{option.name}}</md-option> -->
+<!--                                     </md-content> -->
+<!--                                 </md-select> -->
+<!--                             </div> -->
+
+<!-- 							<div ng-show="layer.showBandSetting" style="float:left;background-color:white;" class="range_selection">     -->
+<!--                                 <select ng-show="layer.showBandSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedBandSetting"  ng-change="updateSelectedLayerBand(layer)"> -->
+<!--                                     <option ng-value="option | json" ng-repeat="option in layer.list_band_arr track by $index">{{option.name}}</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+                            
+                            <!-- bef ng-show="layer.showBandSetting" in div and select in below divs,select-->
+                            
+                            <!-- Update Starts for table -->
+                            
+							<table style="width:100%;">
+								<tr>
+									<td>
+										<div ng-if="layer.elevation" style="float:left;" class="range_selection">
+											<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Elevation :- </label>
+										</div>
+									</td>
+									<td>
+	   <!--                             <div ng-if="false" style="float:left;background-color:white;" class="range_selection">      -->
+										<div ng-if="layer.elevation" style="float:left; width: 100%;" class="range_selection">
+                                        
+<!--                                          	<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Elevation :- </label>    -->
+                                        
+                                            <select aria-label="Aria Label" class="range_select form-control" ng-model="layer.selectedElevationSetting" ng-change="updateSelectedLayerElevation(layer)" ng-value="option" ng-options="option.substring(0,8) for option in layer.list_elevation_arr">
+            <!--                                     <md-content ng-show="layer.showElevationSetting">  <md-option ng-value="option" ng-repeat="option in layer.list_elevation_arr">{{option.substring(0,8)}}</md-option> -->
+            <!--                                     </md-content> -->
+                                            </select>
+                                        </div>
+									</td>
+								</tr>
+								
+								<tr>
+									<td ng-if="!(layer.isContour)">
+										<div style="float:left;" class="range_selection">
+            <!-- 								<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Band/Param:- </label>      -->
+                                            <select aria-label="Aria Label" class="range_select form-control" ng-model="layer.selectedBandSetting"  ng-value="option" ng-change="updateSelectedLayerBand(layer)" ng-options="option.name for option in layer.list_band_arr">
+            <!--                                     <option ng-value="option | json" ng-repeat="option in layer.list_band_arr track by $index">{{option.name}}</option> -->
+                                            </select>
+                                        </div>
+									</td>
+									
+									<td ng-if="!(layer.isContour)">
+		<!-- 							<div style="float:left;background-color:white;" class="range_selection" id="datebased_time_listing_id">      -->
+            							<div style="float:left;" class="range_selection" id="datebased_time_listing_id">
+            							
+            <!-- 								<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Time :- </label>       -->
+            							      
+                                            <select class="range_select form-control" aria-label="Aria Label" ng-if="timezone==timezone_gmt" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_gmt for option in layer.list_time_arr">
+            <!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_gmt}}</md-option> -->
+                                            </select>
+                                            <select class="range_select form-control" aria-label="Aria Label" ng-if="timezone==timezone_local" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_local for option in layer.list_time_arr">
+            <!--                                     <md-option aria-label="Aria Label" ng-value="option" ng-repeat="option in layer.list_time_arr">{{option.displayname_local}}</md-option> -->
+                                            </select>
+                                        </div>
+            																			
+									</td>
+								</tr>
+							</table>
+							
+							<!-- Update Ends for table  bef it is open div for Band/Param,Time,Elevation as per below three divs-->
+                            
+                            <!-- Previous divs for Band/Param,Time,Elevation Starts -->
+                            
+
+<!--                             <div ng-if="layer.elevation" style="float:left;" class="range_selection">   -->
+                            
+<!--                              	<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Elevation :- </label>    -->
+                            
+<!--                                 <select aria-label="Aria Label" class="range_select" ng-model="layer.selectedElevationSetting" ng-change="updateSelectedLayerElevation(layer)" ng-value="option" ng-options="option.substring(0,8) for option in layer.list_elevation_arr"> -->
+
+<!--                                 </select> -->
+<!--                             </div> -->
+                            
+                            
+
+<!-- 							<div style="float:left;" class="range_selection">    -->
+							
+<!-- <!-- 								<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Band/Param:- </label>      -->
+							
+<!--                                 <select aria-label="Aria Label" class="range_select" ng-model="layer.selectedBandSetting"  ng-value="option" ng-change="updateSelectedLayerBand(layer)" ng-options="option.name for option in layer.list_band_arr"> -->
+
+<!--                                 </select> -->
+<!--                             </div> -->
+
+
+
+
+                            <!-- Starts ng-show is only in div for gmt and locale time -->
+                                                        
+<!-- 							<div style="float:left;" class="range_selection" id="datebased_time_listing_id">     -->
+							
+<!-- <!-- 								<label style="color: white; margin-top: 0px; margin-bottom: 0px; font-weight: lighter; font-size: 12px;">Time :- </label>       -->
+							      
+<!--                                 <select class="range_select" aria-label="Aria Label" ng-if="timezone==timezone_gmt" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_gmt for option in layer.list_time_arr"> -->
+
+<!--                                 </select> -->
+<!--                                 <select class="range_select" aria-label="Aria Label" ng-if="timezone==timezone_local" ng-model="layer.selectedTimeSetting" ng-change="updateSelectedLayerTime(layer)" ng-value="option" ng-options="option.displayname_local for option in layer.list_time_arr"> -->
+                                
+<!--                                 </select> -->
+<!--                             </div> -->
+                            
+                            <!-- Ends ng-show is only in div for gmt and locale time -->
+                            
+                            <!-- Previous divs for Band/Param,Time,Elevation Starts -->
+                            
+<!--                             <div ng-show="show_back_date_setting" id="calendar_id" class="calendar_class" aria-hidden="false" style="display: block;">      -->
+
+
+<!--                                 <div class="input-group"> -->
+<!--                                     <input type="text" style="display:none;" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty ng-valid-required ng-valid-date" uib-datepicker-popup="" ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly="" required="required" aria-invalid="false">     -->
+                                    
+<!--                                     <div uib-datepicker-popup-wrap="" ng-model="date" ng-model-options="ngModelOptions" ng-change="dateSelection(date)" template-url="uib/template/datepicker/popup.html" class="ng-not-empty ng-valid" aria-invalid="false"> -->
+                                    <!-- ngIf: isOpen -->
+<!--                                 	</div> -->
+                                
+<!--                                 </div> -->
+                                
+<!--                                 <span class="input-group-btn"> -->
+<!--                                     <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'dt')"><i class="glyphicon glyphicon-calendar"></i></button> -->
+<!--                                 </span> -->
+                    
+                    
+                                <!--
+<!--                                     <input type="text" aria-label="Aria Label" style="width:150px;" class="form-control" datetime-picker="yyyy-MM-dd" ng-model="date_main" ng-change="addLayers(false)" is-open="open"/> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-lg-1"> -->
+<!--                                     <span class="input-group-btn"><button type="button" aria-label="Aria Label" class="btn btn-default" style="valign:top" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button></span> -->
+<!--                                 </div> -->
+<!-- <!--                                --> 
+<!-- 	                        </div> -->
+
+
+                            
+                            
+                            <!-- bef ng-show="layer.showBandSetting" in div and select in above divs,select-->
+                            
+                            <!-- Update Ends by jay for migrate md-select, md-option with  select ng-options-->
+
+
+
+                        </div>
+
+
+
+                        <div ng-if="!(layer.isContour)"> 
+                            <div ng-if="layer.selectedImageSetting=='Range' && layer.showImageSetting" style="padding-top:5px;padding-bottom:5px;color:white;/*width:350px;*/width:302px;align:center;">
+                                <table border-spacing="1px;" class="range_table"  id="range_table_id" width="350px;">
+                                    <tr>
+                                        <td width="15%"> <label><b>Range:</b></label></td>
+<!--                                         <td width="10%"> <label>From:</label></td> -->
+                                        <td width="5%"> <label>From:</label></td>
+                                       <!-- <td width="23%"> <input type="number"  min="2" max="7" style="color:black;" name="sat_min_value" ng-model="layer.range_start_value">
+                                        </td> -->
+<!--                                        <td width="23%"> <input type="text" size="4" maxlength="4" style="color:black;" name="sat_min_value" ng-model="layer.range_start_value"> -->
+                                        <td width="13%"> <input type="text" size="4" maxlength="4" style="color:black;" name="sat_min_value" ng-model="layer.range_start_value">
+                                        </td>
+<!--                                         <td width="8%"><label>To:</label></td> -->
+                                        <td width="5%"><label>To:</label></td>
+                                       <!-- <td width="44%"><input aria-label="Aria Label" type="number" min="2" max="7" style="color:black;" name="sat_max_value" ng-model="layer.range_end_value">
+                                        </td> -->
+                                        <td width="44%"><input aria-label="Aria Label" type="text" size="4" maxlength="4" style="color:black;" name="sat_max_value" ng-model="layer.range_end_value">
+                                        </td>
+				    </tr>
+                                        
+
+                                <!--  <tr ng-if="(layer.data_type!='weather_forecast')"> -->
+<!--                                     <tr> -->
+<!--                                         <td colspan="5"> -->
+<!--                                             <table width="100%"> -->
+<!--                                                 <tr> -->
+<!--                                                     <td width="30%"> -->
+<!--                                                 <md-checkbox ng-if="layer.data_type=='satellite' || layer.data_type=='geophysical_analyzed_winds'" aria-label="Aria Label" ng-model="layer.contour" ng-change="updateContourSetting(layer)" flex="40">Contours</md-checkbox> -->
+<!--                                         </td> -->
+<!--                                         <td width="70%">  -->
+<!--                                             <div ng-if="layer.contour"><label>Interval Value:</label> -->
+<!--                                                 <input aria-label="Aria Label" type="text" name="sat_contour_count" ng-model="layer.satContourInterval" size="4" style="color:black;"> </div>   -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+                                </table>
+                                </td>
+                                </tr>
+<!--                                 <tr> -->
+<!--                                     <td colspan="5">     -->
+<!--                                         <table width="100%"> -->
+<!--                                             <tr> -->
+<!--                                                 <td width="30%"> -->
+<!--                                             <md-checkbox ng-if="layer.data_type=='satellite'" aria-label="Aria Label" ng-if="layer.name==name" ng-click="regionGrowing(layer)" ng-checked="layer.name == name" flex="40">Region&nbsp;Growing</md-checkbox> -->
+<!--                                     </td> -->
+<!--                                     <td width="70%"> -->
+<!--                                         <div ng-if="layer.name==name"> -->
+<!--                                             Threshold: -->
+<!--                                             <input aria-label="Aria Label" type="text" name="threshold-value" value="20" size="2" style="color:black;"/>        -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+                                </table>
+                                </td>
+                                </tr>
+
+                                <tr>
+<!--                                     <td colspan="5">   -->
+                                    <td colspan="4">  
+<!--                                        <div style="text-align:center;"> -->
+                                        <div style="text-align:center; /*margin-left:22px;*/"> 
+                                            <md-button class="range_table_button" aria-label="Aria Label" ng-click="updateSelectedUserRangeSetting(layer, 'default')">Default</md-button>
+                                            <md-button class="range_table_button" aria-label="Aria Label" style="color:white;" ng-click="updateSelectedUserRangeSetting(layer, 'user_selection')" ng-disabled="(layer.range_start_value-0) >= (layer.range_end_value-0)">Apply</md-button>
+                                        </div>
+                                    </td>
+				</tr>
+<br>
+				    <div ng-if="layer.sensor=='Rain' " >
+                                    <label><b>Previous Event:</b></label><br>
+                                    <tr>
+				     <td width="10%">  <label><b>Date:</b></label></td>
+ <select ng-model="selecteddate"   ng-options="selecteddate for selecteddate in collect"   class="ng-pristine ng-untouched ng-valid ng-not-empty" id='date_rain' ng-init="selecteddate" ng-change="getTimeRainfile(selecteddate)" style="height: 30px;width: 35%;color:black;background:white;"></select>
+<!---getTimeRainfile(selecteddate) -->
+                                      </td>
+				     <td width="5%"> <label><b>TIME:</b></label></td>
+ <select ng-model="timeselected_Rain"  class="ng-pristine ng-untouched ng-valid ng-not-empty"  ng-options="t as  t for t in localtimelist" ng-init="timeselected_Rain" ng-change="getlayer(timeselected_Rain,layer)" style="width: 30%;height: 30px;color:black;background:white;"></select>
+                                      </td>
+
+                                    </tr>
+                                   </div> 
+                                </table>
+                            </div>
+							
+<!-- 							<input aria-label="Aria Label" type="text" name="threshold-value1" value="20" size="2" style="color:black; display:none;"/>	     --> <!-- Upadtaed and Added By Jay on 01JAN2020 -->	
+							
+                        </div>
+
+
+
+
+<!--                         <div layout="row" ng-show="layer.showLegendVar" style="float:right;" >  -->
+                            <!-- <div style="float:left;">{{layer.selectedPaletteSetting}}</div> -->
+<!--                             <div style="float:right;"><md-button aria-label="Aria Label" ng-click="showPaletteSelectionFun(layer)">{{layer.paletteButtonLabel}}</md-button></div> <br/>     -->
+<!--                         </div> -->
+
+<!--                         <div id="canvas-layout" class="canvas-layout-class" ng-show="layer.showLegendVar" style="background-color:grey;width:600px;position:relative;" >    -->
+
+<!-- <!--                            <div style="float:left;width:340px;"> <canvas id="canvas_{{layer.name}}_{{layer.sensor}}"></canvas></div> --> 
+<!-- <!--                              <div style="float:left;width:340px;"> <canvas id="canvas_{{layer.name}}_{{layer.sensor}}" style="width: 223px; height: 110px;"></canvas></div>  -->
+<!--                             <div ng-show="layer.showPaletteSetting  && layer.param_type=='geophysical'" style="float:left;background-color:white;" class="range_selection">     -->
+<!--                                 <md-select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                     <md-content ng-show="layer.showPaletteSetting"> <md-option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr_geophysical">{{option.displayname}}</md-option> -->
+<!--                                     </md-content> -->
+<!--                                 </md-select> -->
+<!--                             </div> -->
+<!--                             <div ng-show="layer.showPaletteSetting  && layer.param_type!='geophysical'" style="float:left;background-color:white;" class="range_selection">     -->
+<!--                                 <md-select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                     <md-content ng-show="layer.showPaletteSetting"> <md-option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr">{{option.displayname}}</md-option> -->
+<!--                                     </md-content> -->
+<!--                                 </md-select> -->
+<!--                             </div> -->
+<!--                         </div> -->
+                    </div>
+
+
+
+                    <div class="layer-display" ng-if="count_baselayer!=0">Base Layer</div>
+                    <div ng-repeat="layer in layers | orderBy:'$index':true | limitTo:count_baselayer:starting_baselayer_index">
+                        <div layout="row" class="layer-list-row">
+                            <md-checkbox aria-label="Aria Label" ng-model="layer.active" ng-change="stateChanged(layer)" flex="80">{{layer.displayname}}</md-checkbox>
+                            <input flex="20" type="range" min="0" max="1" step="0.01" ng-model="layer.opacity" ng-change="stateChangedOpacity(layer)"  uib-tooltip="Layer Opacity"/>
+                            <!-- <md-button class="md-icon-button md-primary" value="Remove Layer" ng-click="remove(layer)" uib-tooltip="Delete Layer">         <md-icon md-svg-src="img/ic_delete_black_24px.svg"></md-icon>      </md-button>    -->
+                            <md-button aria-label="Aria Label" class="md-icon-button md-primary"  value="Show Legend" ng-click="showLegend(layer,'toggle')"  uib-tooltip="Select Base Layer">
+                                <i class="{{divbase_class}}" style="font-size:28px;color:white;font-weight:bold;"></i>
+                            </md-button>
+                        </div>
+                        <div layout="row" ng-if="layer.sensor">{{layer.sensor}}/{{layer.satellite}}</div>
+                        <div id="baseselection" ng-show="showBaseSelection" ng-repeat="baselayer in base_layers" >
+                            <div layout="row"  style="width:100%;text-align:center" > <label><input type="radio" ng-model="base_selected_layer"  ng-click="nodeSelectedBase(baselayer)"  value="{{baselayer.name}}">{{baselayer.displayname}}</label> </div>                         </div>
+                    </div>
+
+
+
+                </md-content>
+			
+		</div>
+		
+		
+		
+		
+		<div id="bottom_menu_btn1"  class="scrollbarX" style="text-align:center;">
+			<table style="width:100%;">
+    			<tr>
+        			<td ng-repeat="item in icon_list" ng-cloak style="width:14.285714286%; padding-left: 6px; padding-right: 6px;">
+                        <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip={{item.tooltip}}>
+                            <img ng-class="{'clickedicon':iconarray.indexOf(item.name) > -1}" id="{{item.name}}" width="35px" height="32px" ng-src="img/{{item.image}}">
+                            <div>
+                            <label for="{{item.labelfor}}" style="color:white; font-size:9px; font-weight:bold; text-align:center;">{{item.label}}</label>
+                            </div>
+                        </md-button> 
+        <!--                <label for="{{item.labelfor}}" style="color:white; font-size:18px; font-weight:bold; float: left; ">{{item.label}}</label> -->
+<!--                        <label for="{{item.labelfor}}" style="color:white; font-size:9px; font-weight:bold; text-align:center; position:absolute; bottom:0; left: 62.2%; transform: translateY(35%);">{{item.label}}</label> -->
+                     </td>
+                 </tr>
+                 <tr>
+                 	<td id={{item.name}}_quick ng-repeat="item in icon_list">
+                 		
+                 	</td>
+                 </tr>
+             </table>
+		</div>
+		
+		<div id="bottom_menu_btn2"  class="scrollbarX" style="text-align:center; overflow-y: hidden;">	<!-- Updated By Jay On 30DEC2019 -->
+			<table style="width:100%;">
+    			<tr>
+    				<!-- Update By Jay On 30DEC2019 Starts -->
+    			
+        			<td ng-cloak style="width:14.285714286%; padding-left: 6px; padding-right: 6px;">
+                        <md-button aria-label="Aria Label" ng-click="getLocation()" uib-tooltip="Location" tooltip-placement="top" id="top_panel_button" class="panel-button-class"><img id="location" ng-class="{clicked_button:location_status==true, unclicked_button:location_status==false}" src="img/location-icon.png" style="width:35px;height:32px;"></md-button>                        
+                         
+        <!--                <label for="{{item.labelfor}}" style="color:white; font-size:18px; font-weight:bold; float: left; ">{{item.label}}</label> -->
+<!--                        <label for="{{item.labelfor}}" style="color:white; font-size:9px; font-weight:bold; text-align:center; position:absolute; bottom:0; left: 62.2%; transform: translateY(35%);">{{item.label}}</label> -->
+                     </td>
+                     <td>
+<!--                      	<md-button aria-label="Aria Label" class="panel-button-class" ng-click="searchLocation(EV)" uib-tooltip="Search" tooltip-placement="bottom"><md-icon md-svg-src="img/ic_search_white_48px.svg" style="width:35px;height:32px; min-width: 35px; min-height:32px; background-color:#00adff; border-radius:25px;"></md-icon></md-button>     -->
+                     	<md-button aria-label="Aria Label" class="panel-button-class" ng-click="searchLocation(EV)" uib-tooltip="Search" tooltip-placement="top"><md-icon md-svg-src="img/ic_search_black_48px.svg" style="width:35px;height:32px; min-width: 35px; min-height:32px; background-color:#00adff; border-radius:25px;"></md-icon></md-button>
+                     </td>
+                     <td>
+<!--                      	                <md-button aria-label="Aria Label" ng-click="showRssFeed(ev)" uib-tooltip="Rss Feed" id="top_panel_button" class="panel-button-class"><img id="location" ng-class="{clicked_button:rss_flag==true, unclicked_button:rss_flag==false}" src="img/rss-icon.png" style="width:35px;height:32px;"></md-button>     -->
+                     	                <md-button aria-label="Aria Label" ng-click="showRssFeed(ev)" uib-tooltip="Rss Feed" tooltip-placement="top" id="top_panel_button" class="panel-button-class"><img id="location" src="img/rss-icon.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+                     <td>
+                      	                <md-button aria-label="Aria Label" ng-click="addInteraction('Area')"  uib-tooltip="Measure Area" tooltip-placement="top" class="panel-button-class"><img id="area" ng-class="{clicked_button:measure_area_status==true, unclicked_button:measure_area_status==false}" src="img/area-icon-small.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+                     <td>
+                                     <md-button aria-label="Aria Label" ng-click="addInteraction('Distance')" uib-tooltip="Measure Distance" tooltip-placement="top" class="panel-button-class"><img id="distance" ng-class="{clicked_button:measure_distance_status==true, unclicked_button:measure_distance_status==false}" src="img/distance-icon-small.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+                     <td>
+                 	                <md-button aria-label="Aria Label" ng-click="toggleGraticule()" uib-tooltip="Graticule" id="top_panel_button" tooltip-placement="top" class="panel-button-class"><img id="graticule" ng-class="{clicked_button:graticule_status==true, unclicked_button:graticule_status==false}" src="img/graticule-icon-small.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+<!--                      <td>
+                                     <md-button aria-label="Aria Label" ng-click="resetZoom()" uib-tooltip="Reset Zoom" id="top_panel_button" class="panel-button-class"><img id="zoom" src="img/reset-zoom-icon-small.png" style="width:35px;height:32px;"></md-button>
+                     </td>  -->
+<!--                      <td> 
+                 	                <md-button aria-label="Aria Label" ng-click="setPointProbing()" uib-tooltip="Point Probe" id="top_panel_button" class="panel-button-class"><img id="point_probing" ng-class="{clicked_button:point_probing_status==true, unclicked_button:point_probing_status==false}" src="img/point_icon.png" style="width:35px;height:32px;"></md-button>
+                      </td> -->
+                      
+                      <!-- Update By Jay On 30DEC2019 Ends -->
+                 </tr>
+             </table>
+		</div>
+		
+		<div id="bottom_menu_btn3" class="scrollbarX" style="text-align:center;">
+			<table id="legend_table" style="width:100%;">
+				<tr>
+					<td ng-repeat="layer in layers | orderBy:'$index':true | limitTo:count_layer:starting_layer_index" class="ng-scope">
+<!--     					<div ng-repeat="layer in layers | orderBy:'$index':true | limitTo:count_layer:starting_layer_index" class="ng-scope"> -->
+<!-- 						<div style="text-align: -webkit-center; top: -36px;  margin-bottom: -45px; position: relative;">      -->
+						<div style="text-align: -webkit-center;">
+    
+    							
+    
+    						<!--  <div layout="row" ng-show="layer.showLegendVar"  class="layout-row_btm" style="/* float:right; */" > -->
+    						
+                                
+                            
+    						<div  layout="row"  class="layout-row_btm" style="/* float:right; */" >
+                                <!-- <div style="float:left;">{{layer.selectedPaletteSetting}}</div> -->
+                                
+                                <!-- bef ng-show=layer.showPaletteSetting -->
+                                
+<!--                                 <div ng-show="layer.showPaletteSetting  && layer.param_type=='geophysical'" style="padding-top: 7px;" >     -->    
+<!--                                     <select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="custom_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr_geophysical">{{option.displayname}}</option> -->
+                                        
+<!--                                     </select> -->
+<!--                                 </div> -->
+<!--                                  <div ng-show="layer.showPaletteSetting  && layer.param_type!='geophysical'" style="padding-top: 7px;">     -->      
+<!--                                     <select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="custom_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr">{{option.displayname}}</option> -->
+                                       
+<!--                                     </select> -->
+<!--                                 </div> -->
+                                
+                                <!-- bef ng-show=layer.showPaletteSetting in div and select-->
+
+                                <!-- Updat Starts by jay for to hide show layer legend based on layer checkbox select hide below divs -->
+
+<!-- 								<div ng-show="layer.param_type=='geophysical'" style="padding-top: 7px;" >      -->        
+<!--                                     <select aria-label="Aria Label" class="custom_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)" ng-value="option" ng-options="option.name as option.displayname for option in list_palette_arr_geophysical"> -->
+<!-- <!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr_geophysical">{{option.displayname}}</option>  -->
+                                        
+<!--                                     </select> -->
+<!--                                 </div> -->
+<!--                                  <div ng-show="layer.param_type!='geophysical'" style="padding-top: 7px;">      -->       
+<!--                                     <select aria-label="Aria Label" class="custom_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)" ng-value="option" ng-options="option.name as option.displayname for option in list_palette_arr"> -->
+<!-- <!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr">{{option.displayname}}</option> --> 
+                                       
+<!--                                     </select> -->
+<!--                                 </div> -->
+                                
+                                <!-- Updat Starts by jay for to hide show layer legend based on layer checkbox select hide above divs -->
+                                
+                                
+                                
+<!--                                  <div style="/* float:right; */"><md-button aria-label="Aria Label" ng-click="showPaletteSelectionFun(layer)">{{layer.paletteButtonLabel}}</md-button></div> <br/>      -->     
+                                 
+<!--                                 <div style="/* float:right; */"><md-button aria-label="Aria Label" ng-click="showAlert($event,layer)">{{layer.paletteButtonLabel}}</md-button></div> <br/>  -->  
+                                
+                            </div>
+                            
+                            <div id="canvas-layout" class="canvas-layout-class" ng-show="layer.showLegendVar" style="background-color:transparent;width:259px;">
+                                <!-- Updat Starts by jay for to hide show layer legend based on layer checkbox select -->
+                                
+<!--                                 <div layout="row"  class="layout-row_btm" style="/* float:right; */">   -->
+                                <div layout="row"  class="layout-row_btm" style="float: left; /*padding-left: 40px;*/ /*padding-left: 22px;*/ padding-left: 77px; left: 0; ">	<!-- Updated By Jay On 30DEC2019 -->
+                                    <div ng-show="layer.param_type=='geophysical'" style="/*padding-top: 7px;*/ position: absolute; top: 110px;" >	<!-- Updated By Jay On 30DEC2019 -->
+                                        <select aria-label="Aria Label" class="custom_select form-control-legend" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)" ng-value="option" ng-options="option.name as option.displayname for option in list_palette_arr_geophysical">
+    <!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr_geophysical">{{option.displayname}}</option>  -->
+                                            
+                                        </select>
+                                    </div>
+                                     <div ng-show="layer.param_type!='geophysical'" style="/*padding-top: 7px;*/ position: absolute; top: 110px;">	<!-- Updated By Jay On 30DEC2019 -->       
+                                        <select aria-label="Aria Label" class="custom_select form-control-legend" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)" ng-value="option" ng-options="option.name as option.displayname for option in list_palette_arr">
+    <!--                                          <option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr">{{option.displayname}}</option> --> 
+                                           
+                                        </select>
+                                     </div>
+                                </div>
+                                
+                                <!-- Updat Ends by jay for to hide show layer legend based on layer checkbox select -->
+                            
+                            
+                                <div style="/*float:left; width:340px; */"> <canvas id="canvas_{{layer.name}}_{{layer.sensor}}_{{layer.satellite}}" style="width: 223px;height: 110px;" width="300" height="100"></canvas></div>
+                                <div ng-show="layer.showPaletteSetting  && layer.param_type!='geophysical'" style="float:left;background-color:white;" class="range_selection"></div>
+                                
+                            </div>
+    
+<!--                             <div id="canvas-layout" class="canvas-layout-class" ng-show="layer.showLegendVar" style="background-color:grey;width:600px;">   -->
+<!--                             <div id="canvas-layout" class="canvas-layout-class" ng-show="layer.showLegendVar" style="background-color:grey;width:600px;">   -->
+<!--                             <div id="canvas-layout" class="canvas-layout-class" ng-show="layer.showLegendVar" style="background-color:transparent;width:259px;">   1 -->
+    
+<!--                                 <div style="/*float:left; width:340px; */"> <canvas id="canvas_{{layer.name}}_{{layer.sensor}}" style="width: 223px;height: 110px;" width="300" height="100"></canvas></div>   1 -->
+                                
+<!--                                 <div ng-show="layer.showLegendVar"  class="layout-row_btm" style="/* float:right; */" >     -->
+                                    <!-- <div style="float:left;">{{layer.selectedPaletteSetting}}</div> -->
+                                	
+<!--                                     <div style="/* float:right; */">    -->
+<!--                                     	<md-button aria-label="Aria Label" ng-click="showPaletteSelectionFun(layer)">{{layer.paletteButtonLabel}}</md-button> -->
+<!--                                     </div> <br/> -->
+                                    
+<!--                             	</div> -->
+                            	
+<!--                                 <div ng-show="layer.showPaletteSetting  && layer.param_type=='geophysical'" style="float:left;background-color:white;" class="range_selection">     -->
+<!--                                     <md-select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                         <md-content ng-show="layer.showPaletteSetting"> <md-option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr_geophysical">{{option.displayname}}</md-option> -->
+<!--                                         </md-content> -->
+<!--                                     </md-select> -->
+<!--                                 </div> -->
+<!--                                 <div ng-show="layer.showPaletteSetting  && layer.param_type!='geophysical'" style="float:left;background-color:white;" class="range_selection">    1 -->
+<!--                                     <md-select ng-show="layer.showPaletteSetting" aria-label="Aria Label" class="range_select" ng-model="layer.selectedPaletteSetting" ng-change="updateSelectedLayerPalette(layer)"> -->
+<!--                                         <md-content ng-show="layer.showPaletteSetting"> <md-option ng-value="option.name" ng-show="layer.showPaletteSetting" ng-repeat="option in list_palette_arr">{{option.displayname}}</md-option> -->
+<!--                                         </md-content> -->
+<!--                                     </md-select> -->
+<!--                                 </div> -->
+                                
+<!--                             </div>     1 -->
+                            
+<!--     					</div>    1 -->
+    				</td>
+				</tr>
+			</table>
+		</div>
+		
+<!--		<div id="bottom_menu_btn4" class="scrollbarX" style="text-align:center;">
+<!-- 			<table style="width:100%;">
+<!--     			<tr> -->
+<!--     				<td style="width: 20%;">
+<!--    					<md-button aria-label="Aria Label" ng-click="setPointProbing()" uib-tooltip="Point Probe" id="top_panel_button" class="panel-button-class"><img id="point_probing" ng-class="{clicked_button:point_probing_status==true, unclicked_button:point_probing_status==false}" src="img/point_icon.png" style="width:35px;height:32px;"></md-button>
+<!--     				</td> -->
+<!--         			<td style="background-color:white; style="width: 80%;"">     -->
+<!--                 		<div id="point-probe-bottom"><!-- ng-if="point_probing_status" -->
+<!--                             <div id="popup-content-layer-list"> -->
+<!--                 				<select aria-label="Aria Label" ng-show="(timezone==timezone_local && layer.source.satellite!='Mean Monthly Climatology') && (timezone==timezone_local)" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()" ng-value="layer" ng-options="layer.name+' '+layer.dateval_local+' '+layer.timeval_local+' '+'('+layer.satellite+'/'+layer.sensor+')' for layer in layers |  filtersatlayer "> <!-- ((layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds') -->	
+<!--                 						<option value="" style="display: none;" ng-show="false"></option>     -->
+<!--                                 </select>   -->
+<!--                                 <select aria-label="Aria Label" ng-show="timezone==timezone_gmt && layer.source.satellite!='Mean Monthly Climatology'" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()"> -->
+<!--                                     <option aria-label="Aria Label" ng-value="layer" ng-show="(layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds'" ng-repeat="layer in layers">{{layer.name}}{{layer.dateval}}{{layer.timeval}}({{layer.satellite}}/{{layer.sensor}})</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                            <div id="popup-content-bottom" style="width:100%;height:100%;">
+<!--                             </div> -->
+<!--                         </div> -->
+<!--         			</td> -->
+<!--         		</tr> -->
+<!--         	</table> -->
+<!-- 		</div> -->
+		
+		
+		
+<!--		  <div id="point_probe_layer_selection" style="background: white">    -->
+							<!--         				<div id="popup" class="ol-popup" style="min-width:400px;min-height:200px;display:none;">    -->
+			<table id="point-probe-table" style="width:100%; text-align:center; display:none;">
+    			<tr>
+    				<td>
+        				<div id="point-probe-bottom">
+    <!--                             <a href="#" id="popup-closer" class="ol-popup-closer"></a> Update by Jay-->
+            <!--        <div id="popup-content-layer-list" ng-show="show_dropdown_list" >-->
+        					<div id="popup-content-layer-list">
+                    				<select aria-label="Aria Label" ng-show="(timezone==timezone_local && layer.source.satellite!='Mean Monthly Climatology') && (timezone==timezone_local)" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()" ng-value="layer" ng-options="layer.name+' '+layer.dateval_local+' '+layer.timeval_local+' '+'('+layer.satellite+'/'+layer.sensor+')' for layer in layers |  filtersatlayer " style="max-width: 100%;" class="form-control-legend1"> <!-- ((layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds') -->
+                    						<option value="" style="display: none;" ng-show="false"></option>
+                                    </select>  
+                                    <select aria-label="Aria Label" ng-show="timezone==timezone_gmt && layer.source.satellite!='Mean Monthly Climatology'" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()" ng-value="layer" ng-options="layer.name+' '+layer.dateval+' '+layer.timeval+' '+'('+layer.satellite+'/'+layer.sensor+')' for layer in layers | filtersatlayer" style="max-width: 100%;" class="form-control-legend1">
+<!--                                         <option aria-label="Aria Label" ng-value="layer" ng-show="(layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds'" ng-repeat="layer in layers">{{layer.name}}{{layer.dateval}}{{layer.timeval}}({{layer.satellite}}/{{layer.sensor}})</option> -->
+											<option value="" style="display: none;" ng-show="false"></option>
+                                    </select>
+                            </div>
+                            
+                            <div id="popup-content-bottom" style="width:100%;height:100%;">    
+                            </div> 
+        				</div>
+<!-- 		</div> -->
+					</td>
+				</tr>
+			</table>
+			
+			
+		
+		<div id="bottom_menu_btn4" class="scrollbarX" style="text-align:center; overflow-y: hidden;">	<!-- Updated By Jay On 30DEC2019 -->
+			<table style="width:100%;">
+    			<tr>
+    				<td>
+    					<md-button aria-label="Aria Label" ng-click="setPointProbing()" uib-tooltip="Point Probe" id="top_panel_button" class="panel-button-class"><img id="point_probing" ng-class="{clicked_button:point_probing_status==true, unclicked_button:point_probing_status==false}" src="img/point_icon.png" style="width:35px;height:32px;"></md-button>
+    				</td>
+
+
+<!--                     <md-checkbox ng-if="layer.data_type=='satellite' || layer.data_type=='geophysical_analyzed_winds'" aria-label="Aria Label" ng-model="layer.contour" ng-change="updateContourSetting(layer)" flex="40">Contours</md-checkbox> -->
+<!--                     <md-checkbox ng-if="layer.data_type=='satellite'" aria-label="Aria Label" ng-if="layer.name==name" ng-click="regionGrowing(layer)" ng-checked="layer.name == name" flex="40">Region&nbsp;Growing</md-checkbox> -->
+
+
+					<td ng-if="selectedLayerTimeseries.data_type=='satellite' || selectedLayerTimeseries.data_type=='geophysical_analyzed_winds'">
+						<md-button aria-label="Aria Label" ng-click="updateContourSetting(selectedLayerTimeseries)" uib-tooltip="Contours" id="top_panel_button" class="panel-button-class"><img id="contours" ng-class="{clicked_button:contours_status==true, unclicked_button:contours_status==false}" src="img/contour_icon.png" style="width:35px;height:32px;"></md-button>	<!-- ng-model="selectedLayerTimeseries.contour" -->
+					</td>
+					
+					<td ng-if="selectedLayerTimeseries.data_type=='satellite'">
+						<md-button aria-label="Aria Label" ng-click="regionGrowing(selectedLayerTimeseries)" uib-tooltip="Region Growing" id="top_panel_button" class="panel-button-class"><img id="region_growing" ng-class="{clicked_button:region_growing_status==true, unclicked_button:region_growing_status==false}" src="img/region_icon.png" style="width:35px;height:32px;"></md-button>
+						 
+					</td>
+					
+
+                     <td>
+     	                <md-button aria-label="Aria Label" ng-click="settimeseries_layers()" uib-tooltip="Time Series" id="top_panel_button" class="panel-button-class"><img id="timeseries" ng-class="{clicked_button:timeseries_status==true, unclicked_button:timeseries_status==false}" src="img/time_series_c.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+                     <td ng-show="  ( selectedLayerTimeseries.sensor=='Sounder' && selectedLayerTimeseries.source.urlfilesuffix.indexOf('L2B')>=0 ) || ( selectedLayerTimeseries.sensor=='WRFML'  )">
+      	                <md-button aria-label="Aria Label" ng-click="settephigram_layers()"  uib-tooltip="T-PHI Gram" class="panel-button-class"><img id="area" ng-class="{clicked_button:tphigram_status==true, unclicked_button:tphigram_status==false}" src="img/t-phi.png" style="width:35px;height:32px;"></md-button>
+                     </td>
+<!--                      <td ng-show="( (selectedLayerTimeseries.sensor=='Sounder' && selectedLayerTimeseries.source.urlfilesuffix.indexOf('L2B')>=0) || (selectedLayerTimeseries.sensor=='Anomaly') ) "> -->
+					 <td ng-show=" selectedLayerTimeseries.sensor=='Sounder' && selectedLayerTimeseries.source.urlfilesuffix.indexOf('L2B')>=0 ">
+<!--                          <md-button aria-label="Aria Label" ng-click="addInteraction('Distance')" uib-tooltip="Measure Distance" class="panel-button-class"><img id="distance" ng-class="{clicked_button:measure_distance_status==true, unclicked_button:measure_distance_status==false}" src="img/distance-icon-small.png" style="width:35px;height:32px;"></md-button>   -->
+                         <md-button aria-label="Aria Label" class="md-fab" ng-click="setvertical_profile_new_layers()" uib-tooltip="Vertical Profile" class="panel-button-class" ng-class="{clicked_button:vprofile_status==true, unclicked_button:vprofile_status==false}"> <md-icon class="svg_black" md-svg-src="img/vprofile.svg" md-svg-color="black"></md-icon> </md-button>
+                     </td>
+                     <td ng-show="selectedLayerTimeseries.sensor=='Anomaly'">
+<!--                          <md-button aria-label="Aria Label" ng-click="addInteraction('Distance')" uib-tooltip="Measure Distance" class="panel-button-class"><img id="distance" ng-class="{clicked_button:measure_distance_status==true, unclicked_button:measure_distance_status==false}" src="img/distance-icon-small.png" style="width:35px;height:32px;"></md-button>   -->
+                         <md-button aria-label="Aria Label" class="md-fab" ng-click="setvertical_profile_layers()" uib-tooltip="Vertical Profile" class="panel-button-class" ng-class="{clicked_button:vprofile_old_status==true, unclicked_button:vprofile_old_status==false}"> <md-icon class="svg_black" md-svg-src="img/vprofile.svg" md-svg-color="black"></md-icon> </md-button>
+                     </td>
+<!--                      <td> -->
+<!--     	                <md-button aria-label="Aria Label" ng-click="toggleGraticule()" uib-tooltip="Graticule" id="top_panel_button" class="panel-button-class"><img id="graticule" ng-class="{clicked_button:graticule_status==true, unclicked_button:graticule_status==false}" src="img/graticule-icon-small.png" style="width:35px;height:32px;"></md-button>     -->
+<!--                      </td> -->
+        		</tr>
+        		<tr>
+        			<td>
+        			</td>
+        			<td>
+        				<input aria-label="Aria Label" type="text" name="sat_contour_count" ng-show="contours_status" ng-change="updateSelectedUserRangeSetting(selectedLayerTimeseries, 'user_selection')" ng-model="selectedLayerTimeseries.satContourInterval" size="4" style="color:white; height:1.5em;" uib-tooltip="Interval Value" tooltip-placement="bottom" class="form-control-legend1">
+        			</td>
+        			<td>
+        				<input aria-label="Aria Label" type="text" name="threshold-value" value="20" size="2" style="color:white; height:1.5em;" uib-tooltip="Threshold" ng-show="region_growing_status" ng-change="updateSelectedUserRangeSetting(selectedLayerTimeseries, 'user_selection')" ng-model="temp_region_growing_value" tooltip-placement="bottom" class="form-control-legend1"/>
+        			</td>
+        			<td>
+        				
+        			</td>
+        			<td>
+        			</td>
+        		
+        		</tr>
+        	</table>
+		</div>
+		
+		<!-- Update By Jay Starts On 09JAN2020 -->
+			
+		<div id="bottom_menu_btn5" class="scrollbarX" style="text-align:center; overflow-y: hidden;">	<!-- Updated By Jay On 30DEC2019 -->
+			<table style="width:100%;">
+				<tr>
+					<td>
+						<div id="toast_message_id" class="toast_message"> </div>
+					</td>
+				</tr>
+    			<tr>
+<!--     				<td style="width:10%;">     -->
+<!--      					<md-button ng-if="!(selectedLayerTimeseries.isContour)" aria-label="Aria Label" id="play_pause_btn" class="md-icon-button md-primary"  value="Animation" ng-click="addAnimationLayer(selectedLayerTimeseries)" uib-tooltip="Animation">   <md-icon aria-label="Aria Label" md-svg-src="{{selectedLayerTimeseries.animation_control_status}}"></md-icon> </md-button>    					 -->
+<!--     				</td> -->
+					<td style="width:10%;">
+					</td>
+
+    				<td>
+    					<div class="date_slider" id="date_slider_id">
+<!--                             <md-button aria-label="Aria Label" class="range_table_button" value="Hide div" ng-click="playAnimationAfterSliding()"> -->
+<!--                               {{slider_button_text}} -->
+<!--                             </md-button> -->
+                            <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider> 
+                
+                        </div> 
+    				</td>
+    			</tr>
+    			<tr>
+    				<td style="width:10%;">
+    					<md-button aria-label="Aria Label" id="date_slider_btn" class="range_table_button" value="Hide div" ng-click="playAnimationAfterSliding()" style="display: none;">
+                              {{slider_button_text}}
+                        </md-button>
+    				</td>
+    			</tr>
+    		</table>
+    	</div>
+			
+					
+		<!-- Update By Jay Ends On 09JAN2020 -->
+		
+		<div id="bottom_menu">
+    		<table style="width:100%;">
+    			<tr>
+<!--        			<td class="btm_table_td"><span id="side_btn_btm" class="sidebar_btn_btm" style="font-size:18px;cursor:pointer" onclick="opencloseQuickLayers()">Quick Layers</span></td> -->
+<!--         			<td class="btm_table_td"><span id="side_btn_btm" class="sidebar_btn_btm" style="font-size:18px;cursor:pointer" onclick="opencloseTools()">Tools</span></td> -->
+        			<td id="bottom_menu_act_btn1" class="btm_table_td" style="cursor:pointer;" onclick="opencloseQuickLayers()"><span id="side_btn_btm1" class="sidebar_btn_btm" style="font-size:18px;">Quick Layers</span></td>
+        			<td id="bottom_menu_act_btn2" class="btm_table_td" style="cursor:pointer;" onclick="opencloseTools()"><span id="side_btn_btm2" class="sidebar_btn_btm" style="font-size:18px;">Tools</span></td>
+<!--        			<td id="bottom_menu_act_btn5" class="btm_table_td" style="cursor:pointer;" onclick="opencloseAnimation()"><span id="side_btn_btm5" class="sidebar_btn_btm" style="font-size:18px;">Animation</span></td>	-->
+				<td id="bottom_menu_act_btn5" class="btm_table_td" style="cursor:pointer;" ng-click="refreshSlider()" onclick="opencloseAnimation()"><span id="side_btn_btm5" class="sidebar_btn_btm" style="font-size:18px;">Animation</span></td>
+        			<td id="bottom_menu_act_btn4" class="btm_table_td" style="cursor:pointer;" onclick="opencloseAnalysis()"><span id="side_btn_btm4" class="sidebar_btn_btm" style="font-size:18px;">Analysis</span></td>
+        			<td id="bottom_menu_act_btn3" class="btm_table_td" style="cursor:pointer;" onclick="opencloseLegends()"><span id="side_btn_btm3" class="sidebar_btn_btm" style="font-size:18px;">Legends</span></td>
+    			</tr>
+    		</table>
+		</div>
+		
+		
+		
+		
+
+
+<!--         <div id="popup" class="ol-popup" style="min-width:400px;min-height:200px;display:none;">    -->
+        
+   
+    <div id="popup" class="ol-popup" style="max-width: 121px; max-height: 200px;display:none;">
+
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <!--        <div id="popup-content-layer-list" ng-show="show_dropdown_list" >-->
+<!--             <div id="popup-content-layer-list"> -->
+<!--                 <md-select aria-label="Aria Label" ng-show="timezone==timezone_local && layer.source.satellite!='Mean Monthly Climatology'" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()"> -->
+<!--                     <md-content ng-show="timezone==timezone_local">    <md-option aria-label="Aria Label" ng-value="layer" ng-show="(layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds'" ng-repeat="layer in layers">{{layer.name}}{{layer.dateval_local}}{{layer.timeval_local}}({{layer.satellite}}/{{layer.sensor}}</md-option> -->
+<!--                     </md-content> -->
+<!--                 </md-select>   -->
+<!--                 <md-select aria-label="Aria Label" ng-show="timezone==timezone_gmt && layer.source.satellite!='Mean Monthly Climatology'" ng-model="selectedLayerTimeseries" ng-change="selectLayerForTimeseries()"> -->
+<!--                     <md-option aria-label="Aria Label" ng-value="layer" ng-show="(layer.source.urlprefix || layer.source.urlweather_forecast) && layer.data_type!='satellite_analyzed_winds'" ng-repeat="layer in layers">{{layer.name}}{{layer.dateval}}{{layer.timeval}}({{layer.satellite}}/{{layer.sensor}})</md-option> -->
+<!--                 </md-select>  -->
+
+
+<!--             </div> -->
+            <div id="popup-content" style="width:100%;height:100%;">
+            </div>
+        </div>
+
+
+        <div id="popup-marker" class="ol-popup" style="width:350px;display:none;">
+            <a href="#" id="popup-closer-marker" class="ol-popup-closer"></a>
+            <div id="popup-content-marker"></div>
+        </div>
+        
+        
+        <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="siteInfoId">
+		          <md-dialog  class="site_info_class" aria-label="Mango (Fruit)">
+<!-- 		              <div class="site_info_class" ng-cloak id="site_info_id" style="display:none;">  -->
+		              <div ng-cloak id="site_info_id" style="display:none;">
+<!-- 		              <div style="float:right;height:35px;margin-right: 10px;"><md-button aria-label="Aria Label" ng-click="closeSiteInfo()"><b>X</b></md-button></div>   -->
+      <form>
+<!--         <md-toolbar> -->
+<!--           <div class="md-toolbar-tools"> -->
+<!--             <h2>Mango (Fruit)</h2> -->
+<!--             <span flex></span> -->
+<!--             <md-button class="md-icon-button" ng-click="closeSiteInfo()"> -->
+<!--               <md-icon aria-label="Close dialog">X</md-icon> -->
+<!--               <b>X</b> -->
+<!--             </md-button> -->
+<!--           </div> -->
+<!--         </md-toolbar> -->
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="About">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">About</h1> -->
+                <p>MOSDAC-LIVE is a web enabled data and Information visualization and analysis system of MOSDAC, SAC/ISRO. LIVE provides access to Satellite Data Products and Information products derived from Satellite and model forecast in near real time basis.</p>
+              </md-content>
+            </md-tab>
+            <md-tab label="Disclaimer">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Disclaimer</h1> -->
+                <p>The information contained in this website is currently a Beta site under development. Some of the information, layers may not have been completely validated. This information is to be used along with other reliable data sources for interpretation and derivation of weather and oceanographic events. 
+                <p>The information is provided on best effort basis and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the absolute accuracies of information, data products, services, or related graphics contained on the website for any purpose unless and until explicitly mentioned.</p>
+                In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.</p>
+                <p>The maps are only for gross indication of locations.</p>
+                <p>Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</br></br>
+                    Contact: admin@mosdac.gov.in
+                </p>
+              </md-content>
+            </md-tab>
+            <md-tab label="Credits">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Credits</h1> -->
+                <p>Credits for following information/layers/data used in this website is dually acknowledged</p>
+                * Bhuvan Layer: NRSC, Hyderabd (www.nrsc.gov.in)<br>
+                * Cartodem and LISS-3 Mosaic: Bhuvan, NRSC, Hyderabd (www.nrsc.gov.in)<br>
+                * OpenStreetMap: @OpenStreetMap Contributors (www.openstreetmap.org/copyright)<br>
+                * True Marble: Unearthed Outdoors, LLC<br>
+                * Satellite Data Layers : Indian Space Research Organisation (ISRO)<br>
+                * India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in)<br>
+                * Data Server: THREDDS 4.3 (www.unidata.ucar.edu/software/thredds)<br>
+                * Nowcast Data : AOSG/SAC<br>
+                * Forecast Data: AOSG/SAC
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-dialog-content>
+        
+        <md-dialog-actions layout="row" style="background-color: transparent;">
+        	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+		</md-dialog-actions> 
+
+<!--         <md-dialog-actions layout="row" style="background-color: red;">     -->
+<!--           <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus> -->
+<!--             More on Wikipedia -->
+<!--           </md-button> -->
+<!--           <span flex></span> -->
+<!--           <md-button ng-click="answer('not useful')"> -->
+<!--             Not Useful -->
+<!--           </md-button> -->
+<!--          <md-button ng-click="answer('useful')" style="margin-right:20px;">    -->
+<!--             Useful -->
+<!--           </md-button> -->
+<!--         </md-dialog-actions> -->
+      </form>
+      </div>
+    </md-dialog>
+    
+                </div>
+		     
+		    </div>
+		  
+
+
+        
+
+
+
+
+
+<!--         <div resizable class="satellite_listing" ng-cloak id="satellite_list_id" style="display:none;">     -->
+            <!--<md-button aria-label="Aria Label" ng-click="toggleVisibilityList()"  class="panel-button-class">Layer List</md-button>   <md-button aria-label="Aria Label" ng-click="addLayers()">Add Layers</md-button>   -->
+<!--             <div style="float:right;height:35px;padding-right:25px;"><md-button aria-label="Aria Label" ng-click="closeList()"><b>X</b></md-button></div>   -->
+<!--             <div style="clear:both;"></div>     -->
+
+<!--             <div class="only_satellite_listing">   -->
+<!--                 <md-tabs class="tab_categories" aria-label="Aria Label" md-selected="current_selected_tab" md-stretch-tabs="auto" md-align-tabs="top" md-dynamic-height md-border-bottom md-center-tabs md-swipe-content> -->
+<!--                     <md-tab style="width:280px;color:white;" label="&nbsp;&nbsp;&nbsp;Satellite Data&nbsp;&nbsp;&nbsp;">    -->
+<!--                         <md-tab-body layout-padding="true">  <ul class="navigation_listing"> <li ng-repeat="category in categories" ng-click='showTime($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_satellite.html'"></li> </ul>    -->
+<!--                         </md-tab-body>     -->
+<!--                     </md-tab> -->
+
+<!--                     <md-tab style="width:280px;" label="&nbsp;&nbsp;&nbsp;Ground Observations&nbsp;&nbsp;&nbsp;">   -->
+<!--                         <md-tab-body layout-padding="true"> -->
+<!--                             <ul> -->
+<!--                                 <li ng-repeat="category in ground_observations"  ng-click='showstation($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_satellite_aws.html'"></li>  -->
+<!--                             </ul>          -->
+<!--                         </md-tab-body>     -->
+<!--                     </md-tab> -->
+<!--                     <md-tab label="Forecast"> -->
+<!--                         <md-tab-body layout-padding="true"> -->
+<!--                             <ul>    <li ng-repeat="category in weather_forecast"  ng-click='showWeatherForecast($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_weather_forecast.html'"></li>  -->
+
+<!--                             </ul>          -->
+<!--                         </md-tab-body>     -->
+<!--                     </md-tab> -->
+<!--                     <md-tab label="Climatology"> -->
+<!--                         <md-tab-body layout-padding="true"> -->
+<!--                             <ul>    <li ng-repeat="category in climatology"  ng-click='showClimatology($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_climatology.html'"></li>  -->
+
+<!--                             </ul>          -->
+<!--                         </md-tab-body>     -->
+<!--                     </md-tab> -->
+<!--                     <md-tab label="Analysis"> -->
+<!--                         <md-tab-body layout-padding="true"> -->
+<!--                             <ul>    <li ng-repeat="category in anomaly"  ng-click='showWeatherForecast($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_anomaly.html'"></li>  -->
+
+<!--                             </ul>          -->
+<!--                         </md-tab-body>     -->
+<!--                     </md-tab> -->
+<!--                 </md-tabs> -->
+<!--             </div> -->
+<!--             <div style="float:right;padding-right:25px;">   -->
+                <!--<label style="color:#178ABD;font-size:14px;padding-right:5px; ">{{selected_list_id}}</label>-->
+<!--                 <label style="color:#FF4081;font-size:14px;padding-right:5px; "><b>{{selected_list_id}}</b></label>     -->
+<!--                 <md-button class="range_table_button" aria-label="Aria Label" ng-click="addLayers(true)">Add Layer</md-button> -->
+<!--             </div> -->
+<!--         </div> -->
+        
+        
+        
+        <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="satellitelistId">
+		          <md-dialog  class="satellite_list_class" aria-label="Mango (Fruit)">
+<!-- 		              <div class="site_info_class" ng-cloak id="site_info_id" style="display:none;">  -->
+		              <div ng-cloak id="satellite_list_id" style="display:none; background: rgba(40,40,40,.6);"> <!-- class="scrollbar" -->
+<!-- 		              <div style="float:right;height:35px;/*margin-right: 10px;*/ position: relative; right: 5px; margin-right: 5px;"><md-button aria-label="Aria Label" ng-click="closeList()"><b>X</b></md-button></div>    -->
+      <form>
+<!--         <md-toolbar> -->
+<!--           <div class="md-toolbar-tools"> -->
+<!--             <h2>Mango (Fruit)</h2> -->
+<!--             <span flex></span> -->
+<!--             <md-button class="md-icon-button" ng-click="closeSiteInfo()"> -->
+<!--               <md-icon aria-label="Close dialog">X</md-icon> -->
+<!--               <b>X</b> -->
+<!--             </md-button> -->
+<!--           </div> -->
+<!--         </md-toolbar> -->
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Satellite Data">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">About</h1> -->
+                <md-tab-body layout-padding="true">  
+                	<ul class="navigation_listing"> <li ng-repeat="category in categories" ng-click='showTime($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_satellite.html'"></li> </ul>   
+                </md-tab-body>    
+              </md-content>
+            </md-tab>
+            <md-tab label="Ground Observations">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Disclaimer</h1> -->
+                <md-tab-body layout-padding="true">
+                            <ul class="navigation_listing">
+                                <li ng-repeat="category in ground_observations"  ng-click='showstation($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_satellite_aws.html'"></li> 
+                            </ul>         
+                        </md-tab-body>   
+              </md-content>
+            </md-tab>
+            <md-tab label="Forecast">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Credits</h1> -->
+                <md-tab-body layout-padding="true">
+                            <ul class="navigation_listing">    <li ng-repeat="category in weather_forecast"  ng-click='showWeatherForecast($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_weather_forecast.html'"></li> 
+
+                            </ul>         
+                        </md-tab-body> 
+              </md-content>
+            </md-tab>
+            <md-tab label="Climatology">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Credits</h1> -->
+                <md-tab-body layout-padding="true">
+                            <ul class="navigation_listing">    <li ng-repeat="category in climatology"  ng-click='showClimatology($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_climatology.html'"></li> 
+
+                            </ul>         
+                        </md-tab-body>  
+              </md-content>
+            </md-tab>
+            <md-tab label="Analysis">
+              <md-content class="md-padding" style="color:white;">
+<!--                 <h1 class="md-display-2">Credits</h1> -->
+                <md-tab-body layout-padding="true">
+                    <ul class="navigation_listing">    <li ng-repeat="category in anomaly"  ng-click='showWeatherForecast($event,category)' ng-class="{collapsed: category.flag}" ng-include="folder_name_templates+'/template_anomaly.html'"></li> 
+
+                    </ul>         
+               </md-tab-body>  
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-dialog-content>
+
+<!--         <md-dialog-actions layout="row" style="background-color: red;">     -->
+<!--           <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus> -->
+<!--             More on Wikipedia -->
+<!--           </md-button> -->
+<!--           <span flex></span> -->
+<!--           <md-button ng-click="answer('not useful')"> -->
+<!--             Not Useful -->
+<!--           </md-button> -->
+<!--          <md-button ng-click="answer('useful')" style="margin-right:20px;">    -->
+<!--             Useful -->
+<!--           </md-button> -->
+<!--         </md-dialog-actions> -->
+
+			<md-dialog-actions layout="row" style="background-color: transparent;">
+			    <label style="color:#FF4081;font-size:14px;padding-right:5px; "><b>{{selected_list_id}}</b></label>
+            	<md-button class="range_table_button" aria-label="Aria Label" ng-click="addLayers(true)">Add Layer</md-button>
+            	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeList()">Close</md-button>
+			</md-dialog-actions> 
+
+      </form>
+      
+<!--       <div style="float:right;padding-right:25px;">     -->
+                <!--<label style="color:#178ABD;font-size:14px;padding-right:5px; ">{{selected_list_id}}</label>-->
+<!--                 <label style="color:#FF4081;font-size:14px;padding-right:5px; "><b>{{selected_list_id}}</b></label>     -->
+<!--                 <md-button class="range_table_button" aria-label="Aria Label" ng-click="addLayers(true)">Add Layer</md-button> -->
+<!--             </div> -->
+      
+      </div>
+    </md-dialog>
+    
+                </div>
+		     
+		    </div>
+        
+        <div style="visibility: hidden">
+        	<div class="md-dialog-container" id="time_tephi_vprofileId">
+        		<md-dialog class="time_tephi_vprofile_class" aria-label="Mango (Fruit)">
+        			<div ng-cloak id="time_tephi_vprofile_id" style="display:none; background: rgba(40,40,40,.6);"> <!-- class="scrollbar" -->
+        				<form>
+                            <md-dialog-content style="max-width:800px;max-height:810px; ">
+                            
+                                <md-tabs md-dynamic-height md-border-bottom>
+                                
+                                    <md-tab label="Timeseries" id="content_timeseries_id_tab" ng-if="timeseries_status">
+                                        <md-content class="md-padding" style="color:white;">
+                                            <md-tab-body layout-padding="true">                            
+                            
+<!--                                                 <div resizable on-resize="resize_timeseries_div($evt, $ui)" class="toppanel_timeseries_class" id="content_timeseries_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">   -->
+                                                <div class="toppanel_timeseries_class" id="content_timeseries_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">
+                                                    <div style="float:right;/*height:35px;*/ width:100%;">                    
+							<table style="max-width:100%; /*display: none;*/">
+                                                            <tr>
+                                                                <td id="timeseries_radio" ng-show="elevationFlag && snd_radio" style="/*width: 45%;*/ /*width: 21%*/;">                    	
+                                                                    <!--select class="range_select" aria-label="Aria Label" ng-model="snd_timeseries_selected" ng-change="timeseries_layers()" ng-options="option for option in timeseries_options" style="color: black;">
+                                                                    </select>{{snd_timeseries_selected}} -->
+                                                                    <select class="range_select" aria-label="Aria Label" ng-model="sndTimeseriesSelected.value" ng-change="timeseries_layers()" ng-options="option for option in timeseries_options" style="color: black;">
+                                                                    </select>
+                                                                </td>
+                                                                
+                                                                <td id="plevel_radio" ng-show="elevationFlag && elevation_radio" style="/*width: 45%;*/ /*width: 27%;*/ /*width: 19%;*/">                        	
+                                                                    <select class="range_select" aria-label="Aria Label" ng-model="plevel_radio_selected.value" ng-change="radio_plevel_change()" ng-value="option" ng-options="option for option in plevels_options" style="color: black;">
+                                                                    </select>
+                                                                </td>
+                                                                    	
+                                                                <td id="plevel_multiple_dropdown" ng-show="plevel_radio_selected.value=='Multiple Plevel' && elevationFlag" style="/*width: 45%;*/">
+                                                                    PLevel max: <select class="range_select" aria-label="Aria Label" ng-model="plevel_max.value" ng-change="plevel_change()" ng-value="option" ng-options="option for option in plevels_time" style="color: black;">
+                                                                    </select>
+                                                                    
+                                                                    PLevel min: <select class="range_select" aria-label="Aria Label" ng-model="plevel_min.value" ng-change="plevel_change()" ng-value="option" ng-options="option for option in plevels_time" style="color: black;">
+                                                                    </select>
+                                                                </td>
+                                                                
+                                                                <td id="plevel_single_dropdown" ng-show="plevel_radio_selected.value=='Single Plevel' && elevationFlag" style="/*width: 45%;*/">
+                                                                    PLevel: <select class="range_select" aria-label="Aria Label" ng-model="plevel.value" ng-change="plevel_change()" ng-value="option" ng-options="option for option in plevels_time" style="color: black;">
+                                                                    </select>
+                                                                </td>
+                                                                
+                                                                <!-- <td style="float: right; width: 10%;">  -->
+<!--                                                 	                <md-button aria-label="Aria Label" ng-click="closeTimeseries()"><b>X</b></md-button></div> -->
+                                                                <!-- </td>   -->
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                                
+                                                    <div style="clear:both;"></div> 
+                                                    
+                                                    <div style="float:right;" id="content_timeseries_new" class="ol-timeseries-new">
+                                                    	<img src="img/page-loader.gif" style="width:100px;height:100px;">
+                                                    </div>    
+                                                                
+                                                    <div style="float:right;" id="dummy_loader" class="ol-timeseries-new">
+                                                    	<img src="img/page-loader.gif" style="width:100px;height:100px;">
+                                                    </div>
+                                                                
+                                                    <div style="float:left;" id="content_timeseries_dygraph1" class="ol-timeseries-new">              
+                                                    </div>
+                                                                
+                                                    <span style="float:left;" id="content_timeseries_dygraph_error" class="ol-timeseries-new">                
+                                                    </span>
+                                                                        
+                                                </div>                    
+                            
+                                            </md-tab-body>   
+                                        </md-content>
+                                    </md-tab>
+                                    
+                                	<md-tab label="Tephigram" id="content_tephigram_id_tab" ng-if="tphigram_status">
+                                        <md-content class="md-padding" style="color:white;">
+                                            <md-tab-body layout-padding="true">
+                                            
+<!--                                                 <div resizable on-resize="resize_timeseries_div($evt, $ui)" class="toppanel_timeseries_class" id="content_tephigram_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">    -->
+                                                <div class="toppanel_timeseries_class" id="content_tephigram_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">
+<!--                                                     <div style="float:right;height:35px;"><md-button aria-label="Aria Label" ng-click="closeTephigram()"><b>X</b></md-button></div>     -->
+                                                        <div style="clear:both;"></div> 
+                                                        <div style="float:right;" id="content_tephigram_new" class="ol-timeseries-new">
+                                                        	<img src="img/page-loader.gif" style="width:100px;height:100px;">
+                                                    	</div>    
+                                                </div>
+                                                
+                                            </md-tab-body>   
+                                        </md-content>
+                                    </md-tab>
+                                
+	                                <md-tab label="Vertical Profile" id="content_vprofile_id_tab" ng-if="vprofile_status || vprofile_old_status">
+                                        <md-content class="md-padding" style="color:white;">
+                                            <md-tab-body layout-padding="true">
+                                            
+<!--                                                 <div resizable on-resize="resize_timeseries_div($evt, $ui)" class="toppanel_timeseries_class" id="content_vprofile_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">     -->
+<!--                                                 <div class="toppanel_timeseries_class" id="content_vprofile_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px;">    -->
+                                                <div class="toppanel_timeseries_class" id="content_vprofile_id" style="background: rgba(40,40,40,.65);color:white;display:none; min-height:290px; min-width:320px; margin: auto;">
+<!--                                                     <div style="float:right;height:35px;"><md-button aria-label="Aria Label" ng-click="closeVprofile()"><b>X</b></md-button></div>  -->
+                                                    <div style="clear:both;"></div> 
+                                                    <div style="float:right;" id="content_vprofile_new" class="ol-timeseries-new">
+                                                	    <img src="img/page-loader.gif" style="width:100px;height:100px;">
+                                                    </div>    
+                                                </div>
+                                                
+                                            </md-tab-body>   
+                                        </md-content>
+                                    </md-tab>
+                                    
+                                </md-tabs>                                    
+                                    
+                            </md-dialog-content>
+                            
+                            <md-dialog-actions layout="row" style="background-color: transparent;">
+                            	<label ng-if="timeseries_status">Double click/touch on timeseries graph to default zoom</label>
+                            	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closetime_tephi_vprofile()">Close</md-button>                            	
+                            </md-dialog-actions> 
+        				</form>
+        			</div>
+        		</md-dialog>
+        	</div>
+        </div>
+        
+        <!-- Update Starts On 07JAN2020 -->
+<!--         <div style="display:none;">     -->
+<!--             <div style="float:left;" id="content_timeseries_dygraph1" class="ol-timeseries-new">               -->
+<!--             </div> -->
+<!-- 		</div> -->
+                                                    
+        <!-- Update Ends On 07JAN2020 -->
+        
+        <div class="toppanel" ng-cloak style="display:none;">
+
+            <div style="float:right;">
+                <div style="float:left;" id="top_panel_content" class="toppanelcontent" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="getLocation()" uib-tooltip="Location" id="top_panel_button" class="panel-button-class"><img id="location" ng-class="{clicked_button:location_status==true, unclicked_button:location_status==false}" src="img/location-icon.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="showRssFeed()" uib-tooltip="Rss Feed" id="top_panel_button" class="panel-button-class"><img id="location" ng-class="{clicked_button:rss_flag==true, unclicked_button:rss_flag==false}" src="img/rss-icon.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="addInteraction('Area')"  uib-tooltip="Measure Area" class="panel-button-class"><img id="area" ng-class="{clicked_button:measure_area_status==true, unclicked_button:measure_area_status==false}" src="img/area-icon-small.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="addInteraction('Distance')" uib-tooltip="Measure Distance" class="panel-button-class"><img id="distance" ng-class="{clicked_button:measure_distance_status==true, unclicked_button:measure_distance_status==false}" src="img/distance-icon-small.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="toggleGraticule()" uib-tooltip="Graticule" id="top_panel_button" class="panel-button-class"><img id="graticule" ng-class="{clicked_button:graticule_status==true, unclicked_button:graticule_status==false}" src="img/graticule-icon-small.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="resetZoom()" uib-tooltip="Reset Zoom" id="top_panel_button" class="panel-button-class"><img id="zoom" src="img/reset-zoom-icon-small.png" style="width:35px;height:32px;"></md-button>
+                    <md-button aria-label="Aria Label" ng-click="setPointProbing()" uib-tooltip="Point Probe" id="top_panel_button" class="panel-button-class"><img id="point_probing" ng-class="{clicked_button:point_probing_status==true, unclicked_button:point_probing_status==false}" src="img/point_icon.png" style="width:35px;height:32px;"></md-button>
+                    <!-- <md-button ng-click="zoomToCurrentLocation()" id="top_panel_button" class="panel-button-class"><img id="zoom" src="img/distance-icon-small.png" style="width:60px;height:60px;"></md-button>
+                    -->
+                </div>
+                <div style="float:right;">
+                    <md-button aria-label="Aria Label" value="Hide div" ng-click="hideTopPanel()" class="panel-button-class" >
+                        <i class="{{classval}}" style="font-size:37px;color:white;font-weight:bold;margin-top: 0px;align:center;"></i>
+                    </md-button>
+                </div>
+            </div>
+
+        </div>
+
+<!--         <div resizable class="cyclone_info_class" ng-cloak id="cyclone_info_id" style="display: none;">     -->
+<!--             <div style="float:right;height:35px;"><md-button aria-label="Aria Label" ng-click="closeCycloneInfo()"><b>X</b></md-button></div>   -->
+<!--             <div style="clear:both;"></div>     -->
+
+<!--             <div class="only_site_info_class">   -->
+<!--                 <md-tabs class="popup_info" aria-label="Aria Label" md-selected="selectedIndex" md-stretch-tabs="auto" md-align-tabs="top" md-dynamic-height md-border-bottom md-center-tabs md-swipe-content> -->
+<!--                     <md-tab style="width:280px;color:white;" ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.title}}">  -->
+<!--                         <img ng-src="{{tab.content}}" max-height='480px' width='570px'></img> -->
+<!--                     </md-tab>  -->
+                   
+<!--                     <md-tab> -->
+<!--                         <p></p> -->
+<!--                     </md-tab> -->
+<!--                     <md-tab> -->
+<!--                         <p></p> -->
+<!--                     </md-tab> -->
+                  
+<!--                 </md-tabs> -->
+<!--             </div> -->
+
+<!--         </div> -->
+        
+        <!-- Update Starts By Jay On 19MAY2020 -->
+        
+        <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="cyclone_Info_Id">
+		          <md-dialog  class="cyclone_info_class" aria-label="Mango (Fruit)">
+		              <div ng-cloak id="cyclone_info_id">
+      <form>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <!-- md-tab style="width:280px;color:white;" ng-repeat="tab in tabs" ng-disabled="tab.disabled" label="{{tab.title}}" -->
+            <md-tab ng-repeat="tab in tabs" label="{{tab.title}}">
+            	<md-content class="md-padding" style="color:white;">
+<!--                 	<img ng-src="{{tab.content}}" max-height='480px' width='570px'></img> -->
+                	<img ng-src="{{tab.content}}" style="max-width:100%; max-height: 100%; display: block;"></img>
+                </md-content>
+            </md-tab> 
+            
+            <!--md-tab>
+            	<md-content class="md-padding" style="color:white;">
+                	<p></p>
+                </md-content>
+            </md-tab>
+            <md-tab>
+            	<md-content class="md-padding" style="color:white;">
+                	<p></p>
+                </md-content>
+            </md-tab>
+          </md-tabs-->
+        </md-dialog-content>
+        
+        <md-dialog-actions layout="row" style="background-color: transparent;">
+        	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeCycloneInfo()">Close</md-button>
+		</md-dialog-actions> 
+      </form>
+      </div>
+    </md-dialog>
+    
+                </div>
+		     
+    </div>
+
+    <!-- Update Ends By Jay On 19MAY2020 -->
+
+<!--         <div class="date_slider" id="date_slider_id"> -->
+<!--             <md-button aria-label="Aria Label" class="range_table_button" value="Hide div" ng-click="playAnimationAfterSliding()"> -->
+<!--               {{slider_button_text}} -->
+<!--             </md-button> -->
+<!--             <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>  -->
+
+<!--         </div>  -->
+
+<!--         <div id="rss_feed"  ng-show="show_status" ng-class="{fadein:show_status==true, fadeout:show_status==false}"> -->
+<!-- <!--             <div id="rssfeed_close" ng-click="popup_close()"><b>X</b></div> -->
+<!--             <div id="rssfeed_content"> -->
+<!--             </div> -->
+<!--         </div> -->
+
+
+
+        <div class="iconpanel"  ng-cloak style="display:none;">
+            <div id="icon_panel_content" ng-class="{class1:checked==1,class2:checked==0}" ng-mouseover='animation_stop()' ng-mouseleave='animation_start()'>
+                <div class="iconpanelcontent" ng-repeat="item in icon_list" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip={{item.tooltip}} style="float:right;">
+                        <img ng-class="{'clickedicon':iconarray.indexOf(item.name) > -1}" id="{{item.name}}" width="35px" height="32px" ng-src="img/{{item.image}}">
+                    </md-button> 
+                    <label for="{{item.labelfor}}" style="color:white; font-size:18px; font-weight:bold; float: left; ">{{item.label}}</label>
+                </div>
+            </div>  
+
+            <md-button aria-label="Aria Label" value="Slide div" ng-click="slideDiv()" ng-model="checked">
+                <i class="{{classval1}}" style="font-size:37px;color:white;font-weight:bold;margin-top: 0px;align:center;"></i>
+            </md-button>
+        </div>
+
+
+<!--         <div only_resizable class="titlemenu" style="padding-bottom:4px;">  -->
+<!--             <img width="150" align="center" src="img/transparent_mosdac_rapid.png"/> -->
+<!--             <label ng-cloak class="title">{{view_configuration[2].params.title}}</label> -->
+<!--         </div> -->
+        
+        <div only_resizable class="titlemenu" style="padding-bottom:4px;">
+        <table>
+        <tr>
+        <td>
+        	<img width="150" align="center" src="img/transparent_mosdac_rapid.png"/>
+        </td>
+        <td style="padding-left: 3px;">
+        	<label ng-cloak class="title">{{view_configuration[2].params.title}}</label>
+        </td>
+        <td>
+        <div class="ol-unselectable ol-control" style="position: absolute; top: /*0*/-4px; padding-left: 3px;">
+            <button type="button" title="Info" ng-click="siteInfo()" style="background-color: transparent;">
+                <md-icon class="ol-info" aria-label="" md-svg-src="img/ic_info_24px.svg" style="height: 1.375em; width: 1.375em; line-height: .4em; background-color: transparent;">
+                </md-icon>
+            </button>
+        </div>
+        
+        </td>
+        </tr>
+
+        
+        </table>
+        </div>
+        
+        <div only_resizable class="sidemenu" ng-cloak style="display:none;">
+
+            <div class="on_off">
+                <md-button aria-label="Aria Label" class="md-icon-button md-primary" value="Hide div" ng-click="hideDiv()">
+                    <md-icon md-svg-src="{{hideDivIcon()}}"></md-icon>
+                </md-button>
+                <label style="color:white;font-size:14px;">{{togglemenu}}</label>
+            </div>
+      
+        </div>
+
+        <!--<div id="drag_drop_layer_id" class="drag_drop_layer_class">
+     <md-button aria-label="Aria Label" class="md-fab" ng-click="removeLocationMarkers()" uib-tooltip="Remove Markers"><md-icon md-svg-src="img/ic_clear_24px.svg"></md-icon></md-button>
+             </div>
+         <div ng-if="draggedLayerFlag=='dragged_layer_on'"> <md-button aria-label="Aria Label" class="md-fab" ng-click="removeDraggedLayer()" uib-tooltip="Remove Dragged Layer"><md-icon md-svg-src="img/ic_clear_24px.svg"></md-icon></md-button> </div>
+                  
+        -->
+
+        <div ng-if="draggedLayerFlag=='dragged_layer_on'" class="drag_drop_layer_class ol-unselectable ol-control ">
+            <button type="button" ng-click="removeDraggedLayer()"  title="Remove the dragged layer">X</button>
+        </div>
+
+
+
+        <div ng-show="show_back_date_setting" id="calendar_id" class="calendar_class">
+
+
+<!--             <div class="input-group"> -->
+<!--                 <input type="text" style="display:none;" class="form-control" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>   -->
+<!--             </div> -->
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'dt')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+
+
+            <!--
+                <input type="text" aria-label="Aria Label" style="width:150px;" class="form-control" datetime-picker="yyyy-MM-dd" ng-model="date_main" ng-change="addLayers(false)" is-open="open"/>
+            </div>
+            <div class="col-lg-1">
+                <span class="input-group-btn"><button type="button" aria-label="Aria Label" class="btn btn-default" style="valign:top" ng-click="openCalendar($event)"><i class="fa fa-calendar"></i></button></span>
+            </div>
+            -->
+        </div> 
+
+        <!-- <script src="ol.js"></script> <!-- new -->
+<!--         <script src="ol_versions/v4.6.5-dist/ol.js"></script> -->
+       <script src="ol_old_js_css/ol.js"></script>  
+       <!-- <script src="angular-openlayers-directive_1_1.js"></script> -->
+
+<!--  <script src="inject_ol_cesium.js"></script>--> 
+        <script src="js/windy.js"></script>
+
+        <script type="text/javascript" src="controllers/controller.js?v=0.1"></script>
+        <script type="text/javascript" src="services/service_variable_declaration.js?v=0.1"></script>
+        <script type="text/javascript" src="services/service_draganddrop.js"></script>
+        <script type="text/javascript" src="services/service_config_backdate_layer.js"></script>
+        <script type="text/javascript" src="services/service_config_layer.js"></script>
+        <script type="text/javascript" src="services/service_startbaseoverlay.js"></script>
+        <script type="text/javascript" src="services/service_startsatellitelayer.js"></script>
+        <script type="text/javascript" src="services/service_json_response.js"></script>
+        <script type="text/javascript" src="services/service_measure.js"></script>
+        <script type="text/javascript" src="services/service_features.js"></script>
+        <script type="text/javascript" src="services/service_quickaccess.js?v=0.2"></script> 
+        <script type="text/javascript" src="services/service_show_layer_setting.js"></script> 
+        <script type="text/javascript" src="services/service_update_layer_setting.js"></script>
+        <script type="text/javascript" src="services/service_listing_for_selected_layer_setting.js"></script>
+        <script type="text/javascript" src="services/service_websiteinfo.js"></script>
+        <script type="text/javascript" src="services/service_toggletimezone.js"></script>
+        <script type="text/javascript" src="services/service_layeroperations.js"></script>
+        <script type="text/javascript" src="services/service_syncrecentdata.js"></script>
+        <script type="text/javascript" src="services/service_updateoraddlayer.js"></script>
+        <script type="text/javascript" src="services/service_probeandtimeseries.js"></script>
+        <script type="text/javascript" src="services/service_display_date.js"></script>
+        <script type="text/javascript" src="services/service_aws_layer.js"></script>
+        <script type="text/javascript" src="services/service_dateformats.js"></script>
+        <script type="text/javascript" src="services/service_displaymap.js"></script>
+        <script type="text/javascript" src="services/service_panelsetting.js"></script>
+        <script type="text/javascript" src="services/service_topmenu.js"></script>
+        <script type="text/javascript" src="services/service_commonfunctions.js"></script>
+        <script type="text/javascript" src="services/service_weatherforecast.js"></script>
+        <script type="text/javascript" src="services/service_climatology.js"></script>
+        <script type="text/javascript" src="services/service_layer_selection.js"></script>
+        <script type="text/javascript" src="services/service_addanimation.js"></script>
+
+
+		
+
+<script type="text/ng-template" id="dialog2.tmpl.html">
+	<md-dialog aria-label="Mango (Fruit)">
+		<form>
+			<md-dialog-content style="max-width:800px;max-height:810px; ">
+              			<md-content class="md-padding">
+                			<h1 class="md-title">Pick an item below</h1>
+                            <md-input-container>
+                                
+                                            <input type="text" style="display:none;" uib-datepicker-popup ng-model="date_main" is-open="datepickers.dt" datepicker-options="dateOptionsDt" ng-change="addLayers(false)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                
+                            </md-input-container>
+                        </md-content>
+ 			</md-dialog-content>
+		</form>
+	</md-dialog>
+
+
+
+                                
+</script>
+
+    </body>
+</html>

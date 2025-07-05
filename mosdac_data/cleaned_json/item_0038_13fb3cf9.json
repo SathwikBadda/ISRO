@@ -1,0 +1,21 @@
+{
+  "title": "MOSDAC Live",
+  "type": "general",
+  "section": "General",
+  "text": "X Enter Keyword Search {{entry.display_name}} ({{entry.type}}) {{layer.dateval}} {{layer.timeval}} {{layer.sensor}}/{{layer.satellite}} {{layer.name}} {{layer.dateval_local}} {{layer.timeval_local}} {{layer.sensor}}/{{layer.satellite}} {{layer.name}} {{timezone}} 3D X -- Overlay Layers {{layer.displayname}} {{layer.aws_parameter.parameter_name}} {{layer.dateval_gmt}} {{layer.timeval_gmt}} {{layer.dateval_local}} {{layer.timeval_local}} {{overlaylayer.displayname}} Layers {{layer.name.substring(0,25)}} {{layer.dateval}} {{layer.timeval}} {{layer.dateval_local}} {{layer.timeval_local}} {{layer.sensor}}/{{layer.satellite}} Elevation :- Range: From: To: Default Apply Previous Event: Date: TIME: Base Layer {{layer.displayname}} {{layer.sensor}}/{{layer.satellite}} {{baselayer.displayname}} {{item.label}} {{slider_button_text}} Quick Layers Tools Animation Analysis Legends MOSDAC-LIVE is a web enabled data and Information visualization and analysis system of MOSDAC, SAC/ISRO. LIVE provides access to Satellite Data Products and Information products derived from Satellite and model forecast in near real time basis. The information contained in this website is currently a Beta site under development. Some of the information, layers may not have been completely validated. This information is to be used along with other reliable data sources for interpretation and derivation of weather and oceanographic events. The information is provided on best effort basis and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the absolute accuracies of information, data products, services, or related graphics contained on the website for any purpose unless and until explicitly mentioned. In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website. The maps are only for gross indication of locations. Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control. Contact: admin mosdac.gov.in Credits for following information/layers/data used in this website is dually acknowledged Bhuvan Layer: NRSC, Hyderabd (www.nrsc.gov.in) Cartodem and LISS-3 Mosaic: Bhuvan, NRSC, Hyderabd (www.nrsc.gov.in) OpenStreetMap: OpenStreetMap Contributors (www.openstreetmap.org/copyright) True Marble: Unearthed Outdoors, LLC Satellite Data Layers : Indian Space Research Organisation (ISRO) India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in) Data Server: THREDDS 4.3 (www.unidata.ucar.edu/software/thredds) Nowcast Data : AOSG/SAC Forecast Data: AOSG/SAC Close {{selected_list_id}} Add Layer Close PLevel max: PLevel min: PLevel: Double click/touch on timeseries graph to default zoom Close Close {{item.label}} {{view_configuration[2].params.title}} {{togglemenu}} X",
+  "source_url": "https://www.mosdac.gov.in/internal/vayu",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "temperature",
+      "satellite",
+      "ocean",
+      "climate",
+      "imagery",
+      "data",
+      "monitoring"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.474565"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "sftp-mosdac_0",
+  "content": "User Guide for data downloading from MOSDAC\nMOSDAC has upgraded its file transfer services from FTP to Secure FTP (SFTP)\nImportant information :\n- The user credentials for accessing the SFTP server are the same as FTP.\n- In case of any clarification or any issues, please contact MOSDAC Administrator\n(admin@mosdac.gov.in)\nSteps for automatic download through script : (One can lftp for downloading the data\nfrom MOSDAC using sftp protocol)\nExample script for download using lftp on linux :\n--------------------------------------------------------------------------------------------------\nHOST='sftp://download.mosdac.gov.in'\nUSER=username'\nPASSWORD='password'\nREMOTE_DIR='/Order'\nLOCAL_DIR='local directory path'\nlftp -u \"$USER\",\"$PASSWORD\" $HOST <<EOF\nset ftp:ssl-force true\nset ssl:verify-certificate no\nmirror --use-pget-n=10 $REMOTE_DIR $LOCAL_DIR;\nexit\nEOF\n---------------------------------------------------------------------------------------------------------\nSteps to access SFTP services using ftp download clients:\n- User can access the SFTP service through any SFTP client such as WinSCP, FileZilla etc\nas follows :\no Host name : download.mosdac.gov.in\no Select File transfer protocol as SFTP and Port no, 22\no Type the username and password (same as MOSDAC user credentials) and click\non login or connect. You will be able to access your ordered data under the\n“Order” directory.\n- FileZilla Client example : WincSCP Client example :\n",
+  "metadata": {
+    "Author": "SHIVANI123",
+    "Creator": "Microsoft® Word 2016",
+    "CreationDate": "D:20210719140604+05'30'",
+    "ModDate": "D:20210719140604+05'30'",
+    "Producer": "Microsoft® Word 2016"
+  },
+  "file_path": "mosdac_data/raw_docs/sftp-mosdac_0.pdf",
+  "file_type": "pdf",
+  "parsed_at": "2025-07-04T21:26:52.803719"
+}

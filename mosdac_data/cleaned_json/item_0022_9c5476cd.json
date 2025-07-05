@@ -1,0 +1,19 @@
+{
+  "title": "RSS Feed Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "Uses RSS (Rich Site Summary) based technology for dissemination of Satellite Images and Data Products to end users on Internet Allow Users to subscribe to these feeds automatically and get notified for availability of new data sets Feed subscription is supported by Standard browsers and on RSS readers available on Mobile Apps Enhanced Features specific to Satellite Data are Planned in Customized Client, supporting automated download, analysis and visualization of data Currently SCATSAT-1 High Resolution Products are available, soon more products are planned to be added. Access the feeds using below links: SCATSAT-1 Feed : https://mosdac.gov.in/isrocast.xml INSAT3D-Imager Feed : https://mosdac.gov.in/3dimager.xml INSAT3D-Sounder Feed : https://mosdac.gov.in/3dsounder.xml INSAT3DR-Imager Feed : https://mosdac.gov.in/3drimager.xml INSAT3DR-Sounder Feed : https://mosdac.gov.in/3drsounder.xml",
+  "source_url": "https://www.mosdac.gov.in/rss-feed",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "satellite",
+      "ocean",
+      "imagery",
+      "data",
+      "monitoring"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.425124"
+  }
+}

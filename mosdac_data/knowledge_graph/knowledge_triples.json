@@ -1,0 +1,352 @@
+[
+  {
+    "head": "observation",
+    "relation": "provides",
+    "tail": "indian",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/about-us",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "altimeter",
+    "relation": "monitors",
+    "tail": "loss",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/inland-water-height",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "dataset",
+    "relation": "located_in",
+    "tail": "the",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/inland-water-height",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "altimetry",
+    "relation": "located_in",
+    "tail": "indian",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/inland-water-height",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "saphir",
+    "relation": "provides",
+    "tail": "clear",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/bayesian-based-mt-saphir-rainfall",
+    "document_type": "static",
+    "section": "Climate Monitoring"
+  },
+  {
+    "head": "saphir",
+    "relation": "provides",
+    "tail": "an",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/bayesian-based-mt-saphir-rainfall",
+    "document_type": "static",
+    "section": "Climate Monitoring"
+  },
+  {
+    "head": "the",
+    "relation": "provides",
+    "tail": "saphir",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/bayesian-based-mt-saphir-rainfall",
+    "document_type": "static",
+    "section": "Climate Monitoring"
+  },
+  {
+    "head": "files",
+    "relation": "located_in",
+    "tail": "hdf5",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/bayesian-based-mt-saphir-rainfall",
+    "document_type": "static",
+    "section": "Climate Monitoring"
+  },
+  {
+    "head": "download",
+    "relation": "located_in",
+    "tail": "geotiff",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/soil-moisture-0",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "data",
+    "relation": "located_in",
+    "tail": "antarctic",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/sea-ice-occurrence-probability",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "available",
+    "relation": "located_in",
+    "tail": "rajak",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/sea-ice-occurrence-probability",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "probability",
+    "relation": "located_in",
+    "tail": "percentage",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/sea-ice-occurrence-probability",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "download",
+    "relation": "located_in",
+    "tail": "binary",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/sea-ice-occurrence-probability",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "data",
+    "relation": "located_in",
+    "tail": "float",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/sea-ice-occurrence-probability",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "3d",
+    "relation": "located_in",
+    "tail": "terms",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3ds",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "commissioned",
+    "relation": "located_in",
+    "tail": "1983",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3ds",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "exist",
+    "relation": "located_in",
+    "tail": "hassan",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3ds",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "broadly",
+    "relation": "located_in",
+    "tail": "four",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3ds",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "files",
+    "relation": "located_in",
+    "tail": "netcdf",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/high-resolution-sea-surface-salinity",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "live",
+    "relation": "provides",
+    "tail": "access",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/internal/ocean",
+    "document_type": "static",
+    "section": "Ocean Monitoring"
+  },
+  {
+    "head": "content",
+    "relation": "located_in",
+    "tail": "categorized",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/website-policies",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "8",
+    "relation": "located_in",
+    "tail": "indian",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/meteosat8-cloud-properties",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "files",
+    "relation": "located_in",
+    "tail": "netcdf",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/meteosat8-cloud-properties",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "commissioned",
+    "relation": "located_in",
+    "tail": "1983",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3d",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "exist",
+    "relation": "located_in",
+    "tail": "hassan",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3d",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "broadly",
+    "relation": "located_in",
+    "tail": "four",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/insat-3d",
+    "document_type": "static",
+    "section": "Satellite Data"
+  },
+  {
+    "head": "live",
+    "relation": "provides",
+    "tail": "access",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/internal/urja",
+    "document_type": "static",
+    "section": "General"
+  },
+  {
+    "head": "live",
+    "relation": "provides",
+    "tail": "access",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/internal/varsha",
+    "document_type": "static",
+    "section": "General"
+  },
+  {
+    "head": "live",
+    "relation": "provides",
+    "tail": "access",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "https://www.mosdac.gov.in/internal/vayu",
+    "document_type": "static",
+    "section": "General"
+  },
+  {
+    "head": "the",
+    "relation": "provides",
+    "tail": "mosdac",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/sftp-mosdac_0.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  },
+  {
+    "head": "onset",
+    "relation": "located_in",
+    "tail": "kerala",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/Onset%20Prediction%202023.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  },
+  {
+    "head": "mjo",
+    "relation": "located_in",
+    "tail": "equatorial",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/Onset%20Prediction%202023.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  },
+  {
+    "head": "tpw",
+    "relation": "located_in",
+    "tail": "the",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/Onset%20Prediction%202023.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  },
+  {
+    "head": "onset",
+    "relation": "located_in",
+    "tail": "kerala",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/Onset%20Prediction%202024.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  },
+  {
+    "head": "tpw",
+    "relation": "located_in",
+    "tail": "the",
+    "confidence": 0.7,
+    "source": "pattern_matching",
+    "source_url": "mosdac_data/raw_docs/Onset%20Prediction%202024.pdf",
+    "document_type": "pdf",
+    "section": "Products"
+  }
+]

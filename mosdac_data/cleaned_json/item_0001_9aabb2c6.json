@@ -1,0 +1,13 @@
+{
+  "title": "",
+  "type": "general",
+  "section": "Land Surface",
+  "text": "{{appNameDisplay}} {{startEndDateStr}} Time Series Longitude : Latitude : Start Date: End Date: Submit {{timezone}} {{generalMessage.infoMsg.noLegends.message1}} Close Legends",
+  "source_url": "https://www.mosdac.gov.in/internal/soil-wetness",
+  "document_type": "static",
+  "meta": {
+    "tags": [],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.034729"
+  }
+}

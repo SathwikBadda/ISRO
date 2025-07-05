@@ -1,0 +1,21 @@
+{
+  "total_nodes": 0,
+  "total_relationships": 0,
+  "node_types": {
+    "['Entity']": 867,
+    "['Product']": 19,
+    "['EntityStatistic']": 10,
+    "['Organization']": 6,
+    "['Sensor']": 5,
+    "['Satellite']": 4,
+    "['Location']": 2,
+    "['Mission']": 2,
+    "['System']": 1,
+    "['Metadata']": 1
+  },
+  "relationship_types": {
+    "IS_A": 38,
+    "ARCHIVED_IN": 4
+  },
+  "verified_at": "2025-07-05T11:07:16.025415"
+}

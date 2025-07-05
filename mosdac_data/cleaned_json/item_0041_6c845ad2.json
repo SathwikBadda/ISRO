@@ -1,0 +1,15 @@
+{
+  "title": "sftp-mosdac_0",
+  "type": "documentation",
+  "section": "Products",
+  "text": "User Guide for data downloading from MOSDAC MOSDAC has upgraded its file transfer services from FTP to Secure FTP (SFTP) Important information : - The user credentials for accessing the SFTP server are the same as FTP. - In case of any clarification or any issues, please contact MOSDAC Administrator (admin mosdac.gov.in) Steps for automatic download through script : (One can lftp for downloading the data from MOSDAC using sftp protocol) Example script for download using lftp on linux : -------------------------------------------------------------------------------------------------- HOST 'sftp://download.mosdac.gov.in' USER username' PASSWORD 'password' REMOTE_DIR '/Order' LOCAL_DIR 'local directory path' lftp -u \" USER\",\" PASSWORD\" HOST EOF set ftp:ssl-force true set ssl:verify-certificate no mirror --use-pget-n 10 REMOTE_DIR LOCAL_DIR; exit EOF --------------------------------------------------------------------------------------------------------- Steps to access SFTP services using ftp download clients: - User can access the SFTP service through any SFTP client such as WinSCP, FileZilla etc as follows : o Host name : download.mosdac.gov.in o Select File transfer protocol as SFTP and Port no, 22 o Type the username and password (same as MOSDAC user credentials) and click on login or connect. You will be able to access your ordered data under the \"Order\" directory. - FileZilla Client example : WincSCP Client example :",
+  "source_url": "mosdac_data/raw_docs/sftp-mosdac_0.pdf",
+  "document_type": "pdf",
+  "meta": {
+    "tags": [
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.480712"
+  }
+}

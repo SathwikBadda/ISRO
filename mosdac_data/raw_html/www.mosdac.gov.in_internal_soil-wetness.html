@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes, width=device-width">
+	
+	<link rel="canonical" href="https://localhost/lightning">
+	<link rel="preconnect" href="https://localhost/lightning">
+	
+	<link rel="icon" href="../common_forecast/assets/img/logo-transparent.png" type="image/gif" sizes="16x16">
+	<!-- CSS LINKS START -->
+	<link rel="stylesheet" href="../common_forecast/source/css/angular/angular-csp.css?v=1.0" />
+	<link rel="stylesheet" href="../common_forecast/source/css/angular/angular-material.min.css?v=1.0" />
+	 <link rel="stylesheet" href="../common_forecast/source/css/angular/angular-datepicker.css?v=1.0" />
+	<link rel="stylesheet" href="../common_forecast/source/css/bootstrap/bootstrap.min.css?v=1.0" />	
+	<link rel="stylesheet" href="../common_forecast/source/css/ol/ol.css?v=1.0" />
+	<link rel="stylesheet" href="../common_forecast/source/css/ol/ol-layerswitcher.css?v=1.0" />
+<!-- 	<link rel="stylesheet" href="../common_forecast/source/css/ui-listView/ui-listView.css?v=1.0" /> -->
+	<link rel="stylesheet" href="../common_forecast/source/css/angularjs-slider/rzslider.min.css?v=1.0" />
+	
+    <link rel="stylesheet" href="../common_forecast/source/css/font-awesome.min.css" />
+	
+    <link rel="stylesheet" href="../common_forecast/source/css/custom.css?v=1.0" />
+	<!-- CSS LINKS END -->
+	
+	<!-- LIB JAVASCRIPT START -->
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-datepicker.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-animate.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-aria.min.js?v=1.0"></script>
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-messages.min.js?v=1.0"></script> -->
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-material.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-touch.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/jquery/jquery-3.6.0.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/bootstrap/bootstrap.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js?v=1.0"></script>
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/ui-listView/ui-listView.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular-filter/angular-filter.min.js?v=1.0"></script> -->
+	<script defer type="application/javascript" src="../common_forecast/source/js/angularjs-slider/rzslider.min.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/ol/ol.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/ol/ol-layerswitcher.js?v=1.0"></script>
+	<!-- LIB JAVASCRIPT END -->
+
+
+
+	<script defer type="application/javascript" src="../common_forecast/source/js/highchartjs/highcharts.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/highchartjs/series-label.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/highchartjs/exporting.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/highchartjs/export-data.js?v=1.0"></script>
+	<script defer type="application/javascript" src="../common_forecast/source/js/highchartjs/accessibility.js?v=1.0"></script>
+
+	<!-- LIB JAVASCRIPT EXTRA START -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-route.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-resource.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-cookies.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-sanitize.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/xml2json/xml2json.min.js?v=1.0"></script> -->
+	
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-loader.min.js?v=1.0"></script>	 DEFINE AT TOP -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-message-format.min.js?v=1.0"></script> -->
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/angular/angular-parse-ext.min.js?v=1.0"></script> -->
+	<!-- LIB JAVASCRIPT EXTRA END -->
+	<!-- <script defer type="application/javascript" src="../common_forecast/source/js/jquery.js?v=1.0"></script>	-->
+ <script defer type="application/javascript" src="../common_forecast/source/js/jquery-ui.js?v=1.0"></script>
+<!-- 	<script defer type="application/javascript" src="../common_forecast/source/js/test.js?v=1.0"></script> -->
+
+	<style type="text/css"> 
+		.tool_tip{
+
+            text-transform: none;
+            padding-left:20px;
+            padding-top:1px;
+            /*width: 100px;*/
+            line-height: 2px;
+
+        }
+        .md-tab1{
+
+            text-transform: none;
+            padding-left:20px;
+            padding-top:7px;
+            /*width: 100px;*/
+            line-height: 20px;
+        }
+        .md-tab2{
+
+            text-transform: none;
+            padding-left:2px;
+            padding-right:20px;
+            padding-top:2px;
+            /*width: 100px;*/
+            line-height: 18px;
+        }
+
+        .md-row{
+            /*font-size: 15px;
+            font-weight: bold;
+            padding: 6px 15px 6px 15px;
+            line-height: 30px;*/
+            text-transform: none;
+            padding: 1px;
+            /*width: 100px;*/
+            line-height: 1px;
+        }
+
+        .md-toolbar-tools{
+            background-color: rgba(40,122,147,0.8)
+        }
+
+        .md-primary{
+            background-color: rgba(40,122,147,0.8);
+        }
+
+        .md-button{
+            background-color: rgba(40,122,147,1);
+        }
+        .md-raised{
+            background-color: rgba(40,122,147,0.7);
+        }
+        .md-tab{
+            color:#ffffff;
+            font-weight:bold;
+        }
+/*        .md-tab-item{
+            color:#ffffff;
+            font-weight:bold;
+        }*/
+        md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+    color: #fff !important;
+/*    background-color: rgba(40,40,40,.5);*/
+    
+   
+}
+        .sidemenu {  
+    
+
+    position: absolute;
+     z-index: 1;
+    /* width: 286px; */
+    width: 320px;
+    left: 1px;
+    background: rgba(0,0,0,0.38);
+    top: 32px;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+
+}
+
+   .sidemenu1 {  
+    /*border: 1px solid #333;*/
+    /*  border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    */  
+    position: absolute;
+/*     z-index: 1;*/
+    /* width: 286px; */
+/*    width: 360px;*/
+    left: 50px;
+      background: rgba(40,40,40,0); 
+    top: 50px;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+
+}
+
+
+.iconpanel
+{
+    position: absolute;
+    z-index: 200;
+    height:auto;
+    width:110px;
+    text-align: center;
+    bottom:10%;
+    right:20px;
+    margin: -100px 0 0 -150px;
+     background: rgba(40,40,40,.85);
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+.placeholder-white{
+    
+    color:white;
+}
+.md-select-value :first-child {
+    
+    color:white;
+}
+.md-input-container {
+   
+     margin: 1px 0; 
+   
+}
+ .box{
+                width: 90%;
+                display: block;
+                padding:3px;
+                clear: both;
+            }
+	</style>
+
+	    <script type="text/javascript">
+      function openNav() {
+  		document.getElementById("mySidenav1").style.display = "block";
+  		document.getElementById("side_btn_extra").style.display= "block";
+  	document.getElementById("side_btn").style.background= "transparent";
+  		
+  		
+  	}
+
+  	function closeNav() {
+  		document.getElementById("mySidenav1").style.display = "none";
+  		document.getElementById("side_btn_extra").style.display= "none";
+  		document.getElementById("side_btn").style.background= "transparent";
+
+  		
+  	}
+
+  	var sidebar_open_close_flag=false;
+
+  	function opencloseNav() {
+  		if(sidebar_open_close_flag){
+//  				alert(false)
+  			closeNav();
+  			sidebar_open_close_flag=false;
+  		}else{
+//  				alert(true)
+  			openNav();
+  			sidebar_open_close_flag=true;
+  		}
+  		hideDivIconSideBtn();
+  	}
+
+  	hideDivIconSideBtn=function()
+  	{
+  	    //console.log("INSIDE CONTROLLER AND FUNCTION IS hideDivIconSideBtn"); 
+  	    if(document.getElementById('mySidenav1').style.display=='none' || !document.getElementById('mySidenav1').style.display)
+  	    { 
+  	        //console.log("Inside If:- ",document.getElementById('mySidenav1').style.display)
+  	        //return scope.folder_name_img+'/chevron-down.svg';
+  	    	document.getElementById('layer_open_close_icon').src="icons/chevron-down.svg";
+  	    }
+  	    else
+  	    {
+  	    	//console.log("Inside Else:- ",document.getElementById('mySidenav1').style.display)
+  	        //return scope.folder_name_img+'/double-chevron-up.svg';
+  	    	document.getElementById('layer_open_close_icon').src="icons/double-chevron-up.svg";
+  	    	
+  	    	
+  	    }
+  	}
+      </script>
+
+
+	<script type="application/javascript">
+	changeCssOfLegendDiv=function(img){
+	    	console.log($(img).closest("canvas").attr("id"));
+	    	
+	    	temp_canvas=document.getElementById($(img).closest("canvas").attr("id"));
+	    	
+	    	temp_canvas.width = 300;
+	    	temp_canvas.height = 100;
+		
+	    	degrees = 270; 
+	    	
+	    	ctx=temp_canvas.getContext("2d");
+	    	
+		ctx.save();
+		ctx.translate(temp_canvas.width/2,temp_canvas.height/2);
+		ctx.rotate(degrees*Math.PI/180);
+		ctx.drawImage(img, 0, 0, img.width, img.height, -(temp_canvas.height/2), -(temp_canvas.width/2), temp_canvas.height, temp_canvas.width);
+		ctx.restore();
+	}
+	</script>
+
+	
+</head>
+<body ng-app="app" ng-controller="controller" id="map" class="map body_custom">
+
+	<div class="titlemenu ol-unselectable" style="padding-bottom:4px;">
+		<div>            
+			<img width="150" align="center" src="../common_forecast/assets/img/transparent_mosdac_rapid.png">
+			<span class="title" style="margin-left: 1px;"><label ng-cloak class="ng-cloak">{{appNameDisplay}}</label></span>
+		</div>
+		<div id="date_time_div" style="left: 0px;">
+			
+		<div class="date_time" id="forecast" ng-cloak class="ng-cloak">
+			<!--<div ng-repeat="layer in map.getLayers().getArray()[1].getLayers().getArray()">{{layer.values_.title}},</div> -->
+	   <span>{{startEndDateStr}}</span></div>
+	
+		<br>
+   <span id="side_btn" class="sidebar_btn">
+                <table>
+                    <tr style="top: 20px">
+                        <td>
+                            <md-button aria-label="Aria Label" ng-cloak class="ng-cloak md-fab panel-show-hide-btn" ng-click="openCloseNav()" style="top: 20px;">
+                                <md-icon md-svg-src="{{hideDivIconSideBtn()}}"></md-icon>
+                            </md-button>
+                        </td>
+			<td><center> <label style="margin-left: -1px;
+    margin-top: 54px;
+    border-radius: 3px;
+    width: 148px;
+    height: 41px;
+    background-color: rgb(0 0 0 / 38%);"> Time Series </label></center></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </span>
+
+
+<!--			<span id="side_btn" class="sidebar_btn" style="font-size:24px;cursor:pointer;background:rgb(0 0 0 / 54%);">
+		<table>
+			<tr>
+
+				<td>
+					<button aria-label="Aria Label" onclick="opencloseNav()" style="border: none; position: absolute;top:1px">
+
+					<img id="layer_open_close_icon" src="icons/chevron-down.svg" style="height: 34px; width: 34px; border: 1px solid #ccc; border-radius: 15px;margin-top:0px;"></img>
+
+			        </button>
+				</td>
+				<td>
+				<label style="    margin-left: 45px;border-radius: 3px;width: 148px; height: 41px;"> Time Series </td>
+				
+				</td>
+
+				<td id="side_btn_extra" style="display:none; padding-left:6px;">
+
+			</td>
+
+		    </tr>
+
+	    </table>
+	</span>
+-->
+
+		<div style="
+    overflow: visible;
+    background-color: rgba(0,0,0,0.38);
+    height: 400px;
+    width:280px;
+    display: none;
+    margin-top: -22px;
+" ng-hide="hideViewCtrl" id="sidenav"  >
+			<br>
+			<br>
+			<br>
+			<form>
+			 <div class="md-tab2">
+
+				 <md-label style="text-transform: capitalize; font-style:normal; color:#ffffff; font-weight:bolder" >  Longitude :</md-label> 
+                                <input id="long" style="height:28px;width:165px;"  ng-model="long_final" readOnly="true"  required/>
+                        </div>
+                        <br>
+                        <div class="md-tab2">
+                        <md-label style="text-transform: capitalize; font-style:normal; color:#ffffff; font-weight:bolder" >  Latitude   :</md-label>
+                         <input  id="lat"  ng-model="lat_final" style="height:28px;margin-left: 15px;width:165px;" readOnly="true"  required/>
+                         </div>
+			
+                         <br>
+			<br>
+		  <div ng-hide="hideViewCtrl" >
+
+		   <md-input-container >
+
+                             <div class="input-group" layout="row">
+                                      <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> Start Date: </label>
+                <md-datepicker ng-model="start_date"    md-placeholder="Enter Date"    ng-change="gettime_img(stdate)" md-open-on-focus id="sdate"
+                        style="width:165px ;text-transform: capitalize;margin-left:90px;margin-top: -36px; font-style:normal;" readOnly="true"></<md-datepicker>
+        </div>
+
+
+			   <!--<datepicker date-format="yyyy-MM-dd"  selector="form-control" date-set="{{startdate}}" >
+			   <div class="input-group" layout="row">
+				   			   <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> Start Date: </label>
+<input style="width:165px ;text-transform: capitalize;margin-left:90px;margin-top: -36px; font-style:normal;background-color:#ffffff ; color:#000000;" ng-model="start_date" class="form-control" placeholder="Choose start date" id="sdate" readOnly="true" /> 
+                   </div>
+			   </datepicker> -->
+           </md-input-container>
+            <md-input-container >
+   <div class="input-group" layout="row">
+                                      <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> End Date: </label>
+                <md-datepicker ng-model="enddate"    md-placeholder="Enter Date"    md-open-on-focus id="sdate"
+                        style="width:165px ;text-transform: capitalize;margin-left:90px;margin-top: -36px; font-style:normal;" readOnly="true"></<md-datepicker>
+        </div>
+
+		   <!-- <datepicker date-format="yyyy-MM-dd"   selector="form-control" date-set="{{today}}" date-max-limit="{{today}}"  >
+                    <div class="input-group" layout="row">
+			     <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> End Date: </label>
+                        <input style="width:165px;margin-top: -38px; text-transform: capitalize; font-style:normal; color:#000000;margin-left:90px;background-color:#ffffff ;" ng-model="end_date" class="form-control" placeholder="Choose end date" id="edate" readOnly="true" />
+
+                    </div>
+		   </datepicker> -->
+            </md-input-container>
+		    </div>
+
+                         <center>
+				 <table>
+					 <tr>
+						 <td>
+							 <md-button  style="background-color:rgba(40,40,40,.5);color:#FFFFFF"  ng-click="gettimeseries_wrapper()" >Submit</md-button> 
+						 </td>
+						</tr>
+					</table>
+
+                         </center>
+			</form>
+		</div>
+
+		</div>
+
+                      
+
+	</div>
+
+	<div class="timezone-btn-div ol-unselectable" style="display: none;">
+		<button class="md-fab md-button timezone-btn md-ink-ripple" type="button" aria-label="Aria Label" tooltip-animation-class="fade" ng-class="{ in: isOpen() }" animation="animation"  ng-click="toggleTimezone()" origin-scope="origScope" tooltip-placement="bottom" uib-tooltip="{{uibTimezoneTooltip[timezone]}}">
+			<span id="btn_timezone_text" class="ng-binding ng-scope" ng-cloak class="ng-cloak">{{timezone}}</span>
+			<div class="md-ripple-container"></div>
+		</button>
+	</div>
+
+	<table style="width: 100%; position: absolute; bottom: 146px; z-index: 1;">
+		<tr>
+			<td style="width:10%;">
+			</td>
+
+			<td>
+				<div class="date_slider" id="date_slider_id">
+					<rzslider class="rzslider ng-isolate-scope date-slider" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+				</div>
+			</td>
+			
+			<td style="width:10%;">
+			</td>
+		</tr>
+	</table>
+
+		
+
+
+	<div id="legends" ng-show="showLegend" class="legends scrollbarX">
+		<table>
+			<tr ng-if="layergrps.values_.title=='Data Layer'" ng-repeat="layergrps in map.getLayers().getArray() | orderBy:layergrps:true">
+				<td ng-if="noLegends" id="noLegends">{{generalMessage.infoMsg.noLegends.message1}}</td>
+				<td ng-if="layers.values_.extraparams.legendAvailable" ng-repeat="layers in layergrps.getLayers().getArray()">
+					<div id="legends_div" class="legends_div" ng-show="layers.get('visible') && layergrps.get('visible')">
+						<canvas id="{{layers.ol_uid}}" width="300" height="100">
+							<img ng-src="{{layers.values_.extraparams.legendImgSrc}}" onload="changeCssOfLegendDiv(this)">
+						</canvas>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+		<div style="visibility: hidden">
+		 <div class="md-dialog-container" id="chartsDialog">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="charts_id" style="display:none;width: 530px;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px; ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+          					
+            					<md-tab label="Soil Moisture">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<div id="charts1" class="box">
+										</div>
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Soil Wetness Index">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<div id="charts2" class="box">
+										</div>
+              						</md-content>
+            					</md-tab>
+       					</md-dialog-content> 
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>	    
+	</div>
+
+
+
+	
+
+
+	<div id="bottom_menu&quot;" class="bottom_menu" aria-hidden="false">
+		<table class="bottom_menu_table">
+			<tbody>
+				<tr>
+					<td ng-click="showHideBottomMenu('legends')" role="button" tabindex="0">Legends</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="popup" class="ol-popup">
+		      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+		      <div id="popup-content"></div>
+	    </div>
+
+
+<!-- CONTROLLER JAVASCRIPT START -->
+<script defer type="application/javascript" src="../common_forecast/source/controllers/controller_new.js?v=1.0"></script>
+<!-- CONTROLLER JAVASCRIPT END -->
+
+</body>
+</html>

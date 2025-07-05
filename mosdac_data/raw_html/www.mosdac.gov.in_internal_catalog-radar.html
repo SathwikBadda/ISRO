@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Radar Catalog</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/angular-material.min.css">
+<link rel="stylesheet"
+        href="DataTables/DataTables-1.11.5/media/css/dataTables.bootstrap.css">
+<link rel="stylesheet"
+        href="DataTables/DataTables-1.11.5/media/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="css/styles.css?v=0.1">
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+#back-top{right:40px;}#back-top span#button{background-color:#CCCCCC;}#back-top span#button:hover{opacity:1;background-color:#777777;}
+
+/*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/angular-datepicker.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <script src="newjs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="DataTables/DataTables-1.11.5/media/js/jquery.dataTables.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="DataTables/Responsive-2.2.7/js/dataTables.responsive.js"></script>
+    <script src="js/angular-datatables.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-material.min.js"></script>
+    <script src="js/angular-messages.min.js"></script>
+     <script src="js/angular-datepicker.js"></script>
+    <script src="js/moment.min.js"></script>
+      <link href='packages/core/main.css?v=0.1' rel='stylesheet' />
+  <link href='packages/daygrid/main.css' rel='stylesheet' />
+  <link href='packages/timegrid/main.css' rel='stylesheet' />
+  <link href='packages/list/main.css' rel='stylesheet' />
+  <script src='packages/core/main.js'></script>
+  <script src='packages/interaction/main.js'></script>
+  <script src='packages/daygrid/main.js'></script>
+  <script src='packages/timegrid/main.js'></script>
+  <script src='packages/list/main.js'></script>
+    <script src="Controller/MainController.js?v=0.4"></script>
+    <script src="Controller/directive.js"></script>
+    <script src="Controller/directives.js"></script>
+  </head>
+  <!-- body ng-app="OrderApp"  ng-controller="MainController as mc"  ng-init="getSatellite();" -->
+  <body ng-app="OrderApp"  ng-controller="MainController as mc"  ng-init="getSatellite('A','R');" >    
+
+<!--header id="header" role="banner" class="with-secondary-menu">
+<div class="section clearfix" style="text-align: center;">
+        <a href="/" title="Home" rel="home" id="logo">
+                <img src="https://mosdac.gov.in/sites/default/files/mosdac_small.png" alt="Home">
+        </a></br>
+</div>
+</header-->
+
+  <div class="row container" style="margin-right: auto; margin-left: auto;">
+                        <div class="col-lg-10 col-md-8 col-sm-8 col-xs-6"></div>
+                          <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+<!--    <a href="javascript:;" class="changer" id="text_resize_decrease" style="font-size: 14px;"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="text_resize_reset" style="font-size: 14px;">A</a> <a href="javascript:void(0);" class="changer" ng-click="increaseSize()" style="font-size: 14px;"><sup>+</sup>A</a>
+<div id="text_resize_clear"></div>-->
+
+        <button class="linkClassbtn" ng-click="small()" title="Decrease Font Size"><span>A-</span></button>
+        <button class="linkClassbtn" ng-click="midium()" title="Default Font Size"><span>A</span></button>
+        <button class="linkClassbtn" ng-click="large()" title="Increase Font Size"><span>A+</span></button>
+                        </div>
+                        </div>
+
+
+<header id="header" role="banner" class="with-secondary-menu">
+<div class="row container" style="margin-right:auto; margin-left: auto;">
+<div class="col-sm-6 form-group">
+        <a href="/" title="Home" rel="home" id="logo">
+                <img src="https://mosdac.gov.in/sites/default/files/mosdac_small.png" alt="Home">
+        </a>
+</div>
+<div class="col-sm-6 form-group" style="text-align: center;     margin-top: 22px;">
+        <div style="/*float: right;*/">
+                        <label id="site-slogan" style="font-size: 20px;     color: #428bca;">राडार उत्पाद सूची </label></br>
+			<label id="site-slogan" style="font-size: 20px;     color: #428bca;">RADAR Catalog</label></br>
+                        </div>
+</div>
+</div>
+</header>
+
+    <div ng-init="metadata=[]"></div>
+    <div class="container" style="margin-right: auto; padding-left: unset; padding-right: unset;font-size: 15px;">
+    <!--div class="container" style="/*margin-right: auto;*/ margin-left: 10px; margin-right: 10px; width: auto !important;"-->
+       <nav  ng-show="navbar" class="navbar navbar-expand-sm bg-danger navbar-dark">
+         <div  class="col-md-4 col-sm-6 col-xs-6"> 
+          <label style="text-transform: capitalize; font-style:normal; color:#0213f3; font-weight:bold" >Satellite:</label>
+          <select class="form-control" ng-change="getSensor('R');" ng-model="satellite" name="satellite" style="font-weight:bold" >
+          <option ng-repeat=" satellite in satelliteList"  value="{{satellite.id}}">
+          {{satellite.name}}</option>
+          </select><br>
+          </div>
+          <div  class="col-md-4 col-sm-6 col-xs-6">
+          <label style="text-transform: capitalize; font-style:normal; color:#0213f3; font-weight:bold" >Sensor:</label>
+          <select class="form-control"  ng-change="search('R');" ng-model="sensor" name="sensor" style="font-weight:bold">
+          <option ng-repeat="sensor in sensorList" value ="{{sensor.id}}">
+          {{sensor.name}}</option>
+          </select><br><br>
+          </div>
+          <div class="col-md-4">
+          </div>
+       </nav>
+       <!-- end navbar -->
+    </div>
+  <!--End Show Satellite && Sensor -->
+  <div class="Orderdiv" ng-show="selectBox">
+        <div align="center">
+           <button  ng-click="closeList()" style="float: right;margin-top: 0px;"><b>X</b></button>
+        </div>
+      <div id='calendar'></div>
+    </div>
+  <!--Container for all the tables including data products, standing order, my order etc.-->
+    <div class="container" style="margin-right: auto; padding-left: unset; padding-right: unset;font-size: 15px;">
+    <!--div class="container"  style="/*margin-right: auto;*/ margin-left: 10px; margin-right: 10px; width: auto !important;"-->
+      <div class="maintable"> 
+       <div id="showData">
+      <div id="main_table"  ng-show="maintable">
+        <!-- Start satelite data and standing data tables -->
+          <table id="tabledata"  class="table display responsive  table-striped table-bordered" datatable="ng"  dt-options="dtOptions">
+             <thead style="background: #337ab7; color: white;text-align: left;vertical-align: center">
+              <tr>
+              <th class="all" style="width:50px">Sr.No</th>
+              <th class="all" style="width:150px;white-space:nowrap;">Product /<br>Acq Calendar</th>
+              <th class="all">Product Description</th>
+              <th style="width:50px">Processing Level</th>
+              <th style="width:80px">Temporal Resolution</th>
+              <th style="width:50px">Start Date</th>
+              <th style="width:50px">End Date</th>
+              <th>Processing Status</th>
+              <th>DOI</th>
+
+               </tr>
+              </thead>
+              <tbody>
+               <tr ng-repeat ="allproduct in AllProductList">
+               <td>{{$index + 1}}</td>
+               <!-- td><b>{{allproduct.name}}</b><br> <md-icon  ng-click="addItem(allproduct.enddate,allproduct.id)"  class="md-datepicker-calendar-icon set-svg ng-scope" md-svg-icon="icons/calendar-w.svg"--> <!-- Commented By Jay On 14MAR2022 -->
+               <td><b>{{allproduct.name}}</b><br> <md-icon  ng-click="addItem(allproduct.enddate,allproduct.id,allproduct)"  class="md-datepicker-calendar-icon set-svg ng-scope" md-svg-icon="icons/calendar-w.svg"> <!-- Updated By Jay On 14MAR2022 -->
+                </md-icon></td>
+               <td>{{allproduct.description}}</td>
+               <td>{{allproduct.processlevel}}</td>
+               <td>{{allproduct.frequency  | uppercase}}</td>
+               <td>{{allproduct.startdate}}</td>
+               <td>{{allproduct.enddate}}</td>
+               <td ng-if="allproduct.actv == 'Active'" style="color: green; font-weight: bold;">{{allproduct.actv}}</td>
+               <td ng-if="allproduct.actv != 'Active'" style="color: red; font-weight: bold;">{{allproduct.actv}}</td>
+               <td><a ng-href="https://dx.doi.org/{{allproduct.techdoc}}" target="_blank">{{allproduct.techdoc}}</a></td>
+              </tr>
+              </tbody>
+          </table>
+
+        <div id="wrapper">
+         <div class="spinner-wrapper" id="loading4" style="margin-right:auto;">
+            <div class="spinner"></div>
+            <div class="spinner">
+               <div class="rect1"></div>
+               <div class="rect2"></div>
+               <div class="rect3"></div>
+               <div class="rect4"></div>
+               <div class="rect5"></div>
+            </div>
+         </div>
+       </div>
+      </div > 
+       </div>
+      </div>
+    </div>
+
+ <footer>
+                <div class="row container" style="margin-right: auto; margin-left: auto;background-color:#095cb1;">
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/mosdac-feedback" title="">Feedback</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/about-us" title="">About Us</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/contact-us" title="">Contact Us</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/copyright-policy" title="">Copyright Policy</a></div>
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><a class="footertext" href="/data-access-policy" title="">Data Access Policy</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/hyperlink-policy" title="">Hyperlink Policy</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/privacy-policy" title="">Privacy Policy</a>       </div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/website-policies" title="">Website Policies</a></div>
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><a class="footertext" href="/terms-conditions" title="">Terms &amp; Conditions</a></div>
+                        <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4"><a class="footertext" href="/faq-page" title="">FAQs</a>       </div>
+                        </div>
+
+                <div class="row container" style="margin-right: auto; margin-left: auto;background-color:#095cb1;">
+                        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-0"></div>
+                 <div class="col-lg-6 col-md-6 col-sm-10 col-xs-12" style="background-color:white"><a href="http://www.isro.gov.in" target="_blank"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/logo-transparent.png?itok=IUS20l-w"  height="66" alt="ISRO"></a>
+<a href="http://www.sac.gov.in" target="_blank"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/saclogo.png?itok=_Jv4AuIn" height="66" alt="Space Applications Center"></a>
+<a href="http://www.india.gov.in" target="_blank"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/india-gov_0.png?itok=yssAPH3m" width="75" height="66" alt="NationalPortal"></a>
+<a href="http://mygov.in/" target="_blank" rel="noopener noreferrer"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/mygov_0.png?itok=Po-dzdT3"  height="66" alt="MyGov"></a>
+><a href="http://www.digitalindia.gov.in/" target="_blank"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/digital-india_0.png?itok=ntlP7atE"  height="66" alt="DigitalIndia"></a>
+<a href="http://data.gov.in" target="_blank"><img typeof="foaf:Image" src="https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/data-gov.png?itok=qYA78FgB"  height="66" alt="DataPortal"></a> </div>
+                        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-0"></div>
+                </div>
+
+                <div class="row container" style="margin-right: auto; margin-left: auto;background-color:#095cb1;">
+		<div id="footer-line" class="col-lg-12 col-md-12 col-sm-12 footertext"> Ver 3.0; Last reviewed and updated on 22 Aug, 2024 </div>
+                </div>
+        </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="theme-color" content="#317EFB"/>
+	    <meta name="Description" CONTENT="Author: Mosdac, Illustrator: Satellite Images, Category: Scientific Spatial Data">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		
+		<title></title>
+		
+		<link rel="canonical" href="https://localhost:81/monsoon/">
+		<link rel="preconnect" href="https://localhost:81/monsoon/">
+		
+		<link rel="icon" href="assets/img/logo-transparent.png" type="image/gif" sizes="16x16">
+		<link rel="manifest" href="source/jsons/manifest.json?v=1.0">
+		
+		<!-- CSS LINKS START -->
+		<link rel="stylesheet" href="source/css/angular/angular-material.min.css?v=1.0" />		
+		<link rel="stylesheet" href="source/css/bootstrap/bootstrap.min.css?v=1.0" />
+		<link rel="stylesheet" href="source/css/ol/ol.css?v=1.0" />
+	    <link rel="stylesheet" href="source/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="source/css/rzslider.css" />
+	    <link rel="stylesheet" href="source/css/custom.css?v=1.0" />
+		<!-- CSS LINKS END -->
+		
+		<!-- LIB JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/js/angular/angular.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-animate.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-aria.min.js?v=1.0"></script>		
+		<script defer type="application/javascript" src="source/js/angular/angular-material.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/jquery/jquery-3.6.0.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/bootstrap/bootstrap.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/ol/ol.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/rzslider.js?v=1.0"></script>
+		<!-- LIB JAVASCRIPT END -->
+		
+		
+		
+		
+		<!-- LIB JAVASCRIPT EXTRA START -->
+	
+		<script defer type="application/javascript" src="source/js/xml2json/xml2json.min.js?v=1.0"></script>
+		<!-- LIB JAVASCRIPT EXTRA END -->
+		<script defer type="application/javascript" src="source/js/windy.js"></script>
+		<meta name="viewport" content="initial-scale=1.0 , user-scalable=no, width=device-width">
+	</head>
+	<body ng-app="app" ng-controller="controller" id="map">
+	 <canvas id="windyMap"></canvas>
+
+		<div only_resizable class="titlemenu">
+	        <table>
+	            <tr>
+	                <td>
+	    	            <img width="150" align="center" alt="mosdac logo" alt="mosdac-logo" src="assets/img/transparent_mosdac_rapid.png" style="/*margin-top: -12px;*/"/>
+				<label ng-cloak class="title ng-cloak">{{applicationName}}</label>
+           			<button class="ol-unselectable ol-control" type="button" title="Info" ng-click="siteInfo()" style="background-color: rgba(0,0,0,0.6);/*top: -5px;*/margin-left: 2px;border-radius: 10px;border-color: transparent;">
+                		<md-icon class="ol-info" aria-label="" md-svg-src="assets/img/ic_info_24px.svg" style="height: 1.375em; width: 1.375em; line-height: .4em; background-color: transparent;" role="img">
+						</md-icon>
+            		</button>
+            		<button class="md-fab md-button md-ink-ripple" type="button" aria-label="Aria Label" ng-click="toggleTimeZone()" uib-tooltip="" tooltip-placement="bottom" style="margin:0 ;line-height: unset; width: unset; height: unset; left: 39px; /*bottom:5px*/; ">
+					{{selectedTimezone}}
+					</button>
+	                </td>
+	                
+	             </tr>
+	             <tr>
+	                <td calss="application-name">
+	    	           <div ng-cloak class="title ng-cloak" id="cyclone_text" style="margin-top: 3px;margin-left: 0px;"></div>
+	                </td>
+	               
+	            </tr>
+	           <tr><td>
+			<label  ng-if="selectedTimezone=='LOC'" style="color: white;font-size:13px;" ><b class="ng-binding">{{datetimeLoc}} </b>&nbsp;&nbsp;</label>
+			<label  ng-if="selectedTimezone=='GMT'" style="color: white;font-size:13px;" ><b class="ng-binding">{{datetimeGmt}} </b>&nbsp;&nbsp;</label>
+			<div>
+			<span>
+           <label style="color:white;font-size:large;font-weight: bolder;left: -4px;">Year:</label>
+           	<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+           	  ng-options="cyclone.Year for cyclone in cyclonelist" ng-model="model_cyclone" ng-change="updateCyclonename(model_cyclone)"></select>
+           </span>
+			<span>
+           	<label style="color:white;font-size:large;font-weight: bolder;left: -4px;">Cyclone:</label>
+           	<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label" 
+           	 ng-options="cyc for cyc in model_cyclone.Cyclonelist" ng-model="model_cyclone_selected" ng-change="timeUpdateLayer(model_cyclone_selected)"></select>
+           	</span>
+           	</div>
+           	
+		</td>
+                  </tr>
+	        </table>
+	    </div>
+	   
+	   
+	     <span id="side_btn" class="sidebar_btn">
+	        <table>
+	            <tr>
+	                <td>	
+	                    <md-button aria-label="Aria Label" ng-cloak class="ng-cloak md-fab panel-show-hide-btn" ng-click="openCloseNav()" style="top: /*23px*/ 15px; left: 6px;">    
+	                    	<md-icon md-svg-src="{{hideDivIconSideBtn()}}"></md-icon>
+	                    </md-button>
+	                </td>  
+	            </tr>
+	            
+	        </table>
+	    </span> 
+	    
+	    <div id="sidenav" class="sidenav1 scrollbar" style=" top: /*92px*/ 115px;">
+
+			<md-content layout-padding layout="column" class="md_content_custom" style="padding-top:33px">
+			
+			
+<!-- 				<md-button type="submit" value="Cyclone Info"  ng-click='showCycloneInfo()' style='background-color: deepskyblue; width: /*119px*/ 278px;/*margin-left: 43px;*/ left: 30px; top: 0px; margin-top: 1px;height: 42px; font-size: 23px;'>Cyclone Info</md-button> -->
+				
+	    	
+	    	
+	    		<div ng-if="layergrps.values_.extraparams.sidepanelEntry" ng-repeat="layergrps in map.getLayers().array_ | orderBy:layergrps:true" class="first_side_menu_div">  <!-- | orderBy:propertyName:reverse -->
+	    			<div class="layer-display ng-scope">
+	        			<md-checkbox ng-if="layergrps.values_.extraparams.checkbox" ng-model="layergrps.values_.visible" flex="80" ng-click="layergrps.changed()" class="layer-title-checkbox" aria-label={{layergrps.values_.title}}></md-checkbox><!-- ng-change=layergrps.setVisible(layergrps.values_.visible); Can Be Used-->
+	        			{{layergrps.values_.title}}
+	        			
+	        			
+	        			
+	        			<span ng-show="layergrps.values_.visible">
+							<md-button aria-label="Aria Label" class="collapse-btn" ng-if="layergrps.values_.extraparams.collapsable" ng-click="map.collapseLayers(layergrps)">    
+	                    		<!--md-icon md-svg-src="img/ic_delete_black_24px.svg"></md-icon-->
+	                    		<i ng-if="!layergrps.values_.extraparams.collapsestate" class="{{layergrps.values_.extraparams.collapse_open_img_icon_class}} collapseBtn" ng-click="layergrps.values_.extraparams.collapsestate=!layergrps.values_.extraparams.collapsestate"></i>
+	                    		<i ng-if="layergrps.values_.extraparams.collapsestate" class="{{layergrps.values_.extraparams.collapse_close_img_icon_class}} collapseBtn" ng-click="layergrps.values_.extraparams.collapsestate=!layergrps.values_.extraparams.collapsestate"></i>
+	                    	</md-button>
+	        			
+	        				<md-button aria-label="Aria Label" class="reset-btn" ng-if="layergrps.values_.extraparams.reset" ng-click="addDefaultGroupLayerToMap(layergrps)">
+	                    		<md-icon md-svg-src="assets/img/ic_rotate_left_48px.svg" class="reset-btn-icon"></md-icon>
+	                    	</md-button>
+	                    
+	        				<md-button aria-label="Aria Label" class="delete-btn" ng-if="layergrps.values_.extraparams.delete" ng-click="map.removeLayer(layergrps)">    
+	                    		<md-icon md-svg-src="assets/img/ic_delete_black_24px.svg"></md-icon>
+	                    	</md-button>
+	                    
+	                    	<input flex="20" type="range" min="0" max="1" step="0.01" ng-if="layergrps.values_.extraparams.slider" ng-model="layergrps.values_.opacity" ng-change="layergrps.changed()" uib-tooltip="Layer Opacity" class="ng-pristine ng-untouched ng-valid ng-empty flex-20 slider-bar" aria-invalid="false" aria-valuemin="0" aria-valuemax="1"><!-- ng-change=layergrps.setOpacity(layergrps.values_.opacity); Can Be Used -->
+	        			</span>
+	    			</div>
+	    			<div ng-show="layergrps.values_.visible && !layergrps.values_.extraparams.collapsestate" class="selection-div" ng-class="{'selection-margin':layergrps.values_.title=='Layers'}">
+	    				<md-radio-group ng-if="layergrps.values_.extraparams.radioSelect" ng-model="layergrps.values_.extraparams.radioBtnSelect" ng-change="radioSelect(layergrps)" layout="row" class="color-text">
+						  <label class="selection-label">Selection:-</label>
+	                      <md-radio-button value="Single Select">Single</md-radio-button>
+	                      <md-radio-button value="Multiple Select">Multiple</md-radio-button>
+	                    </md-radio-group>
+	    			</div>
+	        		<div ng-show="layergrps.values_.visible && !layergrps.values_.extraparams.collapsestate" ng-repeat="layers in layergrps.getLayers().array_" class="color-text" ng-class="{'layers-div':layergrps.values_.title=='Layers'}">
+	        			<div ng-if="layers.values_.extraparams.sidepanelEntry">
+	        				<md-checkbox aria-label="Aria Label" ng-if="layers.values_.extraparams.checkbox" ng-model="layers.values_.visible" flex="80" ng-click="layers.getSource().changed(); radioSelectCallFunc(layergrps,layers)"></md-checkbox><!-- ng-change=layers.setVisible(layers.values_.visible); Can Be Used -->
+	            		 
+	            			<span ng-show="!layers.values_.extraparams.multipleband">{{layers.values_.title}}</span>
+	         	        	<select aria-label="Aria Label" class="select-font-box-style select-band-width" ng-show="layers.values_.extraparams.multipleband" ng-model="layers.values_.extraparams.selectedband" ng-change="updateSelectedLayerBand(layers)"  ng-options="option.displayname for option in layers.values_.extraparams.bands.list" aria-invalid="false">
+	            			
+	            			</select>
+	            			
+	            			<span ng-show="layers.values_.visible">
+	            				<md-button aria-label="Aria Label" class="delete-btn" ng-if="layers.values_.extraparams.delete" ng-click="layergrps.values_.layers.remove(layers)">    
+	                    			<md-icon md-svg-src="assets/img/ic_delete_black_24px.svg"></md-icon>
+	                    		</md-button>
+	                    	
+	                    		<input flex="20" type="range" min="0" max="1" step="0.01" ng-if="layers.values_.extraparams.slider" ng-model="layers.values_.opacity" ng-change="layers.getSource().changed()" uib-tooltip="Layer Opacity" class="ng-pristine ng-untouched ng-valid ng-empty flex-20 slider-bar" aria-invalid="false" aria-valuemin="0" aria-valuemax="1"><!-- ng-change=layers.setOpacity(layers.values_.opacity); Can Be Used -->
+		                    
+		                  
+				<div ng-if="layers.values_.title == 'Heat Content Anomaly'">
+	                    		  Select Date And Time :<select aria-label="Aria Label" ng-change="gettimeLayer(date_id)" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched"
+	                    		   ng-model="date_id" ng-options="avlDate.dateStr for avlDate in todayDate | orderBy:avlDate:false" aria-invalid="false" style="padding: 2px;"></select>
+	                    		  
+	                    		  </div>	                    		
+					  
+					   <div ng-if="layergrps.values_.title=='EOS-06 (SCAT)'">
+		                   <select aria-label="Aria Label"  ng-model="scatlayer"  ng-change="updateSelectedLayerWind(selected_scat_layer,scatlayer,layers)" style="width: 46%;margin-top: -17px;margin-left: -4px;font-size: 15px;border: 1px solid #ccc;">
+									<option label="" value="" >--Select--</option>
+									<option label="Analyzed Winds" value="analyzed_wind_speed" >Analyzed Winds</option>
+									<option label="Observed  Winds" value="observed_wind_speed">Observed  Winds</option>
+						</select>
+					   
+					   		
+	                     <select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	                 		   ng-model="selected_scat_layer"
+	                   		   ng-change="updateSelectedSCATlayer(selected_scat_layer,layers)"
+	                  		   ng-options="layer.values_.extraparams.date_local_str for layer in layers.values_.extraparams.scat_layer_obj_arr " aria-invalid="false" style="margin-left: 7px;">
+	                    		  	</select>
+	                   
+
+	                    		  </div>
+					 <!-- <div ng-if="layers.values_.title == 'Analyzed Wind'">
+	                    		  Select Date :<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	                    		   ng-model="selected_scat_layer"
+	                    		   ng-change="updateSelectedSCATlayer(selected_scat_layer,layers)"
+	                    		    ng-options="layer.values_.extraparams.date_local_str for layer in layers.values_.extraparams.scat_layer_obj_arr " aria-invalid="false" style="margin-left: 8px;">
+	                    		  	</select>
+
+					 </div> -->
+	                    	
+	                    		<div ng-if="layers.values_.extraparams.timeSelect">
+	                    			{{layers.values_.extraparams.selectedTimeObj.sensorSatellite}}
+                     	
+	                    		</div>
+	                    		  <div ng-if="layers.values_.title == 'IMG TIR1' || layers.values_.title == 'IMG TIR2' || layers.values_.title == 'IMG SWIR' ||layers.values_.title == 'IMG MIR' || layers.values_.title == 'IMG VIS' || layers.values_.title == 'IMG WV'">
+	                    		  <table>
+	                    
+	                    		  	  
+	             
+           <tr>
+<!--            <td> -->
+<!--            <div> -->
+<!--            <label style="color:white;font-size:large;font-weight: bolder;left: -4px;">Select Year :</label> -->
+<!--            	<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label" -->
+<!--            	  ng-options="cyclone.Year for cyclone in cyclonelist" ng-model="model_cyclone" ng-change="updateCyclonename(model_cyclone)"></select> -->
+<!--            </div> -->
+           	
+<!--            	</td> -->
+<!--            	<td> -->
+<!--            	<div> -->
+<!--            	<label style="color:white;font-size:large;font-weight: bolder;left: -4px;">Cyclone Name:</label> -->
+<!--            	<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"  -->
+<!--            	 ng-options="cyc for cyc in model_cyclone.Cyclonelist" ng-model="model_cyclone_selected" ng-change="timeUpdateLayer(model_cyclone_selected)"></select> -->
+<!--            	</div> -->
+           	 
+<!--            	</td>                  		  -->
+	                    		  <tr>
+	                    		  <td>
+	                    		  
+	                    		 	<select aria-label="Aria Label"  ng-model="bandname"  ng-change="updateSelectedLayerBand(bandname)" style="width: 130px;">
+									<option label="TIR1 Count" value="IMG_TIR1" selected="selected">TIR1 Count</option>
+									<option label="TIR2 Count" value="IMG_TIR2">TIR2 Count</option>
+									<option label="MIR Count" value="IMG_MIR">MIR Count</option>
+									<option label="SWIR Count" value="IMG_SWIR">SWIR Count</option>
+									<option label="Visible Count" value="IMG_VIS">Visible Count</option>
+									<option label="Water Vapour Count" value="IMG_WV">Water Vapour Count</option>
+									</select>
+									
+	                    		  </td>
+	                    		  	
+	                    		  <td>
+	                    		 <select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	                    		  ng-if="selectedTimezone=='LOC'" ng-model="selected_tir1_layer"
+	                    		   ng-change="updateSelectedLayerTime(selected_tir1_layer,layers)"
+	                    		    ng-options="layer.values_.extraparams.date_local_str for layer in layers.values_.extraparams.tir1_layer_obj_arr " aria-invalid="false" style="margin-left: 8px;">
+	                    		  	</select>
+	                    		  	<select class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	                    		  ng-if="selectedTimezone=='GMT'" ng-model="selected_tir1_layer"
+	                    		   ng-change="updateSelectedLayerTime(selected_tir1_layer,layers)"
+	                    		    ng-options="layer.values_.extraparams.date_gmt_str for layer in layers.values_.extraparams.tir1_layer_obj_arr " aria-invalid="false" style="margin-left: 8px;">
+	                    		  	</select>
+	                    		  </td>
+	                    		  </tr>
+	                    		  
+	                    		  </table>
+		        			  
+									
+				
+				                   </div>
+				                </span>
+		        			</div>
+	            			
+	            			
+	            			
+	        			</div>
+	        		</div>
+	        		
+	        		
+	        		</div> 
+	        		</md-content>
+	    		</div>
+	
+	
+		
+
+		<div  ng-show="selectedTimezone=='LOC'" style="bottom: 136px; position: absolute; width: -webkit-fill-available;">
+           		<rzslider  rz-slider-model="rangeSliderLocal.value" rz-slider-options="rangeSliderLocal.options"></rzslider>
+           	</div>
+           	
+           	<div ng-show="selectedTimezone=='GMT'" style="bottom: 136px; position: absolute; width: -webkit-fill-available;">
+           		<rzslider  rz-slider-model="rangeSliderGmt.value" rz-slider-options="rangeSliderGmt.options"></rzslider>
+           	</div>
+           	
+		<div id=bottom_menu" class="bottom_menu">
+			<table class="bottom_menu_table">
+				<tbody>
+					<tr>			
+					  <td ng-click="showHideBottomMenu('quick_layers')">Quick Layers</td>				
+					  <td ng-click="showHideBottomMenu('analysis')">Analysis</td>	
+					  <td ng-click="showHideBottomMenu('tools')">Tools</td>														
+					  <td ng-click="showHideBottomMenu('legends')">Legends</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		   
+		
+		<div id="quick_layers" class="quick_layers scrollbarX" style="display: block;">
+        <table>
+            <tr>
+                <td ng-if="item.visible && model_cyclone.Year=='Recent'" ng-repeat="item in iconList" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip="{{item.tooltip}}">
+    	            	<img ng-class="{clicked_button:item.active==true, unclicked_button:item.active==false}" id="{{item.name}}" ng-src="{{item.image}}" alt="cyclone-images">
+                	</md-button>
+                	</br>
+                	                <label>Gfs Winds</label>
+                </td>
+		 <td ng-if=" model_cyclone.Year=='Recent'" >
+
+		  <md-button aria-label="Aria Label" ng-click="showSCATImgInfo()"  id="CycloneInfo" uib-tooltip="SCAT Recent Image">
+                		
+    	            	<img id="CycloneInfo" ng-src="assets/img/scat_wind_2.png" alt="cyclone-images">
+                </md-button>
+                </br>
+                <label>SCAT Image</label>
+
+                </td>
+                <td>
+<!--                 <md-button type="submit" value="Cyclone Info"  ng-click='showCycloneInfo()' style='background-color: deepskyblue; width: /*119px*/ 278px;/*margin-left: 43px;*/ left: 30px; top: 0px; margin-top: 1px;height: 42px; font-size: 23px;'>Cyclone Info</md-button> -->
+                <md-button aria-label="Aria Label" ng-click="showCycloneInfo()" uib-tooltip="Cyclone Info">
+                		
+    	            	<img id="CycloneInfo" ng-src="assets/img/cyclone-icon.png" alt="cyclone-images">
+                </md-button>
+                </br>
+                <label>Cyclone Info</label>
+                </td>
+<!--                 <td ng-if="quickLayersNoBtn" id="quickLayersNoBtn">{{generalMessage.infoMsg.quickLayersNoBtn.message}}</td> -->
+          
+
+            </tr>           
+        </table>
+    </div>
+		
+		
+	<div id="tools" class="tools scrollbarX">
+        <table>
+            <tr>
+                <td ng-if="item.visible" ng-repeat="item in toolsBtnList" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip="{{item.tooltip}}">
+    	            	<img defer ng-class="{clicked_button:item.active==true, unclicked_button:item.active==false}" id="{{item.name}}" ng-src="{{item.image}}" alt="tools-btn">
+                	</md-button> 
+                	</br>
+                	<label>{{item.label}}</label>
+                </td>
+<!--                 <td ng-if="toolsNoBtn" id="toolsNoBtn">{{generalMessage.infoMsg.toolsNoBtn.message}}</td> -->
+            </tr>
+            
+
+        </table>
+    </div>
+    
+    <div id="analysis" class="analysis scrollbarX">
+        <table ng-if="scope.selectedLayer!=''">
+            <tr>
+                <td ng-if="item.visible" ng-repeat="item in analysisBtnList" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip="{{item.tooltip}}">
+    	            	<img defer ng-class="{clicked_button:item.active==true, unclicked_button:item.active==false}" id="{{item.name}}" ng-src="{{item.image}}" alt="analysis-btn">
+                	</md-button> 
+            	    </br>
+                <label>{{item.label}}</label>
+                </td>
+<!--                 <td ng-if="analysisNoBtn" id="analysisNoBtn">{{generalMessage.infoMsg.analysisNoBtn.message}}</td> -->
+            </tr>
+            <tr>
+            	<td></td>
+            	<td ng-if="item.visible && item.name=='Contours'" ng-repeat="item in analysisBtnList"> 
+            		
+            		<input ng-if="item.name=='Contours' && contours_status" type="text" id="threshold-value-contour" ng-value="satContour.Interval" size="2" class="regionThresholdInput" uib-tooltip="Threshold" tooltip-placement="bottom" ng-change="updateSelectedUserRangeSetting(satContour.Interval)" ng-model="satContour.Interval">
+            	</td>
+            	<td ng-if="item.visible && item.name=='RegionGrowing'" ng-repeat="item in analysisBtnList"> 	
+            		<input ng-if="item.name=='RegionGrowing'" type="text" id="threshold-value" ng-value="analysisBtnList[regionGrowingBtnIndex].thresholdvalue" size="2" class="regionThresholdInput" uib-tooltip="Threshold" tooltip-placement="bottom" ng-show="analysisBtnList[regionGrowingBtnIndex].active" ng-change="updateSelectedUserRangeSetting(selectedLayerTimeseries, 'user_selection')" ng-model="analysisBtnList[regionGrowingBtnIndex].thresholdvalue">
+            	</td>
+            </tr>
+        </table>
+    </div>
+
+	<div id="legends" class="legends scrollbarX">
+		  
+	
+		 <table>
+			<tr>
+				<td ng-if="layergrps.values_.title=='Overlay Layers' ||layergrps.values_.title=='INSAT-3D' || layergrps.values_.title =='Heat Content Anomaly'||layergrps.values_.title =='EOS-06 (SCAT)'" ng-repeat="layergrps in map.getLayers().array_ | orderBy:layergrps:true">
+					<table>
+						<tr>
+							<td ng-if="!noLegends && layers.values_.extraparams.legendAvailable" ng-repeat="layers in layergrps.getLayers().array_">
+ 							<!-- {{layers.values_.visible && layergrps.values_.visible}} --> 
+								<div id="legends_div" class="legends_div" ng-show="layers.values_.visible && layergrps.values_.visible">
+ 								<!-- {{layers.values_.extraparams.legendImgSrc}}  -->
+									<canvas id="{{layers.ol_uid}}">
+										<img defer ng-src="{{layers.values_.extraparams.legendImgSrc}}" onload="changeCssOfLegendDiv(this)" alt="legend-img">
+									</canvas><br/>
+									<select ng-if="layers.values_.extraparams.fixStyleLegend==true" aria-label="Aria Label" class="select-font-box-style" ng-model="legendStyle" ng-change="updateSelectedLayerLegend(layers,legendStyle)"  ng-options="option for option in layers.values_.extraparams.legendsStyleAvailable" aria-invalid="false" style="position: absolute; top: 3px; margin-left: 60px;">
+									</select>
+									<select ng-if="layers.values_.extraparams.fixStyleLegend==false" aria-label="Aria Label" class="select-font-box-style" ng-model="legendStyle_scat" ng-change="updateSelectedLayerLegendScat(layers,legendStyle_scat)"  ng-options="option for option in layers.values_.extraparams.legendsStyleAvailable" aria-invalid="false" style="position: absolute; top: 3px; margin-left: 60px;">
+									</select>
+								</div>
+							</td>
+								
+						</tr>
+					</table>
+				</td>
+				<td>
+						<div>
+									<center>
+								<img ng-src="/scorpio/assets/img/cyc_legend.png" onload="changeCssOfLegendDiv(this)" alt="legend-img" style="margin-bottom: 7px;">
+							</center>
+						</div>
+					</td>	
+			</tr>
+		</table> 
+	</div>	
+	
+	<div id="cyclone_track_quick">
+	</div>
+	
+	<div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="animationdiv" >
+		          <md-dialog  class="cyclone_info_class" aria-label="Mango (Fruit)">
+		              <div ng-cloak id="cyclone_info_id" style='background-color: #000000c9;'>
+      <form>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+            	<md-content class="md-padding" style="color:white;">
+
+                </md-content>
+                  </md-dialog-content>
+        
+        <md-dialog-actions layout="row" style="background-color: transparent;">
+        	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeCycloneInfo()"  style='background-color: cornflowerblue;'>Close</md-button>
+		</md-dialog-actions> 
+      </form>
+      </div>
+    </md-dialog>
+    
+                </div>
+		     
+    </div>
+	
+	 <div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="cyclone_Info_Id" >
+		          <md-dialog  class="cyclone_info_class" aria-label="Mango (Fruit)">
+		              <div ng-cloak id="cyclone_info_id" style='background-color: #000000c9;'>
+      <form>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+          <md-tabs md-dynamic-height md-border-bottom>
+            
+            <md-tab ng-repeat="tab in tabs" label="{{tab.title}}">
+            	<md-content class="md-padding" style="color:white;">
+            	<div ng-if="tab.title=='Center'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneCenter).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneCenter for cycloneCenter in returnObjectKeys(selectedCycloneCenter)" ng-model="currentSelectedCyclone.Center"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneCenter).length!=0" defer ng-src="{{selectedCycloneCenter[currentSelectedCyclone.Center]}}" loading="lazy" style="/*max-width:100%; max-height: 100%;*/ width: 78vw; height: 60vh;  display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneCenter).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="/*max-width:100%; max-height: 100%;*/  width: 78vw; height: 60vh; display: block;" alt="cyclone-images"></img>
+                	
+            	</div>
+            	
+            	<div ng-if="tab.title=='Animation'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneAnimation).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneAnimation for cycloneAnimation in returnObjectKeys(selectedCycloneAnimation)" ng-model="currentSelectedCyclone.Animation"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneAnimation).length!=0" defer ng-src="{{selectedCycloneAnimation[currentSelectedCyclone.Animation]}}" loading="lazy" style="max-width:100%; max-height: 100%;/*width: 78vw; height: 60vh;*/ display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneAnimation).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>
+            	
+            	<div ng-if="tab.title=='Cyclone Centric Images'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneCenteric).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneCenteric for cycloneCenteric in returnObjectKeys(selectedCycloneCenteric)" ng-model="currentSelectedCyclone.Centeric"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneCenteric).length!=0" defer ng-src="{{selectedCycloneCenteric[currentSelectedCyclone.Centeric]}}" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneCenteric).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>
+            	
+            	<div ng-if="tab.title=='Intensity'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneIntensity).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneIntensity for cycloneIntensity in returnObjectKeys(selectedCycloneIntensity)" ng-model="currentSelectedCyclone.Intensity"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneIntensity).length!=0" defer ng-src="{{selectedCycloneIntensity[currentSelectedCyclone.Intensity]}}" loading="lazy" style="max-width:100%; max-height: 100%;  display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneIntensity).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>
+            	
+            	<div ng-if="tab.title=='Inundation'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneInundation).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneInundation for cycloneInundation in returnObjectKeys(selectedCycloneInundation)" ng-model="currentSelectedCyclone.Inundation"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneInundation).length!=0" defer ng-src="{{selectedCycloneInundation[currentSelectedCyclone.Inundation]}}" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneInundation).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>
+            	
+            	<div ng-if="tab.title=='Landfall'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneLandfall).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneLandfall for cycloneLandfall in returnObjectKeys(selectedCycloneLandfall)" ng-model="currentSelectedCyclone.Landfall"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneLandfall).length!=0" defer ng-src="{{selectedCycloneLandfall[currentSelectedCyclone.Landfall]}}" loading="lazy" style="max-width:100%; max-height: 100%;  display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneLandfall).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>
+					
+				<div ng-if="tab.title=='Cyclogenesis'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneCycloGenesis).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneCycloGenesis for cycloneCycloGenesis in returnObjectKeys(selectedCycloneCycloGenesis)" ng-model="currentSelectedCyclone.CycloGenesis"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneCycloGenesis).length!=0" defer ng-src="{{selectedCycloneCycloGenesis[currentSelectedCyclone.CycloGenesis]}}" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneCycloGenesis).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>	
+            	
+				<div ng-if="tab.title=='Ship Avoidance Region'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneShipAvoidance).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneShipAvoidance for cycloneShipAvoidance in returnObjectKeys(selectedCycloneShipAvoidance)" ng-model="currentSelectedCyclone.ShipAvoidance"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneShipAvoidance).length!=0" defer ng-src="{{selectedCycloneShipAvoidance[currentSelectedCyclone.ShipAvoidance]}}" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneShipAvoidance).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>	
+			
+				<div ng-if="tab.title=='Surge'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneSurge).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneSurge for cycloneSurge in returnObjectKeys(selectedCycloneSurge)" ng-model="currentSelectedCyclone.Surge"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneSurge).length!=0" defer ng-src="{{selectedCycloneSurge[currentSelectedCyclone.Surge]}}" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneSurge).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style=" width: 78vw; height: 60vh; display: block;" alt="cyclone-images"></img>
+            	</div>			
+					
+				<div ng-if="tab.title=='Track'">
+	            	<div style="text-align: center;">
+	            	<select ng-show="returnObjectKeys(selectedCycloneTrack).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+	           	    ng-options="cycloneTrack for cycloneTrack in returnObjectKeys(selectedCycloneTrack)" ng-model="currentSelectedCyclone.Track"></select>
+	           	    </div>
+            		
+                	<img ng-show="returnObjectKeys(selectedCycloneTrack).length!=0" defer ng-src="{{selectedCycloneTrack[currentSelectedCyclone.Track]}}" loading="lazy" style="max-width:100%; max-height: 100%;  display: block;" alt="cyclone-images"></img>
+                	<img ng-show="returnObjectKeys(selectedCycloneTrack).length==0" defer ng-src="Images/NoImage.jpg" loading="lazy" style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+            	</div>		
+				
+                </md-content>
+            </md-tab> 
+                  </md-dialog-content>
+        
+        <md-dialog-actions layout="row" style="background-color: transparent;">
+        	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeCycloneInfo()"  style='background-color: cornflowerblue;'>Close</md-button>
+		</md-dialog-actions> 
+      </form>
+      </div>
+    </md-dialog>
+    
+                </div>
+		     
+    </div>
+
+	<div style="visibility: hidden">    
+		    <div class="md-dialog-container" id="scatinfoimg" >
+		     <md-dialog  class="cyclone_info_class" aria-label="Mango (Fruit)">
+		     	  <div ng-cloak id="cyclone_info_id" style='background-color: #000000c9;'>
+		     	   <form>
+		     	   	<md-dialog-content style="max-width:800px;max-height:810px; ">
+		     	   	
+          				<md-tabs md-dynamic-height md-border-bottom>
+          			          <md-tab ng-repeat="tab in scattabs" label="{{tab.title}}">
+                <md-content class="md-padding" style="color:white;">
+                <div ng-if="tab.title=='EOS-06 SCAT ARB'">
+                        <div style="text-align: center;font-size:13px;">
+                        <select ng-show="returnObjectKeys(selectedARB).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+                            ng-options="scatarb for scatarb in returnObjectKeys(selectedARB)" ng-model="currentSelectedCyclone.ARB"></select>
+                            </div>
+
+                        <img ng-show="returnObjectKeys(selectedARB).length!=0" defer ng-src="{{selectedARB[currentSelectedCyclone.ARB]}}"  style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                        <img ng-show="returnObjectKeys(selectedARB).length==0" defer ng-src="Images/NoImage.jpg"  style="/*max-width:100%; max-height: 100%;*/  width: 78vw; height: 60vh; display: block;" alt="cyclone-images"></img>
+
+                </div>
+
+                <div ng-if="tab.title=='EOS-06 SCAT BOB'">
+                        <div style="text-align: center;font-size:13px;">
+                        <select ng-show="returnObjectKeys(selectedBOB).length!=0" class="ng-pristine ng-valid ng-scope ng-not-empty ng-touched" aria-label="Aria Label"
+                            ng-options="scatBOB for scatBOB in returnObjectKeys(selectedBOB)" ng-model="currentSelectedCyclone.BOB"></select>
+                            </div>
+
+                        <img ng-show="returnObjectKeys(selectedBOB).length!=0" defer ng-src="{{selectedBOB[currentSelectedCyclone.BOB]}}"  style="max-width:100%; max-height: 100%;/*width: 78vw; height: 60vh;*/ display: block;" alt="cyclone-images"></img>
+                        <img ng-show="returnObjectKeys(selectedBOB).length==0" defer ng-src="Images/NoImage.jpg"  style="max-width:100%; max-height: 100%; display: block;" alt="cyclone-images"></img>
+                </div>
+		
+                                    <!--         <md-tab label="EOS-06 SCAT ARB">
+          						<md-content class="md-padding" style="color:white;">
+          						<img src="Images/SCAT/E06SCTL2B_Latest_ARB.jpg" style="max-width:100%; max-height: 100%;"/>
+          						</md-content>
+          					</md-tab>
+          					<md-tab label="EOS-06 SCAT BOB">
+          						<md-content class="md-padding" style="color:white;">
+          						<img src="Images/SCAT/E06SCTL2B_Latest_BOB.jpg"  style="max-width:100%; max-height: 100%;"/>
+          						</md-content>
+						</md-tab> -->
+          					
+          				</md-tabs>
+          			</md-dialog-content>
+          			<md-dialog-actions layout="row" style="background-color: transparent;">
+        	<md-button class="range_table_button" aria-label="Aria Label" ng-click="closeCycloneInfo()"  style='background-color: cornflowerblue;'>Close</md-button>
+		</md-dialog-actions>	
+		     	   </form>
+		     	  </div>
+		     </md-dialog>
+		     
+		    </div>
+     </div>
+
+
+
+		<div style="visibility: hidden">    
+    	<div class="md-dialog-container" id="summaryInfoId">
+        	<md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+            	<div ng-cloak id="summary_info_id" style="display:none;">
+      				<form>
+        				        
+        				<md-dialog-actions layout="row" style="background-color: transparent;">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSummaryInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		</md-dialog> 
+         </div>
+	
+	 <div class="md-dialog-container" id="siteInfoId">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="site_info_id" style="display:none;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px;color: antiquewhite ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+            					<md-tab label="About">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p>
+								 SCORPIO (Satellite Based Cyclone Observation and Real-time Prediction over Indian Ocean) is a WebGIS based Cyclone Information System. Accurate and timely advance prediction of tropical cyclones is very important to disseminate the warnings and preparedness. Prediction of development of any cyclone system in the North Indian Ocean is being done at Space Applications Centre (ISRO) Ahmedabad, using the in-house developed algorithms. Once the low-pressure system is formed, it is continuously monitored by satellite observations. The forecasts like cyclogenesis, track, intensity and landfall of cyclones, ship avoidance region, storm surge, coastal inundation etc. and satellite based cyclone information are disseminated through web-portal SCORPIO.
+
+                						</p>
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Disclaimer">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p>
+This is an experimental forecast. This information is to be used along with other reliable data sources for interpretation. SAC/ISRO/MOSDAC should not be made responsible for any loss or damage incurred.
+The information is provided on best effort basis and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the absolute accuracies of information, data products, services, or related graphics contained on the website for any purpose unless and until explicitly mentioned.
+In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website. The maps are only for gross indication of locations. Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</br>
+Developed & Maintained By: DWD/SAC/ISRO.</p> 
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Credits">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p>
+									 Credits for following information/layers/data used in this website is dually acknowledged
+                                                                                        </br>
+                                                                                        * Bhuvan Layer: NRSC, Hyderabd (www.nrsc.gov.in)
+                                                                                        </br>
+                                                                                        * OpenStreetMap: @OpenStreetMap Contributors (www.openstreetmap.org/copyright)
+                                                                                        </br>
+                                                                                        * True Marble: Unearthed Outdoors, LLC
+                                                                                        </br>
+                                                                                        * India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in)
+                                                                                        </br>
+                                                                                        * FORECAST Data : AOSG/SAC
+
+								</p>
+              						</md-content>
+            					</md-tab>
+          					</md-tabs>
+        				</md-dialog-content>
+        
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>
+	
+   </div>
+	
+
+         
+
+   </div>
+	
+	<div id="popup" class="ol-popup">
+		<!--		<a href="#" id="popup-closer" class="ol-popup-closer"></a> -->
+		  <button type='button' id="popup-closer" class="ol-popup-closer">Close</button>
+		<div id="popup-content"></div>
+	</div>
+	
+		<!-- CONTROLLER JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/controllers/controller.js?v=1.0"></script>
+		<!-- CONTROLLER JAVASCRIPT END -->
+		
+		<!-- SERVICES JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/services/service_temp.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_displaymap.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_display_date.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_startgrplayers.js?v=1.0"></script>
+	    <script defer type="application/javascript" src="source/services/service_quickAccess.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_measure.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_analysis.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_addanimation.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_panelSettingService.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_handleEvent.js?v=1.0"></script>		
+		<script defer type="application/javascript" src="source/services/service_json_response.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_variable_declaration.js?v=1.0"></script>
+		
+		<!-- SERVICES JAVASCRIPT START -->
+	</body>
+</html>

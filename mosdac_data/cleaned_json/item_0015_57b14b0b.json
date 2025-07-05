@@ -1,0 +1,18 @@
+{
+  "title": "Soil Moisture Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "Data Access Click Here to access the Science Products . Request to use MOSDAC Single Sign On user credentials to download the data. Data Version Version 1.0 (beta) Data Sources SMAP L-band radiometer data Processing Steps Following are the three major processing steps : i. SMAP L1C daily data. ii. Import previous 3 days data iii. Generate global mosaic of Tb iv. Generate Indian mosaic of Tb v. Generate SWI from Tb and gridding the data Derivation Techniques and Algorithm Soil Wetness Index (SWI) is derived using a time series based methodology using SMAP L-band radiometer data, normalized to the extreme values of 0 and 1, corresponding to the dry and saturated soil wetness conditions respectively. File Naming Convention The Geotiff file names follows naming convention; Soil Wetness Index file: SWI_SMAP_I_YYYYMMD1_YYYYMMD2.tif SWI : Soil Wetness Index SMAP : Soil Moisture Active Passive I : India YYYY : Year MM : Month D1 : Start Date D2 : End Date Soil Moisture file : SWI_SMAP_I_YYYYMMD1_YYYYMMD2.tif SWI : Soil Moisture SMAP : Soil Moisture Active Passive I : India YYYY : Year MM : Month D1 : Start Date D2 : End Date MetaData Sr. No Core Metadata Elements Definition 1 Metadata language English 2 Metadata Contact MOSDAC 3 Metadata date April, 2015 4 Data Lineage or Quality Soil Wetness Map derived using SMAP L-band Radiometer data 5 Title Soil Wetness Index. 6 Abstract Soil Wetness Index (SWI) is derived using a time series based methodology using SMAP L-band radiometer data, normalized to the extreme values of 0 and 1, corresponding to the dry and saturated soil wetness conditions respectively. 7 Dataset Contact Dharmendra Kumar Pandey, Sasmita Chaurasia, EPSA, Space Applications Centre (ISRO), Ahmedabad-380015, dkp sac.isro.gov.in , sasmita sac.isro.gov.in 8 Update frequency 3 day composite 9 Access Rights or Restriction Open Access 10 Spatial Resolution 40 km (resampled at 0.125 degrees) 11 Language English 12 Topic Category Land 13 Keywords Soil Wetness Index, SMAP. SWI, Soil Moisture Active Passive 14 Date or period April 2015 15 Responsible Party Dharmendra Kumar Pandey,EPSA, Space Applications Centre (ISRO), Ahmedabad-380015, India 16 Organization Space Applications Centre (ISRO), Ahmedabad, India 16a Org. role Geophysical parameters retrieval from satellite 16b Individual name Dharmendra Kumar pandeyEPSA, SAC (ISRO), Ahmedabad-380015, India. Ph: 91 79 2691 4005. Email: dkp sac.isro.gov.in 16c Position Scientist/Engineer, EPSA, SAC (ISRO), Ahmedabad-380015, India. Ph: 91 79 2691 4005. Email: dkp sac.isro.gov.in 17 Geographic Extent Indian Land mask 18 Geographic name, geographic Identifier Indian Region 19 Bounding box lat_min: 05N, lat_max: 24N, lon_min: 68E, lon_max: 90E 20 Temporal Extent April 2015 onwards 21 Access Rights or Restrictions Open Access 22 Distribution Information Online download in Geotiff format. 23 Processing Level Level 2 24 Reference System Datum: WGS84 Tags: Opendata Land",
+  "source_url": "https://www.mosdac.gov.in/soil-moisture-0",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "temperature",
+      "satellite",
+      "ocean",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.084938"
+  }
+}

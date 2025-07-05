@@ -1,0 +1,10 @@
+{
+  "find_all_satellites": "MATCH (s:Satellite) RETURN s.name, s.confidence LIMIT 10",
+  "find_satellite_sensors": "\n                MATCH (satellite:Satellite)<-[:INSTALLED_ON]-(sensor:Sensor)\n                RETURN satellite.name, collect(sensor.name) as sensors\n                LIMIT 5\n            ",
+  "find_monitoring_relationships": "\n                MATCH (entity1)-[:MONITORS]->(entity2)\n                RETURN entity1.name, entity2.name, 'monitors' as relationship\n                LIMIT 10\n            ",
+  "find_data_providers": "\n                MATCH (provider)-[:PROVIDES]->(data)\n                RETURN provider.name, data.name, 'provides' as relationship\n                LIMIT 10\n            ",
+  "find_entity_by_name": "\n                MATCH (e:Entity)\n                WHERE e.name CONTAINS $search_term\n                RETURN e.name, e.type, e.confidence\n                LIMIT 10\n            ",
+  "find_shortest_path": "\n                MATCH path = shortestPath((a:Entity {name: $start})-[*]-(b:Entity {name: $end}))\n                RETURN path\n            ",
+  "get_entity_neighbors": "\n                MATCH (e:Entity {name: $entity_name})-[r]-(neighbor)\n                RETURN neighbor.name, type(r) as relationship, r.confidence\n                LIMIT 20\n            ",
+  "find_high_confidence_triples": "\n                MATCH (a)-[r]->(b)\n                WHERE r.confidence > 0.8\n                RETURN a.name, type(r), b.name, r.confidence\n                ORDER BY r.confidence DESC\n                LIMIT 20\n            "
+}

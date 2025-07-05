@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="theme-color" content="#317EFB"/>
+	    <meta name="Description" CONTENT="Author: Mosdac, Illustrator: Satellite Images, Category: Scientific Spatial Data">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes, width=device-width">
+		
+		<title></title>
+		
+		<link rel="canonical" href="https://localhost/currentevent_hr">
+	<link rel="preconnect" href="https://localhost/currentevent_hr">
+		
+		<link rel="icon" href="assets/img/logo-transparent.png" type="image/gif" sizes="16x16">
+		<link rel="manifest" href="source/jsons/manifest.json?v=1.0">
+		
+		<!-- CSS LINKS START -->
+		<link rel="stylesheet" href="source/css/angular/angular-csp.css?v=1.0" />
+		<link rel="stylesheet" href="source/css/angular/angular-material.min.css?v=1.0" />
+		<link rel="stylesheet" href="source/css/bootstrap/bootstrap.min.css?v=1.0" />
+		<link rel="stylesheet" href="source/css/ol/ol.css?v=1.0" />
+		<link rel="stylesheet" href="source/css/ui-listView/ui-listView.css?v=1.0" />
+		<!--link rel="stylesheet" href="source/css/angularjs-slider/rzslider.min.css?v=1.0" /-->
+		
+	    <link rel="stylesheet" href="source/css/font-awesome.min.css?v=1.0" />
+	    <link rel="stylesheet" href="source/css/angular/angular-datepicker.css?v=1.0" />
+		
+	    <link rel="stylesheet" href="source/css/custom.css?v=1.0" />
+		<!-- CSS LINKS END -->
+		
+		<!-- LIB JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/js/angular/angular.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-animate.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-aria.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-datepicker.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-messages.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-material.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-touch.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/jquery/jquery-3.6.0.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/bootstrap/bootstrap.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/ui-listView/ui-listView.min.js?v=1.0"></script>
+		<!--script defer type="application/javascript" src="source/js/angular-filter/angular-filter.min.js?v=1.0"></script-->
+		<!--script defer type="application/javascript" src="source/js/angularjs-slider/rzslider.min.js?v=1.0"></script-->
+		<script defer type="application/javascript" src="source/js/ol/ol.js?v=1.0"></script>
+		<!-- LIB JAVASCRIPT END -->
+		
+		<!-- LIB JAVASCRIPT EXTRA START -->
+	
+		<script defer type="application/javascript" src="source/js/xml2json/xml2json.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-route.min.js?v=1.0"></script>		
+		<script defer type="application/javascript" src="source/js/angular/angular-resource.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-cookies.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-sanitize.min.js?v=1.0"></script>
+	<!-- 	<script type="application/javascript" src="source/js/angular/angular-mocks.js?v=1.0"></script> --> <!-- GET REQUEST ERROR DUE TO TESTING ROUTINES -->
+	
+		<script defer type="application/javascript" src="source/js/angular/angular-loader.min.js?v=1.0"></script>	 <!-- DEFINE AT TOP -->
+		<script defer type="application/javascript" src="source/js/angular/angular-message-format.min.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/js/angular/angular-parse-ext.min.js?v=1.0"></script>
+		<!-- LIB JAVASCRIPT EXTRA END -->
+
+
+	<style type="text/css">
+
+		 md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+    color: #fff !important;
+/*    background-color: rgba(40,40,40,.5);*/
+    
+   
+}
+
+		 .box{
+                width: 100%;
+                display: block;
+                padding:3px;
+                clear: both;
+            }
+            
+            
+           table1{
+           
+           	border : 1px solid;
+           }
+            
+            
+		</style>
+
+		
+	</head>
+	<body ng-app="app" ng-controller="controller" id="map">
+	
+		<div only_resizable class="titlemenu">
+		 <table>
+	            <tr>
+	                <td>
+	    	            <img width="150" align="center" alt="mosdac logo" src="assets/img/transparent_mosdac_rapid.png" style="margin-top: -19px;"/>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td calss="application-name">
+	    	            <label ng-cloak class="title ng-cloak">{{applicationName}}</label>
+	    	            </br>
+	    	            <lable class="title ng-cloak" >Rainfall (mm): {{datetime}} GMT</lable>
+	    	           
+	    	            
+	                </td>
+	               <td>
+	               <div class="ol-unselectable ol-control" style="position: absolute; top: /*0*/-4px; padding-left: 3px;">
+           			<button type="button" title="Info" ng-click="siteInfo()" style="background-color: transparent;margin:auto;margin-left:-1px;margin-top: -4px;">
+                		<md-icon class="ol-info" aria-label="" md-svg-src="assets/img/ic_info_24px.svg" style="margin-left:-274px;height: 1.375em; width: 1.375em; line-height: .4em; background-color: transparent;" role="img">
+						</md-icon>
+            		</button>
+        			</div>
+	               </td>
+	            </tr>
+	         
+	        </table>
+	    </div>
+	    
+	  
+	     <span id="side_btn" class="sidebar_btn">
+	        <table>
+	            <tr>
+	                <td>	
+	                    <md-button aria-label="Aria Label" ng-cloak class="ng-cloak md-fab panel-show-hide-btn" ng-click="openCloseNav()" style="top: 1px;">    
+	                    	<md-icon md-svg-src="{{hideDivIconSideBtn()}}"></md-icon>
+	                    </md-button>
+	                </td>  
+	            </tr>
+	            <tr>
+	            </tr>
+	        </table>
+	    </span> 
+	    
+	    <div id="sidenav" class="sidenav1 scrollbar" style=" top: 92px;">
+
+			<md-content layout-padding layout="column" class="md_content_custom">
+			 
+			 <md-button aria-label="Aria Label" class="summaryBtn" ng-click="summaryInfo()">    
+                	Current HeavyRain
+                </md-button>
+			   <br>
+				
+	    		<div ng-if="layergrps.values_.extraparams.sidepanelEntry" ng-repeat="layergrps in map.getLayers().array_ | orderBy:layergrps:true" class="first_side_menu_div"><!-- | orderBy:propertyName:reverse -->
+	    			<div class="layer-display ng-scope">
+	        			<md-checkbox ng-if="layergrps.values_.extraparams.checkbox" ng-model="layergrps.values_.visible" flex="80" ng-click="layergrps.changed();removeLayer();" class="layer-title-checkbox" aria-label={{layergrps.values_.title}}></md-checkbox><!-- ng-change=layergrps.setVisible(layergrps.values_.visible); Can Be Used-->
+	        			{{layergrps.values_.title}}
+	        			
+	        			<span ng-show="layergrps.values_.visible">
+							<md-button aria-label="Aria Label" class="collapse-btn" ng-if="layergrps.values_.extraparams.collapsable" ng-click="map.collapseLayers(layergrps)">    
+	                    		<!--md-icon md-svg-src="img/ic_delete_black_24px.svg"></md-icon-->
+	                    		<i ng-if="!layergrps.values_.extraparams.collapsestate" class="{{layergrps.values_.extraparams.collapse_open_img_icon_class}} collapseBtn" ng-click="layergrps.values_.extraparams.collapsestate=!layergrps.values_.extraparams.collapsestate"></i>
+	                    		<i ng-if="layergrps.values_.extraparams.collapsestate" class="{{layergrps.values_.extraparams.collapse_close_img_icon_class}} collapseBtn" ng-click="layergrps.values_.extraparams.collapsestate=!layergrps.values_.extraparams.collapsestate"></i>
+	                    	</md-button>
+	        			
+	        				<md-button aria-label="Aria Label" class="reset-btn" ng-if="layergrps.values_.extraparams.reset" ng-click="addDefaultGroupLayerToMap(layergrps)">
+	                    		<md-icon md-svg-src="assets/img/ic_rotate_left_48px.svg" class="reset-btn-icon"></md-icon>
+	                    	</md-button>
+	                    
+	        				<md-button aria-label="Aria Label" class="delete-btn" ng-if="layergrps.values_.extraparams.delete" ng-click="map.removeLayer(layergrps)">    
+	                    		<md-icon md-svg-src="assets/img/ic_delete_black_24px.svg"></md-icon>
+	                    	</md-button>
+	                    
+	                    	<input flex="20" type="range" min="0" max="1" step="0.01" ng-if="layergrps.values_.extraparams.slider" ng-model="layergrps.values_.opacity" ng-change="layergrps.changed()" uib-tooltip="Layer Opacity" class="ng-pristine ng-untouched ng-valid ng-empty flex-20 slider-bar" aria-invalid="false" aria-valuemin="0" aria-valuemax="1"><!-- ng-change=layergrps.setOpacity(layergrps.values_.opacity); Can Be Used -->
+	        			</span>
+	    			</div>
+	    			<div ng-show="layergrps.values_.visible && !layergrps.values_.extraparams.collapsestate" class="selection-div" ng-class="{'selection-margin':layergrps.values_.title=='Layers'}">
+	    				<md-radio-group ng-if="layergrps.values_.extraparams.radioSelect" ng-model="layergrps.values_.extraparams.radioBtnSelect" ng-change="radioSelect(layergrps)" layout="row" class="color-text">
+						  <label class="selection-label">Selection:-</label>
+	                      <md-radio-button value="Single Select">Single</md-radio-button>
+	                      <md-radio-button value="Multiple Select">Multiple</md-radio-button>
+	                    </md-radio-group>
+	    			</div>
+	        		<div ng-show="layergrps.values_.visible && !layergrps.values_.extraparams.collapsestate" ng-repeat="layers in layergrps.getLayers().array_" class="color-text" ng-class="{'layers-div':layergrps.values_.title=='Layers'}">
+	        			<div ng-if="layers.values_.extraparams.sidepanelEntry">
+	        				<md-checkbox aria-label="Aria Label" ng-if="layers.values_.extraparams.checkbox" ng-model="layers.values_.visible" flex="80" ng-click="layers.getSource().changed(); radioSelectCallFunc(layergrps,layers)"></md-checkbox><!-- ng-change=layers.setVisible(layers.values_.visible); Can Be Used -->
+	            			<!-- {{layers.values_.title}}  -->
+	            			<span ng-show="!layers.values_.extraparams.multipleband">{{layers.values_.title}}</span>
+	            			<select aria-label="Aria Label" class="select-font-box-style select-band-width" ng-show="layers.values_.extraparams.multipleband" ng-model="layers.values_.extraparams.selectedband" ng-change="updateSelectedLayerBand(layers)"  ng-options="option.displayname for option in layers.values_.extraparams.bands.list" aria-invalid="false">
+	            			
+	            			</select>
+	            			
+	            			<span ng-show="layers.values_.visible">
+	            				 <md-button aria-label="Aria Label" class="delete-btn" ng-if="layers.values_.extraparams.delete" ng-click="layergrps.values_.layers.remove(layers)">    
+	                    			<md-icon md-svg-src="assets/img/ic_delete_black_24px.svg"></md-icon>
+	                    		</md-button> 
+	                    	
+	                    		<input flex="20" type="range" min="0" max="1" step="0.01" ng-if="layers.values_.extraparams.slider" ng-model="layers.values_.opacity" ng-change="layers.getSource().changed()" uib-tooltip="Layer Opacity" class="ng-pristine ng-untouched ng-valid ng-empty flex-20 slider-bar" aria-invalid="false" aria-valuemin="0" aria-valuemax="1"><!-- ng-change=layers.setOpacity(layers.values_.opacity); Can Be Used -->
+	                    	
+	                    		<div ng-if="layers.values_.extraparams.timeSelect">
+	                    			{{layers.values_.extraparams.selectedTimeObj.sensorSatellite}}
+	<!--                     		<select aria-label="Aria Label"  ng-model="layers.values_.extraparams.selectedTimeObj" ng-change="updateSelectedLayerTime(layers)" ng-value="option" ng-options="option.localDateTime for option in layers.values_.extraparams.FileList" aria-invalid="false" class="form-control ng-pristine ng-valid ng-scope ng-not-empty ng-touched"> -->
+	<!-- <select aria-label="Aria Label"  ng-model="layers.values_.extraparams.selectedTimeObj" ng-change="updateSelectedLayerTime(layers)" ng-value="option" ng-options="option.localDateTime for option in layers.values_.extraparams.FileList" aria-invalid="false"> -->
+									<select aria-label="Aria Label" class="select-font-box-style select-datetime-width" ng-model="layers.values_.extraparams.selectedTimeObj" ng-change="updateSelectedLayerTime(layers)"  ng-options="option.gmtDateTime for option in layers.values_.extraparams.FileList" aria-invalid="false">
+	                    			
+	                    			</select>
+	                    		</div>
+	            			</span>
+	            			
+	            			
+	        			</div>
+	        		</div> 
+	    		</div>
+	    		
+			</md-content>
+			<md-content  layout-padding layout="column" class="md_content_custom">
+			
+			<lable style="font-size: larger; color: rgb(255 255 255 / 87%); margin-top: -48px; font-weight: bold; margin-left: 23px;">Previous Forecast/Events</lable>
+			
+			
+			   <md-input-container    style="margin-left: -8px;margin-top: -42px;">
+				     <div class="input-group" layout="row" style="margin-top: 75px;">
+					      <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> Select Date: </label>
+                <md-datepicker ng-model="start_date"    md-placeholder="Enter Date"  md-max-date="maxDate" md-date-filter="dateFilter"  ng-change="gettime(start_date)" md-open-on-focus id="sdate"
+                        style="width: 158px; text-transform: capitalize; margin-left: 111px; margin-top: -35px; font-style: normal;"></<md-datepicker>
+        </div>
+
+				 <!-- <datepicker date-format="dd-MM-yyyy"  selector="form-control" date-set="" date-max-limit="{{dateformate}}" button-prev-title="previous month" button-next-title="next month">
+				   <div class="input-group" layout="row" style="margin-top: 75px;">
+				 <label style="color:white;font-size:x-large;font-weight: bolder;left: -4px;"> Select Date: </label>
+	<input style="width: 158px; text-transform: capitalize; margin-left: 111px; margin-top: -35px; font-style: normal;  background-color: rgb(255, 255, 255);
+	    color: rgb(0, 0, 0);" ng-model="start_date" class="form-control" placeholder="Choose date" id="sdate" ng-change="gettime()"  readOnly="true"/> 
+	                   </div>
+				 </datepicker> -->
+	           </md-input-container>
+	           
+			    <div class="input-group" layout="row" ng-if="timeshow" style="margin-left: -10px;margin-top: -44px;">
+			    <label style="color:white;font-size:large;font-weight: bolder;left: -4px;"> Select Time(GMT): </label>
+			    <select ng-model="timeselected"  ng-options=" t for t in time"   ng-init="timeselected=time[0]" ></select>			   
+			     <center>
+					<md-button  style="background-color:#0d6efd;color:#FFFFFF;margin-top: 17px; margin-left: 88px;"  ng-click="getpreviousdata(timeselected)">Submit</md-button> 				
+	            </center>
+			     </div>
+					          		
+			</md-content> 
+		</div>
+		
+		
+		
+	
+
+		<div id=bottom_menu" class="bottom_menu">
+			<table class="bottom_menu_table">
+				<tbody>
+					<tr>				
+						<td ng-click="showHideBottomMenu('tools')">Tools</td>									
+ 						<td ng-click="showHideBottomMenu('analysis')">Analysis</td> 
+						<td ng-click="showHideBottomMenu('legends')">Legends</td> 
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	<div id="tools" class="tools scrollbarX">
+        <table>
+            <tr>
+                <td ng-if="item.visible" ng-repeat="item in toolsBtnList" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip="{{item.tooltip}}">
+    	            	<img ng-class="{clicked_button:item.active==true, unclicked_button:item.active==false}" id="{{item.name}}" ng-src="{{item.image}}">
+                	</md-button> 
+                </td>
+                <td ng-if="toolsNoBtn" id="toolsNoBtn">{{generalMessage.infoMsg.toolsNoBtn.message}}</td>
+            </tr>
+            <!-- tr>
+            	<td ng-repeat="item in icon_list"> 		
+            	</td>
+            </tr-->
+        </table>
+    </div>
+    
+    <div id="analysis" class="analysis scrollbarX">
+        <table>
+            <tr>
+                <td ng-if="item.visible" ng-repeat="item in analysisBtnList" ng-cloak>
+                    <md-button aria-label="Aria Label" ng-click="handleEvent(item)" uib-tooltip="{{item.tooltip}}">
+    	            	<img ng-class="{clicked_button:item.active==true, unclicked_button:item.active==false}" id="{{item.name}}" ng-src="{{item.image}}">
+                	</md-button> 
+                </td>
+                <td ng-if="analysisNoBtn" id="analysisNoBtn">{{generalMessage.infoMsg.analysisNoBtn.message}}</td>
+            </tr>
+            <tr>
+            	<td ng-if="item.visible" ng-repeat="item in analysisBtnList"> 	
+            		<input ng-if="item.name=='RegionGrowing'" type="text" id="threshold-value" ng-value="analysisBtnList[regionGrowingBtnIndex].thresholdvalue" size="2" class="regionThresholdInput" uib-tooltip="Threshold" tooltip-placement="bottom" ng-show="analysisBtnList[regionGrowingBtnIndex].active" ng-change="updateSelectedUserRangeSetting(selectedLayerTimeseries, 'user_selection')" ng-model="analysisBtnList[regionGrowingBtnIndex].thresholdvalue">
+            	</td>
+            </tr>
+        </table>
+    </div>
+
+
+	
+	<div id="legends"  class="legends scrollbarX">
+		<table>
+			<tr ng-if="layergrps.values_.title=='Rainfall'" ng-repeat="layergrps in map.getLayers().getArray() | orderBy:layergrps:true">
+				<td ng-if="noLegends" id="noLegends">{{generalMessage.infoMsg.noLegends.message1}}</td>
+				<td ng-if="layers.values_.extraparams.legendAvailable" ng-repeat="layers in layergrps.getLayers().getArray()">
+					<div id="legends_div" class="legends_div" ng-show="layers.get('visible') && layergrps.get('visible')">
+						<canvas id="{{layers.ol_uid}}" width="300" height="100">
+							<img ng-src="{{layers.values_.extraparams.legendImgSrc}}" onload="changeCssOfLegendDiv(this)">
+						</canvas>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	    
+
+	
+
+	<div style="visibility: hidden">    
+    	
+    	
+    	 	<div class="md-dialog-container" id="summaryInfoId">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="summary_info_id" style="display:none;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px; ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+            					
+            					<md-tab label="District View">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+              						<p><center style="font-style: oblique;color: cornsilk;">DISTRICTS HAVING HIGH RAIN(>5mm/h)</center></p>
+              						
+                						 <div id="table1">
+                							<table class="table" style="width: 100%;margin-bottom: 1rem;color: rgb(255 204 188);">
+                							<thead>
+                							<tr>
+                							<th>District Name</th>
+                							<th>Met-subdivision</th>
+                							<th>Rain(mm/h)</th>
+                							</tr>
+                							</thead>
+                							<tbody>
+                							<tr ng-repeat="item in list" >
+                							<td ng-repeat="item1 in item.split(',')">{{item1}}</td>
+                							</tr>
+                							</tbody>
+                							</table>
+                						</div>
+                					
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Area View">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p><center  style="font-style: oblique;color: cornsilk;"> AREA HAVING HIGH RAIN(>10mm/h)</center></p>
+                							 <div id="table2">
+                							<table class ="table" style="width: 100%;margin-bottom: 1rem;color: rgb(255 204 188);">
+                							<thead>
+                							<tr>
+                							<th>Area(Km*2)</th>
+                							<th>Highest Rain(mm/h)</th>
+                							<th>Lat/Long</th>
+                							</tr>
+                							</thead>
+                							<tbody>
+                							<tr ng-repeat="item_t2 in t2list">
+                							<td ng-repeat="item1_t2 in item_t2.split(',')">{{item1_t2}}</td>
+                							</tr>
+                							</tbody>
+                							</table>
+                						</div>
+              						</md-content>
+            					</md-tab>
+          					</md-tabs>
+        				</md-dialog-content>
+        
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>
+    	
+    	
+    	<div class="md-dialog-container" id="prevRainMap">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="prev_Rain" style="display:none;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px; ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+            					<md-tab label="Heavy Rain Map">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+              						
+                						<img src={{image}}  style="width: 500px;height:500px"/>
+                						
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="District View">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+              						<p><center style="font-style: oblique;color: cornsilk;">DISTRICTS HAVING HIGH RAIN(>5mm/h)</center></p>
+              						
+                						 <div id="table1">
+                							<table class="table" style="width: 100%;margin-bottom: 1rem;color: rgb(255 204 188);">
+                							<thead>
+                							<tr>
+                							<th>District Name</th>
+                							<th>Met-subdivision</th>
+                							<th>Rain(mm/h)</th>
+                							</tr>
+                							</thead>
+                							<tbody>
+                							<tr ng-repeat="item in list" >
+                							<td ng-repeat="item1 in item.split(',')">{{item1}}</td>
+                							</tr>
+                							</tbody>
+                							</table>
+                						</div>
+                					
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Area View">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p><center  style="font-style: oblique;color: cornsilk;"> AREA HAVING HIGH RAIN(>10mm/h)</center></p>
+                							 <div id="table2">
+                							<table class ="table" style="width: 100%;margin-bottom: 1rem;color: rgb(255 204 188);">
+                							<thead>
+                							<tr>
+                							<th>Area(Km*2)</th>
+                							<th>Highest Rain(mm/h)</th>
+                							<th>Lat/Long</th>
+                							</tr>
+                							</thead>
+                							<tbody>
+                							<tr ng-repeat="item_t2 in t2list">
+                							<td ng-repeat="item1_t2 in item_t2.split(',')">{{item1_t2}}</td>
+                							</tr>
+                							</tbody>
+                							</table>
+                						</div>
+              						</md-content>
+            					</md-tab>
+          					</md-tabs>
+        				</md-dialog-content>
+        
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>
+    	
+	
+	 <div class="md-dialog-container" id="siteInfoId">
+	          <md-dialog  class="summary_info_class" aria-label="Mango (Fruit)">
+	              <div ng-cloak id="site_info_id" style="display:none;">
+    				  <form>
+        				<md-dialog-content style="max-width:800px;max-height:810px; ">
+          					<md-tabs md-dynamic-height md-border-bottom>
+            					<md-tab label="About">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p>For More Detail...
+                						<a href="assets/documents/HE-intense-rain.pdf" target="_blank">Algorithm</a>
+                						</p>
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Disclaimer">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p>©Space Applications Centre, ISRO      Developed & Maintained By: DWD/SAC</p> 
+              						</md-content>
+            					</md-tab>
+            					<md-tab label="Credits">
+              						<md-content class="md-padding" style="color:white; font-size: large;">
+                						<p> 
+											Credits for following information/layers/data used in this website is dually acknowledged
+											
+											</br>
+											* OpenStreetMap: @OpenStreetMap Contributors (www.openstreetmap.org/copyright)
+											</br>
+											* True Marble: Unearthed Outdoors, LLC
+											</br>
+											* India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in)											
+											</br>
+											* INSAT 3D Algorithm : AOSG/SAC
+										
+										</p>
+              						</md-content>
+            					</md-tab>
+          					</md-tabs>
+        				</md-dialog-content>
+        
+        				<md-dialog-actions layout="row">
+        					<md-button class="closeBtn" aria-label="Aria Label" ng-click="closeSiteInfo()">Close</md-button>
+						</md-dialog-actions> 
+      				</form>
+      			</div>
+    		 </md-dialog>
+    		</div>
+	
+   </div>
+	
+	<div id="popup" class="ol-popup">
+		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+		<div id="popup-content"></div>
+	</div>
+	
+		<!-- CONTROLLER JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/controllers/controller.js?v=1.0"></script>
+		<!-- CONTROLLER JAVASCRIPT END -->
+		
+		<!-- SERVICES JAVASCRIPT START -->
+		<script defer type="application/javascript" src="source/services/service_temp.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_displaymap.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_startgrplayers.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_cbLayer.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_measure.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_analysis.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_panelSettingService.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_handleEvent.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_json_response.js?v=1.0"></script>
+		<script defer type="application/javascript" src="source/services/service_variable_declaration.js?v=1.0"></script>
+		<!-- SERVICES JAVASCRIPT START -->
+	</body>
+</html>

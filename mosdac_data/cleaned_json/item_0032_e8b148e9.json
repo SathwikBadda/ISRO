@@ -1,0 +1,17 @@
+{
+  "title": "Radar Catalog",
+  "type": "general",
+  "section": "General",
+  "text": "A- A A र ड र उत प द स च RADAR Catalog Satellite: {{satellite.name}} Sensor: {{sensor.name}} X Sr.No Product / Acq Calendar Product Description Processing Level Temporal Resolution Start Date End Date Processing Status DOI {{ index 1}} {{allproduct.name}} {{allproduct.description}} {{allproduct.processlevel}} {{allproduct.frequency uppercase}} {{allproduct.startdate}} {{allproduct.enddate}} {{allproduct.actv}} {{allproduct.actv}} {{allproduct.techdoc}} Feedback About Us Contact Us Copyright Policy Data Access Policy Hyperlink Policy Privacy Policy Website Policies Terms Conditions FAQs Ver 3.0; Last reviewed and updated on 22 Aug, 2024",
+  "source_url": "https://www.mosdac.gov.in/internal/catalog-radar",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "temperature",
+      "satellite",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.461152"
+  }
+}

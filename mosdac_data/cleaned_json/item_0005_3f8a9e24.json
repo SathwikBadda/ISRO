@@ -1,0 +1,18 @@
+{
+  "title": "",
+  "type": "general",
+  "section": "General",
+  "text": "{{applicationName}} Rainfall (mm): {{datetime}} GMT Current HeavyRain {{layergrps.values_.title}} Selection:- Single Multiple {{layers.values_.title}} {{layers.values_.extraparams.selectedTimeObj.sensorSatellite}} Previous Forecast/Events Select Date: Select Time(GMT): Submit Tools Analysis Legends {{generalMessage.infoMsg.toolsNoBtn.message}} {{generalMessage.infoMsg.analysisNoBtn.message}} {{generalMessage.infoMsg.noLegends.message1}} DISTRICTS HAVING HIGH RAIN( 5mm/h) District Name Met-subdivision Rain(mm/h) {{item1}} AREA HAVING HIGH RAIN( 10mm/h) Area(Km 2) Highest Rain(mm/h) Lat/Long {{item1_t2}} Close DISTRICTS HAVING HIGH RAIN( 5mm/h) District Name Met-subdivision Rain(mm/h) {{item1}} AREA HAVING HIGH RAIN( 10mm/h) Area(Km 2) Highest Rain(mm/h) Lat/Long {{item1_t2}} Close For More Detail... Algorithm Space Applications Centre, ISRO Developed Maintained By: DWD/SAC Credits for following information/layers/data used in this website is dually acknowledged OpenStreetMap: OpenStreetMap Contributors (www.openstreetmap.org/copyright) True Marble: Unearthed Outdoors, LLC India River Basins/ State/ District Boundaries and World Coastlines : India Meteorological Department, Delhi (www.imd.gov.in) INSAT 3D Algorithm : AOSG/SAC Close",
+  "source_url": "https://www.mosdac.gov.in/internal/event-heavyrain",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "rainfall",
+      "satellite",
+      "data",
+      "monitoring"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.045168"
+  }
+}

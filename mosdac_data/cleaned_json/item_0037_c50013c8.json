@@ -1,0 +1,17 @@
+{
+  "title": "Data Quality Meteorological Oceanographic Satellite Data Archival Centre",
+  "type": "general",
+  "section": "Satellite Data",
+  "text": "Display name modified SCATSAT1 Thu, 2017-04-06 15:31 INSAT-3DR Mon, 2017-03-27 11:18 INSAT-3D Mon, 2017-03-27 11:18 3 folders",
+  "source_url": "https://www.mosdac.gov.in/data-quality",
+  "document_type": "static",
+  "meta": {
+    "tags": [
+      "satellite",
+      "ocean",
+      "data"
+    ],
+    "geolocation": "India",
+    "processed_at": "2025-07-04T21:26:53.470217"
+  }
+}
