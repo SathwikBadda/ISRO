@@ -1,0 +1,56 @@
+{
+    "scraping": {
+      "max_pages": 50,
+      "delay": 2.0,
+      "timeout": 10,
+      "max_retries": 3,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      "respect_robots_txt": true,
+      "selenium_options": {
+        "headless": true,
+        "window_size": [1920, 1080],
+        "disable_gpu": true,
+        "no_sandbox": true
+      }
+    },
+    "parsing": {
+      "min_text_length": 10,
+      "max_file_size_mb": 50,
+      "supported_formats": ["pdf", "docx", "doc", "xlsx", "xls"],
+      "extract_metadata": true,
+      "extract_images": false
+    },
+    "cleaning": {
+      "min_cleaned_length": 10,
+      "remove_non_english": true,
+      "remove_stopwords": false,
+      "normalize_unicode": true,
+      "remove_html_tags": true,
+      "remove_special_chars": true,
+      "min_line_length": 3
+    },
+    "output": {
+      "save_individual_files": true,
+      "save_master_file": true,
+      "pretty_print_json": true,
+      "output_format": "json",
+      "create_summary_stats": true
+    },
+    "target_sections": [
+      "/product",
+      "/data", 
+      "/satellite",
+      "/faq",
+      "/documentation",
+      "/about",
+      "/contact"
+    ],
+    "content_types": {
+      "climate": ["climate", "weather", "temperature", "rainfall", "precipitation"],
+      "satellite": ["satellite", "insat", "goes", "meteosat", "imagery"],
+      "ocean": ["ocean", "sea", "marine", "coastal", "sst"],
+      "land": ["land", "vegetation", "ndvi", "surface", "soil"],
+      "atmosphere": ["atmosphere", "aerosol", "ozone", "winds", "pressure"],
+      "cyclone": ["cyclone", "hurricane", "typhoon", "storm", "tropical"]
+    }
+  }

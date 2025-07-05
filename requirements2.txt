@@ -1,0 +1,96 @@
+# MOSDAC Knowledge Graph & Chat Interface Requirements - Phase 2
+# Bharatiya Antariksh Hackathon 2025 - Problem Statement 2
+
+# Core Phase 1 Requirements (already included)
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+selenium>=4.8.0
+pandas>=1.5.0
+pdfplumber>=0.7.0
+PyMuPDF>=1.21.0
+python-docx>=0.8.11
+openpyxl>=3.1.0
+nltk>=3.8
+spacy>=3.5.0
+langdetect>=1.0.9
+ftfy>=6.1.0
+tqdm>=4.64.0
+
+# Phase 2: NLP & Knowledge Graph Requirements
+# HuggingFace Transformers for NER and Relation Extraction
+transformers>=4.25.0
+torch>=1.13.0
+tokenizers>=0.13.0
+datasets>=2.8.0
+
+# Knowledge Graph & Neo4j
+neo4j>=5.3.0
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-core>=0.1.0
+langchain-google-genai>=0.0.5
+
+# Gemini API
+google-generativeai>=0.3.0
+google-ai-generativelanguage>=0.4.0
+
+# Streamlit Frontend
+streamlit>=1.28.0
+streamlit-chat>=0.1.1
+plotly>=5.17.0
+streamlit-plotly-events>=0.0.6
+
+# Environment Management
+python-dotenv>=1.0.0
+
+# Additional NLP Libraries
+scikit-learn>=1.3.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Graph Visualization (Optional)
+networkx>=3.0
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Data Processing
+pyvis>=0.3.2
+graphviz>=0.20.1
+
+# API and Web Framework Support
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+
+# Testing and Development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Memory and Performance
+psutil>=5.9.0
+memory-profiler>=0.61.0
+
+# Additional Utilities
+click>=8.1.0
+rich>=13.6.0
+typer>=0.9.0
+
+# Optional: Advanced NLP Features
+# sentence-transformers>=2.2.0
+# chromadb>=0.4.0
+# faiss-cpu>=1.7.4
+
+# Optional: Enhanced Visualization
+# graphistry>=0.29.0
+# bokeh>=3.3.0
+
+# Database Alternatives (if needed)
+# pymongo>=4.6.0
+# redis>=5.0.0
+
+# Cloud Services Integration
+# boto3>=1.34.0
+# azure-storage-blob>=12.19.0
+# google-cloud-storage>=2.10.0

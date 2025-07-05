@@ -1,0 +1,18 @@
+# MOSDAC Pipeline Generated Files
+mosdac_data/
+*.log
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+.DS_Store
+Thumbs.db
+chromedriver.exe
+chromedriver
+geckodriver.exe
+geckodriver
