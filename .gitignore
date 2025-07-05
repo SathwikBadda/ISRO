@@ -1,5 +1,5 @@
 # MOSDAC Pipeline Generated Files
-mosdac_data/
+
 *.log
 __pycache__/
 *.pyc
